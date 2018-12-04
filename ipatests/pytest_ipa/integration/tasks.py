@@ -463,10 +463,15 @@ def install_replica(master, replica, setup_ca=True, setup_dns=False,
     if master_authoritative_for_client_domain(master, replica):
         args.extend(['--ip-address', replica.ip])
 
+    ntp_args = [arg for arg in extra_args if "-ntp" in arg]
+
+    for ntp_arg in ntp_args:
+        extra_args.remove(ntp_arg)
+
     args.extend(extra_args)
 
     # install client on a replica machine and then promote it to replica
-    install_client(master, replica)
+    install_client(master, replica, extra_args=ntp_args)
     fix_apache_semaphores(replica)
     args.extend(['-r', replica.domain.realm])
     fw.enable_services(fw_services)
@@ -500,16 +505,19 @@ def install_client(master, client, extra_args=(),
     if password is None:
         password = client.config.admin_password
 
-    client.run_command(['ipa-client-install', '-U',
-                        '--domain', client.domain.name,
-                        '--realm', client.domain.realm,
-                        '-p', user,
-                        '-w', password,
-                        '--server', master.hostname]
-                       + list(extra_args))
+    result = client.run_command([
+        'ipa-client-install', '-U',
+        '--domain', client.domain.name,
+        '--realm', client.domain.realm,
+        '-p', user,
+        '-w', password,
+        '--server', master.hostname] + list(extra_args)
+    )
 
     setup_sssd_debugging(client)
     kinit_admin(client)
+
+    return result
 
 
 def install_adtrust(host):
