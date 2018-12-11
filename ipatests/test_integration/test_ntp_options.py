@@ -48,175 +48,176 @@ class TestNTPoptions(IntegrationTest):
         finally:
             self.cleanup()
 
-    def test_server_client_install_no_ntp(self):
-        """
-        test to verify that ipa-server and ipa-client install invoked with
-        option -N uses system defined NTP daemon configuration
-        """
-        expected_msg1 = "Excluded by options:"
-        expected_msg2 = "Using default chrony configuration."
 
-        try:
-            server_install = tasks.install_master(self.master, setup_dns=False,
-                                                  extra_args=['-N'])
-            assert expected_msg1 in server_install.stdout_text
-            assert expected_msg2 not in server_install.stdout_text
-
-            client_install = tasks.install_client(self.master, self.client,
-                                                  extra_args=['--no-ntp'])
-            assert expected_msg2 not in client_install.stdout_text
-
-        finally:
-            self.cleanup()
-
-    def test_server_client_install_with_multiple_ntp_srv(self):
-        """
-        test to verify that ipa-server-install passes with multiple
-        --ntp-server option used
-        """
-        expected_msg = "Configuration of chrony was changed by installer."
-        args = ['--ntp-server=%s' % self.ntp_server1,
-                '--ntp-server=%s' % self.ntp_server2]
-
-        try:
-            server_install = tasks.install_master(self.master, setup_dns=False,
-                                                  extra_args=args)
-            assert expected_msg in server_install.stderr_text
-            cmd = self.master.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_server1 in cmd.stdout_text
-            assert self.ntp_server2 in cmd.stdout_text
-
-            client_install = tasks.install_client(self.master, self.client,
-                                                  extra_args=args)
-            assert expected_msg in client_install.stderr_text
-            cmd = self.client.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_server1 in cmd.stdout_text
-            assert self.ntp_server2 in cmd.stdout_text
-
-        finally:
-            self.cleanup()
-
-    def test_server_replica_client_install_with_pool_and_srv(self):
-        """
-        test to verify that ipa-server, ipa-replica and ipa-client install
-        passes with options --ntp-pool and --ntp-server together
-        """
-        expected_msg = "Configuration of chrony was changed by installer."
-        args = ['--ntp-pool=%s' % self.ntp_pool,
-                '--ntp-server=%s' % self.ntp_server1]
-
-        try:
-            server_install = tasks.install_master(self.master, setup_dns=False,
-                                                  extra_args=args)
-            assert expected_msg in server_install.stderr_text
-            cmd = self.master.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_pool in cmd.stdout_text
-            assert self.ntp_server1 in cmd.stdout_text
-
-            replica_install = tasks.install_replica(self.master, self.replica,
-                                                    extra_args=args)
-            assert expected_msg in replica_install.stderr_text
-            cmd = self.replica.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_pool in cmd.stdout_text
-            assert self.ntp_server1 in cmd.stdout_text
-
-            client_install = tasks.install_client(self.master, self.client,
-                                                  extra_args=args)
-            assert expected_msg in client_install.stderr_text
-            cmd = self.client.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_pool in cmd.stdout_text
-            assert self.ntp_server1 in cmd.stdout_text
-            tasks.uninstall_master(self.replica)
-
-        finally:
-            self.cleanup()
-
-    def test_server_client_install_mixed_options(self):
-        """
-        test to verify that ipa-server and ipa-client install with
-        --ntp-server and -N options would fail
-        """
-        exp_str = ("error: --ntp-server cannot be used"
-                   " together with --no-ntp")
-        exp_pool_str = ("error: --ntp-pool cannot be used"
-                        " together with --no-ntp")
-        try:
-            args1 = ['ipa-server-install', '-N',
-                     '--ntp-server=%s' % self.ntp_server1]
-            server_install = self.master.run_command(args1, raiseonerr=False)
-            assert server_install.returncode == 2
-            assert exp_str in server_install.stderr_text
-
-            args2 = ['ipa-client-install', '--no-ntp',
-                     '--ntp-server=%s' % self.ntp_server2]
-            client_install = self.client.run_command(args2, raiseonerr=False)
-            assert client_install.returncode == 2
-            assert exp_str in client_install.stderr_text
-
-            args3 = ['ipa-client-install', '-N',
-                     '--ntp-pool=%s' % self.ntp_pool]
-            client_install = self.client.run_command(args3, raiseonerr=False)
-            assert client_install.returncode == 2
-            assert exp_pool_str in client_install.stderr_text
-
-        finally:
-            self.cleanup()
-
-    def test_replica_promotion_with_ntp_options(self):
-        """
-        test to verify that replica promotion with ntp --ntp-server,
-        --ntp-pool and -N or --no-ntp option would fail
-        """
-        exp_str = "NTP configuration cannot be updated during promotion"
-
-        tasks.install_master(self.master, setup_dns=False)
-        tasks.install_client(self.master, self.replica)
-
-        try:
-            replica_install = self.replica.run_command(
-                ['ipa-replica-install', '--no-ntp'],
-                raiseonerr=False)
-            assert replica_install.returncode == 1
-            assert exp_str in replica_install.stderr_text
-
-            replica_install = self.replica.run_command(
-                ['ipa-replica-install', '--ntp-server=%s' % self.ntp_server1],
-                raiseonerr=False)
-            assert replica_install.returncode == 1
-            assert exp_str in replica_install.stderr_text
-
-            replica_install = self.replica.run_command(
-                ['ipa-replica-install', '--ntp-pool=%s' % self.ntp_pool],
-                raiseonerr=False)
-            assert replica_install.returncode == 1
-            assert exp_str in replica_install.stderr_text
-
-        finally:
-            tasks.uninstall_master(self.replica)
-            self.cleanup()
-
-    def test_replica_promotion_without_ntp(self):
-        """
-        test to verify that replica promotion without ntp options
-        - ipa-client-install with ntp option
-        - ipa-replica-install without ntp option
-        will be successful
-        """
-        exp_str = "ipa-replica-install command was successful"
-
-        try:
-            tasks.install_master(self.master, setup_dns=False)
-            tasks.install_client(self.master, self.replica,
-                                 extra_args=['--ntp-pool=%s' % self.ntp_pool])
-
-            replica_install = self.replica.run_command(
-                ['ipa-replica-install'], raiseonerr=False)
-            assert exp_str in replica_install.stderr_text
-            cmd = self.replica.run_command(['cat', paths.CHRONY_CONF])
-            assert self.ntp_pool in cmd.stdout_text
-
-        finally:
-            tasks.uninstall_master(self.replica)
+    # def test_server_client_install_no_ntp(self):
+    #     """
+    #     test to verify that ipa-server and ipa-client install invoked with
+    #     option -N uses system defined NTP daemon configuration
+    #     """
+    #     expected_msg1 = "Excluded by options:"
+    #     expected_msg2 = "Using default chrony configuration."
+    #
+    #     try:
+    #         server_install = tasks.install_master(self.master, setup_dns=False,
+    #                                               extra_args=['-N'])
+    #         assert expected_msg1 in server_install.stdout_text
+    #         assert expected_msg2 not in server_install.stdout_text
+    #
+    #         client_install = tasks.install_client(self.master, self.client,
+    #                                               extra_args=['--no-ntp'])
+    #         assert expected_msg2 not in client_install.stdout_text
+    #
+    #     finally:
+    #         self.cleanup()
+    #
+    # def test_server_client_install_with_multiple_ntp_srv(self):
+    #     """
+    #     test to verify that ipa-server-install passes with multiple
+    #     --ntp-server option used
+    #     """
+    #     expected_msg = "Configuration of chrony was changed by installer."
+    #     args = ['--ntp-server=%s' % self.ntp_server1,
+    #             '--ntp-server=%s' % self.ntp_server2]
+    #
+    #     try:
+    #         server_install = tasks.install_master(self.master, setup_dns=False,
+    #                                               extra_args=args)
+    #         assert expected_msg in server_install.stderr_text
+    #         cmd = self.master.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_server1 in cmd.stdout_text
+    #         assert self.ntp_server2 in cmd.stdout_text
+    #
+    #         client_install = tasks.install_client(self.master, self.client,
+    #                                               extra_args=args)
+    #         assert expected_msg in client_install.stderr_text
+    #         cmd = self.client.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_server1 in cmd.stdout_text
+    #         assert self.ntp_server2 in cmd.stdout_text
+    #
+    #     finally:
+    #         self.cleanup()
+    #
+    # def test_server_replica_client_install_with_pool_and_srv(self):
+    #     """
+    #     test to verify that ipa-server, ipa-replica and ipa-client install
+    #     passes with options --ntp-pool and --ntp-server together
+    #     """
+    #     expected_msg = "Configuration of chrony was changed by installer."
+    #     args = ['--ntp-pool=%s' % self.ntp_pool,
+    #             '--ntp-server=%s' % self.ntp_server1]
+    #
+    #     try:
+    #         server_install = tasks.install_master(self.master, setup_dns=False,
+    #                                               extra_args=args)
+    #         assert expected_msg in server_install.stderr_text
+    #         cmd = self.master.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_pool in cmd.stdout_text
+    #         assert self.ntp_server1 in cmd.stdout_text
+    #
+    #         replica_install = tasks.install_replica(self.master, self.replica,
+    #                                                 extra_args=args)
+    #         assert expected_msg in replica_install.stderr_text
+    #         cmd = self.replica.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_pool in cmd.stdout_text
+    #         assert self.ntp_server1 in cmd.stdout_text
+    #
+    #         client_install = tasks.install_client(self.master, self.client,
+    #                                               extra_args=args)
+    #         assert expected_msg in client_install.stderr_text
+    #         cmd = self.client.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_pool in cmd.stdout_text
+    #         assert self.ntp_server1 in cmd.stdout_text
+    #         tasks.uninstall_master(self.replica)
+    #
+    #     finally:
+    #         self.cleanup()
+    #
+    # def test_server_client_install_mixed_options(self):
+    #     """
+    #     test to verify that ipa-server and ipa-client install with
+    #     --ntp-server and -N options would fail
+    #     """
+    #     exp_str = ("error: --ntp-server cannot be used"
+    #                " together with --no-ntp")
+    #     exp_pool_str = ("error: --ntp-pool cannot be used"
+    #                     " together with --no-ntp")
+    #     try:
+    #         args1 = ['ipa-server-install', '-N',
+    #                  '--ntp-server=%s' % self.ntp_server1]
+    #         server_install = self.master.run_command(args1, raiseonerr=False)
+    #         assert server_install.returncode == 2
+    #         assert exp_str in server_install.stderr_text
+    #
+    #         args2 = ['ipa-client-install', '--no-ntp',
+    #                  '--ntp-server=%s' % self.ntp_server2]
+    #         client_install = self.client.run_command(args2, raiseonerr=False)
+    #         assert client_install.returncode == 2
+    #         assert exp_str in client_install.stderr_text
+    #
+    #         args3 = ['ipa-client-install', '-N',
+    #                  '--ntp-pool=%s' % self.ntp_pool]
+    #         client_install = self.client.run_command(args3, raiseonerr=False)
+    #         assert client_install.returncode == 2
+    #         assert exp_pool_str in client_install.stderr_text
+    #
+    #     finally:
+    #         self.cleanup()
+    #
+    # def test_replica_promotion_with_ntp_options(self):
+    #     """
+    #     test to verify that replica promotion with ntp --ntp-server,
+    #     --ntp-pool and -N or --no-ntp option would fail
+    #     """
+    #     exp_str = "NTP configuration cannot be updated during promotion"
+    #
+    #     tasks.install_master(self.master, setup_dns=False)
+    #     tasks.install_client(self.master, self.replica)
+    #
+    #     try:
+    #         replica_install = self.replica.run_command(
+    #             ['ipa-replica-install', '--no-ntp'],
+    #             raiseonerr=False)
+    #         assert replica_install.returncode == 1
+    #         assert exp_str in replica_install.stderr_text
+    #
+    #         replica_install = self.replica.run_command(
+    #             ['ipa-replica-install', '--ntp-server=%s' % self.ntp_server1],
+    #             raiseonerr=False)
+    #         assert replica_install.returncode == 1
+    #         assert exp_str in replica_install.stderr_text
+    #
+    #         replica_install = self.replica.run_command(
+    #             ['ipa-replica-install', '--ntp-pool=%s' % self.ntp_pool],
+    #             raiseonerr=False)
+    #         assert replica_install.returncode == 1
+    #         assert exp_str in replica_install.stderr_text
+    #
+    #     finally:
+    #         tasks.uninstall_master(self.replica)
+    #         self.cleanup()
+    #
+    # def test_replica_promotion_without_ntp(self):
+    #     """
+    #     test to verify that replica promotion without ntp options
+    #     - ipa-client-install with ntp option
+    #     - ipa-replica-install without ntp option
+    #     will be successful
+    #     """
+    #     exp_str = "ipa-replica-install command was successful"
+    #
+    #     try:
+    #         tasks.install_master(self.master, setup_dns=False)
+    #         tasks.install_client(self.master, self.replica,
+    #                              extra_args=['--ntp-pool=%s' % self.ntp_pool])
+    #
+    #         replica_install = self.replica.run_command(
+    #             ['ipa-replica-install'], raiseonerr=False)
+    #         assert exp_str in replica_install.stderr_text
+    #         cmd = self.replica.run_command(['cat', paths.CHRONY_CONF])
+    #         assert self.ntp_pool in cmd.stdout_text
+    #
+    #     finally:
+    #         tasks.uninstall_master(self.replica)
 
     def cleanup(self):
         """
