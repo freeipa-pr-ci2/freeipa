@@ -47,28 +47,39 @@ class TestNTPoptions(IntegrationTest):
 
         finally:
             self.cleanup()
+            cmd = self.client.run_command(['ipa', 'ping'], raiseonerr=False)
+            print (cmd.stdout_text)
+            assert cmd.returncode == 1
+            cmd = self.master.run_command(['ipa', 'ping'], raiseonerr=False)
+            print (cmd.stdout_text)
+            assert cmd.returncode == 1
 
+    def test_server_client_install_no_ntp(self):
+        """
+        test to verify that ipa-server and ipa-client install invoked with
+        option -N uses system defined NTP daemon configuration
+        """
+        expected_msg1 = "Excluded by options:"
+        expected_msg2 = "Using default chrony configuration."
 
-    # def test_server_client_install_no_ntp(self):
-    #     """
-    #     test to verify that ipa-server and ipa-client install invoked with
-    #     option -N uses system defined NTP daemon configuration
-    #     """
-    #     expected_msg1 = "Excluded by options:"
-    #     expected_msg2 = "Using default chrony configuration."
-    #
-    #     try:
-    #         server_install = tasks.install_master(self.master, setup_dns=False,
-    #                                               extra_args=['-N'])
-    #         assert expected_msg1 in server_install.stdout_text
-    #         assert expected_msg2 not in server_install.stdout_text
-    #
-    #         client_install = tasks.install_client(self.master, self.client,
-    #                                               extra_args=['--no-ntp'])
-    #         assert expected_msg2 not in client_install.stdout_text
-    #
-    #     finally:
-    #         self.cleanup()
+        try:
+            server_install = tasks.install_master(self.master, setup_dns=False,
+                                                  extra_args=['-N'])
+            assert expected_msg1 in server_install.stdout_text
+            assert expected_msg2 not in server_install.stdout_text
+
+            client_install = tasks.install_client(self.master, self.client,
+                                                  extra_args=['--no-ntp'])
+            assert expected_msg2 not in client_install.stdout_text
+
+        finally:
+            self.cleanup()
+            cmd = self.client.run_command(['ipa', 'ping'], raiseonerr=False)
+            print (cmd.stdout_text)
+            assert cmd.returncode == 1
+            cmd = self.master.run_command(['ipa', 'ping'], raiseonerr=False)
+            print (cmd.stdout_text)
+            assert cmd.returncode == 1
     #
     # def test_server_client_install_with_multiple_ntp_srv(self):
     #     """
