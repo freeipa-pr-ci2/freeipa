@@ -29,8 +29,8 @@ topologies:
     name: master_3repl_1client
     cpu: 6
     memory: 12900
-  ad: &ad
-    name: ad
+  master_1repl_1client_1ad: &master_1repl_1client_1ad
+    name: master_1repl_1client_1ad
     cpu: 4
     memory: 12000
 
@@ -59,4 +59,4 @@ jobs:
         test_suite: test_integration/test_trust.py
         template: *ci-master-f30
         timeout: 12000
-        topology: *ad
+        topology: *master_1repl_1client_1ad
