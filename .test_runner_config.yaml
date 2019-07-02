@@ -57,7 +57,7 @@ steps:
   - make PYTHON=/usr/bin/python3 V=0 pylint
   tox:
   # just run one pylint and one Python 3 target (time/coverage trade-off)
-  - tox -e py27,py36,pypi,pylint3
+  - tox -e py36 -v
   prepare_tests:
   - echo ${server_password} | kinit admin && ipa ping
   - cp -r /etc/ipa/* ~/.ipa/
