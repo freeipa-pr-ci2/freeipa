@@ -20,38 +20,38 @@ env:
           CI_RUNNER_LOGS_DIR="/tmp/test-runner-logs"
           CI_RUNNER_LOG_ARCHIVE="freeipa-ci-pr-${TRAVIS_PULL_REQUEST}-job-${TRAVIS_JOB_NUMBER}.tar.gz"
     matrix:
-        - TASK_TO_RUN="lint"
-          TEST_RUNNER_CONFIG=".test_runner_config.yaml"
-        - TASK_TO_RUN="run-tests"
-          PYTHON=/usr/bin/python2
-          TEST_RUNNER_CONFIG=".test_runner_config.yaml"
-          TESTS_TO_RUN="test_xmlrpc/test_[a-k]*.py"
-        - TASK_TO_RUN="run-tests"
-          PYTHON=/usr/bin/python2
-          TEST_RUNNER_CONFIG=".test_runner_config.yaml"
-          TESTS_TO_RUN="test_cmdline
-            test_install
-            test_ipaclient
-            test_ipalib
-            test_ipaplatform
-            test_ipapython
-            test_ipaserver
-            test_xmlrpc/test_[l-z]*.py"
-        - TASK_TO_RUN="run-tests"
-          PYTHON=/usr/bin/python3
-          TEST_RUNNER_CONFIG=".test_runner_config_py3_temp.yaml"
-          TESTS_TO_RUN="test_xmlrpc/test_[a-k]*.py"
-        - TASK_TO_RUN="run-tests"
-          PYTHON=/usr/bin/python3
-          TEST_RUNNER_CONFIG=".test_runner_config_py3_temp.yaml"
-          TESTS_TO_RUN="test_cmdline
-                test_install
-                test_ipaclient
-                test_ipalib
-                test_ipaplatform
-                test_ipapython
-                test_ipaserver
-                test_xmlrpc/test_[l-z]*.py"
+        # - TASK_TO_RUN="lint"
+        #   TEST_RUNNER_CONFIG=".test_runner_config.yaml"
+        # - TASK_TO_RUN="run-tests"
+        #   PYTHON=/usr/bin/python2
+        #   TEST_RUNNER_CONFIG=".test_runner_config.yaml"
+        #   TESTS_TO_RUN="test_xmlrpc/test_[a-k]*.py"
+        # - TASK_TO_RUN="run-tests"
+        #   PYTHON=/usr/bin/python2
+        #   TEST_RUNNER_CONFIG=".test_runner_config.yaml"
+        #   TESTS_TO_RUN="test_cmdline
+        #     test_install
+        #     test_ipaclient
+        #     test_ipalib
+        #     test_ipaplatform
+        #     test_ipapython
+        #     test_ipaserver
+        #     test_xmlrpc/test_[l-z]*.py"
+        # - TASK_TO_RUN="run-tests"
+        #   PYTHON=/usr/bin/python3
+        #   TEST_RUNNER_CONFIG=".test_runner_config_py3_temp.yaml"
+        #   TESTS_TO_RUN="test_xmlrpc/test_[a-k]*.py"
+        # - TASK_TO_RUN="run-tests"
+        #   PYTHON=/usr/bin/python3
+        #   TEST_RUNNER_CONFIG=".test_runner_config_py3_temp.yaml"
+        #   TESTS_TO_RUN="test_cmdline
+        #         test_install
+        #         test_ipaclient
+        #         test_ipalib
+        #         test_ipaplatform
+        #         test_ipapython
+        #         test_ipaserver
+        #         test_xmlrpc/test_[l-z]*.py"
         - TASK_TO_RUN="tox"
           TEST_RUNNER_CONFIG=".test_runner_config.yaml"
 
@@ -70,7 +70,7 @@ install:
 
 script:
     - mkdir -p $CI_RUNNER_LOGS_DIR
-    - travis_wait 50 ./.travis_run_task.sh
+    - ./.travis_run_task.sh
     - test -z "`cat $PEP8_ERROR_LOG`"
 after_failure:
     - echo "Test runner output:"; tail -n $CI_BACKLOG_SIZE $CI_RESULTS_LOG
