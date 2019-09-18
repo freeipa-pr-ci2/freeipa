@@ -24,6 +24,7 @@ topologies:
     cpu: 6
     memory: 12900
 
+
 jobs:
   fedora-30/build:
     requires: []
