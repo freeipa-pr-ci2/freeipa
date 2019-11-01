@@ -176,3 +176,123 @@ jobs:
         template: *ci-master-f30
         timeout: 4800
         topology: *ad_master
+
+  fedora-30/test_smb_6:
+    requires: [fedora-30/build]
+    priority: 100
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_smb.py
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *ad_master_2client
+
+  fedora-30/test_sssd_6:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_sssd.py
+        template: *ci-master-f30
+        timeout: 4800
+        topology: *ad_master
+
+  fedora-30/test_smb_7:
+    requires: [fedora-30/build]
+    priority: 100
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_smb.py
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *ad_master_2client
+
+  fedora-30/test_sssd_7:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_sssd.py
+        template: *ci-master-f30
+        timeout: 4800
+        topology: *ad_master
+
+  fedora-30/test_smb_8:
+    requires: [fedora-30/build]
+    priority: 100
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_smb.py
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *ad_master_2client
+
+  fedora-30/test_sssd_8:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_sssd.py
+        template: *ci-master-f30
+        timeout: 4800
+        topology: *ad_master
+
+  fedora-30/test_smb_9:
+    requires: [fedora-30/build]
+    priority: 100
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_smb.py
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *ad_master_2client
+
+  fedora-30/test_sssd_9:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_sssd.py
+        template: *ci-master-f30
+        timeout: 4800
+        topology: *ad_master
+
+  fedora-30/test_smb_10:
+    requires: [fedora-30/build]
+    priority: 100
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_smb.py
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *ad_master_2client
+
+  fedora-30/test_sssd_10:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunADTests
+      args:
+        build_url: '{fedora-30/build_url}'
+        test_suite: test_integration/test_sssd.py
+        template: *ci-master-f30
+        timeout: 4800
+        topology: *ad_master
