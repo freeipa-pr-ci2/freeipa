@@ -302,3 +302,8 @@ class TestCRLGenManage(IntegrationTest):
         check_crlgen_enable(self.replicas[0])
         # call uninstall without --ignore-last-of-role, should be OK
         self.master.run_command(['ipa-server-install', '--uninstall', '-U'])
+
+    @classmethod
+    def uninstall(cls, mh):
+        # Clean up was already done
+        pass

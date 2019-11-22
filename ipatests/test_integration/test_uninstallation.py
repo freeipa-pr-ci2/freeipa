@@ -119,3 +119,8 @@ class TestUninstallBase(IntegrationTest):
             self.master.run_command([
                 paths.DSCTL, serverid, 'remove', '--do-it'
             ])
+
+    @classmethod
+    def uninstall(cls, mh):
+        # Cleanup was already done earlier
+        pass
