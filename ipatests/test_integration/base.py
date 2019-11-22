@@ -97,9 +97,12 @@ class IntegrationTest:
 
     @classmethod
     def uninstall(cls, mh):
-        tasks.uninstall_master(cls.master)
         for replica in cls.replicas:
+            tasks.run_server_del(
+                cls.master, replica.hostname, force=True,
+                ignore_topology_disconnect=True, ignore_last_of_role=True)
             tasks.uninstall_master(replica)
+        tasks.uninstall_master(cls.master)
         for client in cls.clients:
             tasks.uninstall_client(client)
         if cls.fips_mode:
