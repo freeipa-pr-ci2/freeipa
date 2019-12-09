@@ -58,7 +58,20 @@ jobs:
         timeout: 1800
         topology: *build
 
-  fedora-previous/xmlrpc:
+  fedora-previous/xmlrpc-A:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        test_suite: test_xmlrpc/test_dns_plugin.py
+        xmlrpc: True
+        template: *ci-master-previous
+        timeout: 3600
+        topology: *ipaserver
+
+  fedora-previous/xmlrpc-B:
     requires: [fedora-previous/build]
     priority: 50
     job:
@@ -71,3 +84,16 @@ jobs:
         timeout: 3600
         topology: *ipaserver
 
+
+  fedora-previous/xmlrpc-C:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        test_suite: test_xmlrpc/test_[l-z]*.py
+        xmlrpc: True
+        template: *ci-master-previous
+        timeout: 3600
+        topology: *ipaserver
