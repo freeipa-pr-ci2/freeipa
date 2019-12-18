@@ -57,14 +57,436 @@ jobs:
         timeout: 1800
         topology: *build
 
-  fedora-latest/temp_commit:
+  fedora-latest/test_installation_TestInstallMaster_1:
     requires: [fedora-latest/build]
-    priority: 50
+    priority: 100
     job:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
-        test_suite: test_integration/test_REPLACEME.py
+        test_suite: test_integration/test_installation.py::TestInstallMaster
         template: *ci-master-latest
         timeout: 3600
-        topology: *master_1repl_1client
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_2:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_3:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_4:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_5:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_6:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_7:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_8:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_9:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_10:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_11:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_12:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_13:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_14:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_15:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_16:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_17:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_18:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_19:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_20:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_21:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_22:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_23:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_24:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_25:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_26:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_27:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_28:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_29:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_30:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_31:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_32:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_33:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_34:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+  fedora-latest/test_installation_TestInstallMaster_35:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
+
+  fedora-latest/test_installation_TestInstallMaster_36:
+    requires: [fedora-latest/build]
+    priority: 100
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        test_suite: test_integration/test_installation.py::TestInstallMaster
+        template: *ci-master-latest
+        timeout: 3600
+        topology: *master_1repl
+
