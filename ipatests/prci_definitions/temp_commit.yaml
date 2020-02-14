@@ -47,6 +47,34 @@ topologies:
     memory: 14500
 
 jobs:
+  fedora-previous/build:
+    requires: []
+    priority: 100
+    job:
+      class: Build
+      args:
+        git_repo: '{git_repo}'
+        git_refspec: '{git_refspec}'
+        template: &ci-master-previous
+          name: freeipa/ci-master-f30
+          version: 0.0.6
+        timeout: 1800
+        topology: *build
+
+  fedora-30/build:
+    requires: []
+    priority: 100
+    job:
+      class: Build
+      args:
+        git_repo: '{git_repo}'
+        git_refspec: '{git_refspec}'
+        template: &ci-master-f30
+          name: freeipa/ci-ipa-4-8-f30
+          version: 0.0.3
+        timeout: 1800
+        topology: *build
+
   fedora-latest/build:
     requires: []
     priority: 100
@@ -61,14 +89,392 @@ jobs:
         timeout: 1800
         topology: *build
 
-  fedora-latest/temp_commit:
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_1:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_2:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_3:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_4:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_5:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_6:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_7:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_8:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_9:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-previous/test_replication_layouts_TestCompleteTopologyWithCAKRA_10:
+    requires: [fedora-previous/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-previous/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-previous
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_1:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_2:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_3:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_4:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_5:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_6:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_7:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_8:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_9:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-30/test_replication_layouts_TestCompleteTopologyWithCAKRA_10:
+    requires: [fedora-30/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-30/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-f30
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_1:
     requires: [fedora-latest/build]
     priority: 50
     job:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
-        test_suite: test_integration/test_REPLACEME.py
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
         template: *ci-master-latest
-        timeout: 3600
-        topology: *master_1repl_1client
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_2:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_3:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_4:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_5:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_6:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_7:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_8:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_9:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
+
+  fedora-latest/test_replication_layouts_TestCompleteTopologyWithCAKRA_10:
+    requires: [fedora-latest/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
+        template: *ci-master-latest
+        timeout: 7200
+        topology: *master_3repl_1client
