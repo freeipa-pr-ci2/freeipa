@@ -159,8 +159,8 @@ jobs:
       args:
         build_url: '{fedora-latest/build_url}'
         test_suite: test_integration/test_http_kdc_proxy.py
-        template: *ci-master-latest
-        timeout: 3600
+        template: *ad_master_2client
+        timeout: 7200
         topology: *master_1repl_1client
 
   fedora-latest/test_fips:
