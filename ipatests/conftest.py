@@ -20,8 +20,12 @@ try:
 except ImportError:
     ipaplatform = None
     osinfo = None
+    paths = None
 else:
     from ipaplatform.osinfo import osinfo
+    from ipaplatform.paths import paths
+
+from ipatests.pytest_ipa.integration import tasks
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -169,3 +173,24 @@ def tempdir(request):
 
     request.addfinalizer(fin)
     return tempdir
+
+
+@pytest.fixture(scope='class')
+def ipa_ad_trust(mh):
+    ad = mh.ads[0]
+    tasks.install_adtrust(mh.master)
+    tasks.configure_dns_for_trust(mh.master, ad)
+    tasks.establish_trust_with_ad(mh.master, ad.domain.name)
+    backups = []
+    for client in mh.clients:
+        backups.append(tasks.FileBackup(client, paths.KRB5_CONF))
+        tasks.configure_ipa_client_for_ad_trust(client)
+        tasks.clear_sssd_cache(client)
+    yield
+    for backup in backups:
+        backup.restore()
+    for client in mh.clients:
+        tasks.clear_sssd_cache(client)
+    tasks.remove_trust_with_ad(mh.master, ad.domain.name)
+    tasks.unconfigure_dns_for_trust(mh.master, ad)
+    tasks.clear_sssd_cache(mh.master)
