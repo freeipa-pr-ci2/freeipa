@@ -210,8 +210,16 @@ class TestIpaHealthCheck(IntegrationTest):
 
     @classmethod
     def install(cls, mh):
+        cls.master.run_command([paths.CHRONYC, 'tracking'], raiseonerr=False)
+        cls.master.run_command([paths.CHRONYC, 'sources'], raiseonerr=False)
+        cls.master.run_command(['firewall-cmd', '--list-all'],
+            raiseonerr=False)
         tasks.install_master(cls.master, setup_dns=True)
         tasks.install_replica(cls.master, cls.replicas[0], setup_dns=True)
+        cls.master.run_command([paths.CHRONYC, 'tracking'], raiseonerr=False)
+        cls.master.run_command([paths.CHRONYC, 'sources'], raiseonerr=False)
+        cls.master.run_command(['firewall-cmd', '--list-all'],
+            raiseonerr=False)
 
     def test_ipa_healthcheck_install_on_master(self):
         """
@@ -879,6 +887,10 @@ class TestIpaHealthCheck(IntegrationTest):
         cert = x509.load_certificate_list(certfile)
         cert_expiry = cert[0].not_valid_after
 
+        self.master.run_command([paths.CHRONYC, 'tracking'],
+                                raiseonerr=False)
+        self.master.run_command([paths.CHRONYC, 'sources'],
+                                raiseonerr=False)
         for service in ('chronyd', 'pki_tomcatd',):
             restart_service(self.master, service)
 
@@ -896,6 +908,12 @@ class TestIpaHealthCheck(IntegrationTest):
             # After restarting chronyd, the date may need some time to get
             # synced. Help chrony by resetting the date
             self.master.run_command(['date', '-s', now_str])
+
+    def test_debug_chronyd(self):
+        self.master.run_command([paths.CHRONYC, 'tracking'],
+                                raiseonerr=False)
+        self.master.run_command([paths.CHRONYC, 'sources'],
+                                raiseonerr=False)
 
     def test_ipa_healthcheck_remove(self):
         """
