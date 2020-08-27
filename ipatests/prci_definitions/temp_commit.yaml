@@ -57,7 +57,7 @@ jobs:
         git_refspec: '{git_refspec}'
         template: &ci-master-latest
           name: freeipa/ci-master-f32
-          version: 0.0.8
+          version: 0.0.11
         timeout: 1800
         topology: *build
 
@@ -87,7 +87,7 @@ jobs:
         git_refspec: '{git_refspec}'
         template: &ci-ipa-4-8-latest
           name: freeipa/ci-ipa-4-8-f32
-          version: 0.0.7
+          version: 0.0.9
         timeout: 1800
         topology: *build
 
@@ -104,65 +104,5 @@ jobs:
           test_webui/test_navigation.py
           test_webui/test_translation.py
         template: *ci-ipa-4-8-latest
-        timeout: 3600
-        topology: *ipaserver
-
-  fedora-latest-old-template/build:
-    requires: []
-    priority: 100
-    job:
-      class: Build
-      args:
-        git_repo: '{git_repo}'
-        git_refspec: '{git_refspec}'
-        template: &ci-master-latest-old-template
-          name: freeipa/ci-master-f32
-          version: 0.0.7
-        timeout: 1800
-        topology: *build
-
-  fedora-latest-old-template/test_webui_general:
-    requires: [fedora-latest-old-template/build]
-    priority: 50
-    job:
-      class: RunWebuiTests
-      args:
-        build_url: '{fedora-latest-old-template/build_url}'
-        test_suite: >-
-          test_webui/test_loginscreen.py
-          test_webui/test_misc_cases.py
-          test_webui/test_navigation.py
-          test_webui/test_translation.py
-        template: *ci-master-latest-old-template
-        timeout: 3600
-        topology: *ipaserver
-
-  fedora-latest-ipa-4-8-old-template/build:
-    requires: []
-    priority: 150
-    job:
-      class: Build
-      args:
-        git_repo: '{git_repo}'
-        git_refspec: '{git_refspec}'
-        template: &ci-ipa-4-8-latest-old-template
-          name: freeipa/ci-ipa-4-8-f32
-          version: 0.0.6
-        timeout: 1800
-        topology: *build
-
-  fedora-latest-ipa-4-8-old-template/test_webui_general:
-    requires: [fedora-latest-ipa-4-8-old-template/build]
-    priority: 50
-    job:
-      class: RunWebuiTests
-      args:
-        build_url: '{fedora-latest-ipa-4-8-old-template/build_url}'
-        test_suite: >-
-          test_webui/test_loginscreen.py
-          test_webui/test_misc_cases.py
-          test_webui/test_navigation.py
-          test_webui/test_translation.py
-        template: *ci-ipa-4-8-latest-old-template
         timeout: 3600
         topology: *ipaserver
