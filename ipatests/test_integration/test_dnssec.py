@@ -200,7 +200,9 @@ class TestInstallDNSSECLast(IntegrationTest):
 
         dnskey_new = resolve_with_dnssec(self.master.ip, test_zone,
                                          rtype="DNSKEY").rrset
-        assert dnskey_old != dnskey_new, "DNSKEY should be different"
+        assert dnskey_old != dnskey_new, (
+            "DNSKEY should be different\nnew: %s\nold:%s" %
+            (dnskey_new.to_text(), dnskey_old.to_text()))
 
     def test_disable_reenable_signing_replica(self):
         dnskey_old = resolve_with_dnssec(self.replicas[0].ip, test_zone_repl,
