@@ -1489,3 +1489,26 @@ class TestIPACommand(IntegrationTest):
         self.master.run_command(['date', '-s', '-15Years'])
 
         assert isrgrootx1_nick in result
+
+    def test_client_doesnot_throw_responsenotready_error(self):
+        """
+        This testcase checks that ipa command
+        doesn't throw http.client.ResponseNotReady error
+        when current users session is deleted from the cache
+        """
+        error_msg = (
+            "http.client.ResponseNotReady: Request-sent \n"
+            "ipa: ERROR: an internal error has occurred"
+        )
+
+        # kinit as admin on ipa-client and run ipa command
+        tasks.kinit_admin(self.clients[0], raiseonerr=False)
+        self.clients[0].run_command(['ipa', '-d', '-vv', 'user-find'])
+
+        # Delete the current user session cache on IPA server
+        self.master.run_command('rm -fv /run/ipa/ccaches/*')
+
+        # Run the command on the client again after cache is removed
+        cmd = self.clients[0].run_command(['ipa', '-d', '-vv', 'user-find'])
+        assert cmd.returncode == 0
+        assert error_msg not in (cmd.stdout_text + cmd.stderr_text)
