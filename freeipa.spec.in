@@ -107,7 +107,7 @@
 
 # Make sure to use 389-ds-base versions that fix https://github.com/389ds/389-ds-base/issues/4609
 %if 0%{?fedora} < 34
-%global ds_version %{lua: local v={}; v['32']='1.4.3.20-2'; v['33']='1.4.4.13-2'; print(v[rpm.expand('%{fedora}')])}
+%global ds_version 2.0.3-20210322git6d3f339bd.fc33
 %else
 %global ds_version 2.0.3-3
 %endif
@@ -251,7 +251,7 @@ BuildRequires:  openssl-devel
 BuildRequires:  libini_config-devel
 BuildRequires:  cyrus-sasl-devel
 %if ! %{ONLY_CLIENT}
-BuildRequires:  389-ds-base-devel >= %{ds_version}
+BuildRequires:  389-ds-base-devel == %{ds_version}
 BuildRequires:  samba-devel >= %{samba_version}
 BuildRequires:  libtalloc-devel
 BuildRequires:  libtevent-devel
@@ -334,7 +334,7 @@ BuildRequires:  python3-jinja2
 BuildRequires:  python3-jwcrypto >= 0.4.2
 BuildRequires:  python3-ldap >= %{python_ldap_version}
 BuildRequires:  python3-ldap >= %{python_ldap_version}
-BuildRequires:  python3-lib389 >= %{ds_version}
+BuildRequires:  python3-lib389 == %{ds_version}
 BuildRequires:  python3-libipa_hbac
 BuildRequires:  python3-libsss_nss_idmap
 BuildRequires:  python3-lxml
@@ -399,7 +399,7 @@ Requires: %{name}-client = %{version}-%{release}
 Requires: %{name}-common = %{version}-%{release}
 Requires: python3-ipaserver = %{version}-%{release}
 Requires: python3-ldap >= %{python_ldap_version}
-Requires: 389-ds-base >= %{ds_version}
+Requires: 389-ds-base == %{ds_version}
 Requires: openldap-clients > 2.4.35-4
 Requires: nss-tools >= %{nss_version}
 Requires(post): krb5-server >= %{krb5_version}
@@ -436,7 +436,7 @@ Requires: (pki-acme >= %{pki_version} if pki-ca >= 10.10.0)
 Requires: policycoreutils >= 2.1.12-5
 Requires: tar
 Requires(pre): certmonger >= %{certmonger_version}
-Requires(pre): 389-ds-base >= %{ds_version}
+Requires(pre): 389-ds-base == %{ds_version}
 Requires: fontawesome-fonts
 Requires: open-sans-fonts
 Requires: openssl
