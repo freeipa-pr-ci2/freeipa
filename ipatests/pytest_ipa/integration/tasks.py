@@ -2425,11 +2425,6 @@ def remote_ini_file(host, filename):
     host.put_file_contents(filename, data.getvalue())
 
 
-def is_selinux_enabled(host):
-    res = host.run_command('selinuxenabled', ok_returncode=(0, 1))
-    return res.returncode == 0
-
-
 def get_logsize(host, logfile):
     """ get current logsize"""
     logsize = len(host.get_file_contents(logfile))

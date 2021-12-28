@@ -5,30 +5,19 @@ from __future__ import absolute_import
 import re
 import textwrap
 import time
-import functools
 
 import pytest
 
 from ipatests.test_integration.base import IntegrationTest
 from ipatests.pytest_ipa.integration import tasks
 from ipatests.pytest_ipa.integration import fips
+from ipatests.util import xfail_context
 from ipapython.dn import DN
 from collections import namedtuple
 from contextlib import contextmanager
 
 TestDataRule = namedtuple('TestDataRule',
                           ['name', 'ruletype', 'user', 'subject'])
-
-
-def skip_in_fips_mode_due_to_issue_8715(test_method):
-    @functools.wraps(test_method)
-    def wrapper(instance):
-        if fips.is_fips_enabled(instance.master):
-            pytest.skip('Skipping in FIPS mode due to '
-                        'https://pagure.io/freeipa/issue/8715')
-        else:
-            test_method(instance)
-    return wrapper
 
 
 class BaseTestTrust(IntegrationTest):
@@ -769,7 +758,13 @@ class TestTrust(BaseTestTrust):
 
     # Test for one-way forest trust with shared secret
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_establish_forest_trust_with_shared_secret(self):
         tasks.configure_dns_for_trust(self.master, self.ad)
         tasks.configure_windows_dns_for_trust(self.ad, self.master)
@@ -794,7 +789,13 @@ class TestTrust(BaseTestTrust):
         tasks.establish_trust_with_ad(
             self.master, self.ad_domain, shared_secret=self.shared_secret)
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_trustdomains_found_in_forest_trust_with_shared_secret(self):
         result = self.master.run_command(
             ['ipa', 'trust-fetch-domains', self.ad.domain.name],
@@ -803,7 +804,13 @@ class TestTrust(BaseTestTrust):
         self.check_trustdomains(
             self.ad_domain, [self.ad_domain, self.ad_subdomain])
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_user_gid_uid_resolution_in_forest_trust_with_shared_secret(self):
         """Check that user has SID-generated UID"""
         # Using domain name since it is lowercased realm name for AD domains
@@ -822,7 +829,13 @@ class TestTrust(BaseTestTrust):
         assert re.search(
             testuser_regex, result.stdout_text), result.stdout_text
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_remove_forest_trust_with_shared_secret(self):
         ps_cmd = (
             '[System.DirectoryServices.ActiveDirectory.Forest]'
@@ -845,7 +858,13 @@ class TestTrust(BaseTestTrust):
 
     # Test for one-way external trust with shared secret
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_establish_external_trust_with_shared_secret(self):
         tasks.configure_dns_for_trust(self.master, self.ad)
         tasks.configure_windows_dns_for_trust(self.ad, self.master)
@@ -861,7 +880,13 @@ class TestTrust(BaseTestTrust):
             self.master, self.ad_domain, shared_secret=self.shared_secret,
             extra_args=['--range-type', 'ipa-ad-trust', '--external=True'])
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_trustdomains_found_in_external_trust_with_shared_secret(self):
         result = self.master.run_command(
             ['ipa', 'trust-fetch-domains', self.ad.domain.name],
@@ -870,7 +895,13 @@ class TestTrust(BaseTestTrust):
         self.check_trustdomains(
             self.ad_domain, [self.ad_domain])
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_user_uid_resolution_in_external_trust_with_shared_secret(self):
         """Check that user has SID-generated UID"""
         # Using domain name since it is lowercased realm name for AD domains
@@ -889,7 +920,13 @@ class TestTrust(BaseTestTrust):
         assert re.search(
             testuser_regex, result.stdout_text), result.stdout_text
 
-    @skip_in_fips_mode_due_to_issue_8715
+    @pytest.mark.skip_if_hostfips(
+        "master",
+        reason=(
+            "Skipping in FIPS mode due to "
+            "https://pagure.io/freeipa/issue/8715"
+        ),
+    )
     def test_remove_external_trust_with_shared_secret(self):
         self.ad.run_command(
             ['netdom.exe', 'trust', self.master.domain.name,
