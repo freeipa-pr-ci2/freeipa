@@ -44,10 +44,9 @@ class TestNFS(IntegrationTest):
         time.sleep(WAIT_AFTER_UNINSTALL)
 
         nfsclt.run_command(["umount", "-a", "-t", "nfs4"])
-        nfsclt.run_command(["systemctl", "stop", "rpc-gssd"])
+        nfsclt.systemctl.stop("rpcgssd")
 
-        nfssrv.run_command(["systemctl", "stop", "nfs-server"])
-        nfssrv.run_command(["systemctl", "disable", "nfs-server"])
+        nfssrv.systemctl.disable("nfs-server", now=True)
         nfssrv.run_command([
             "rm", "-f", "/etc/exports.d/krbnfs.exports",
             "/etc/exports.d/stdnfs.exports"
@@ -63,8 +62,8 @@ class TestNFS(IntegrationTest):
         self.master.run_command([
             "ipa", "automountlocation-del", "seattle"
         ])
-        nfsclt.run_command(["systemctl", "restart", "nfs-utils"])
-        nfssrv.run_command(["systemctl", "restart", "nfs-utils"])
+        nfsclt.systemctl.restart("nfs-utils")
+        nfssrv.systemctl.restart("nfs-utils")
 
     def test_prepare_users(self):
 
@@ -101,8 +100,8 @@ class TestNFS(IntegrationTest):
             "ipa-getkeytab", "-p", "nfs/%s" % nfssrv.hostname,
             "-k", "/etc/krb5.keytab"
         ])
-        nfssrv.run_command(["systemctl", "restart", "nfs-server"])
-        nfssrv.run_command(["systemctl", "enable", "nfs-server"])
+        nfssrv.systemctl.restart("nfs-server")
+        nfssrv.systemctl.enable("nfs-server")
         time.sleep(WAIT_AFTER_INSTALL)
 
         basedir = "exports"
@@ -131,17 +130,13 @@ class TestNFS(IntegrationTest):
 
         # for journalctl --since
         since = time.strftime('%Y-%m-%d %H:%M:%S')
-        nfsclt.run_command(["systemctl", "restart", "rpc-gssd"])
+        nfsclt.systemctl.restart("rpcgssd")
         time.sleep(WAIT_AFTER_INSTALL)
         mountpoints = ("/mnt/krb", "/mnt/std", "/home")
         for mountpoint in mountpoints:
             nfsclt.run_command(["mkdir", "-p", mountpoint])
-        nfsclt.run_command([
-            "systemctl", "status", "gssproxy"
-        ])
-        nfsclt.run_command([
-            "systemctl", "status", "rpc-gssd"
-        ])
+        nfsclt.systemctl.status("gssproxy")
+        nfsclt.systemctl.status("rpcgssd")
         nfsclt.run_command([
             "mount", "-t", "nfs4", "-o", "sec=krb5p,vers=4.0",
             "%s:/exports/krbnfs" % nfssrv.hostname, "/mnt/krb", "-v"

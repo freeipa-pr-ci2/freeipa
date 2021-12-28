@@ -33,7 +33,6 @@ import six
 
 from ipalib import x509
 from ipapython import ipautil
-from ipaplatform.paths import paths
 from ipapython.dn import DN
 from ipatests.test_integration.base import IntegrationTest
 from ipatests.pytest_ipa.integration import tasks
@@ -77,16 +76,28 @@ def get_replica_prepare_stdin(cert_passwords=()):
 
 
 def ipa_certs_cleanup(host):
-    host.run_command(['certutil', '-d', paths.NSS_DB_DIR, '-D',
-                      '-n', 'External CA cert'],
-                     raiseonerr=False)
+    host.run_command(
+        [
+            "certutil",
+            "-d",
+            host.paths.NSS_DB_DIR,
+            "-D",
+            "-n",
+            "External CA cert",
+        ],
+        raiseonerr=False,
+    )
     # A workaround for https://fedorahosted.org/freeipa/ticket/4639
-    result = host.run_command(['certutil', '-L', '-d',
-                               paths.HTTPD_ALIAS_DIR], raiseonerr=False)
+    result = host.run_command(
+        ["certutil", "-L", "-d", host.paths.HTTPD_ALIAS_DIR],
+        raiseonerr=False,
+    )
     for rawcert in result.stdout_text.split('\n')[4: -1]:
         cert = rawcert.split('    ')[0]
-        host.run_command(['certutil', '-D', '-d', paths.HTTPD_ALIAS_DIR,
-                          '-n', cert], raiseonerr=False)
+        host.run_command(
+            ["certutil", "-D", "-d", host.paths.HTTPD_ALIAS_DIR, "-n", cert],
+            raiseonerr=False,
+        )
 
 
 def server_install_teardown(func):
@@ -218,7 +229,9 @@ class CALessBase(IntegrationTest):
             cls.copy_cert(host, filename)
 
         # Remove existing ca certs from default database to avoid conflicts
-        args = [paths.CERTUTIL, "-D", "-d", "/etc/httpd/alias", "-n"]
+        args = [
+            host.paths.CERTUTIL, "-D", "-d", host.paths.HTTPD_ALIAS_DIR, "-n"
+        ]
         host.run_command(args + ["ca1"], raiseonerr=False)
         host.run_command(args + ["ca1/server"], raiseonerr=False)
 
@@ -351,7 +364,7 @@ class CALessBase(IntegrationTest):
                 with open(cert_fname) as cert:
                     chain.write(cert.read())
 
-        ipautil.run([paths.OPENSSL, "pkcs12", "-export", "-out", filename,
+        ipautil.run(["openssl", "pkcs12", "-export", "-out", filename,
                      "-inkey", key_fname, "-in", certchain_fname, "-passin",
                      "pass:" + cls.cert_password, "-passout", "pass:" +
                      password, "-name", nickname], cwd=cls.cert_dir)
@@ -396,7 +409,7 @@ class CALessBase(IntegrationTest):
             assert cert_from_ldap == expected_cacrt
 
             result = host.run_command(
-                ["/usr/bin/stat", "-c", "%U:%G:%a", paths.IPA_CA_CRT]
+                ["/usr/bin/stat", "-c", "%U:%G:%a", host.paths.IPA_CA_CRT]
             )
             (owner, group, mode) = result.stdout_text.strip().split(':')
             assert owner == "root"
@@ -409,7 +422,7 @@ class CALessBase(IntegrationTest):
 
         for host in self.get_all_hosts():
             # Check the cert PEM file
-            remote_cacrt = host.get_file_contents(paths.IPA_CA_CRT)
+            remote_cacrt = host.get_file_contents(host.paths.IPA_CA_CRT)
             logger.debug('%s:/etc/ipa/ca.crt contents:\n%s',
                          host, remote_cacrt.decode('utf-8'))
             cacrt = x509.load_unknown_x509_certificate(remote_cacrt)
@@ -1221,9 +1234,16 @@ class TestIPACommands(CALessBase):
         self.master.run_command(['ipa', 'host-add', self.test_hostname,
                                  '--force',
                                  '--certificate', self.client_pem])
-        self.master.run_command(['ipa-getkeytab', '-s', self.master.hostname,
-                                 '-p' "host/%s" % self.test_hostname,
-                                 '-k', paths.HTTP_KEYTAB])
+        self.master.run_command(
+            [
+                "ipa-getkeytab",
+                "-s",
+                self.master.hostname,
+                "-p" "host/%s" % self.test_hostname,
+                "-k",
+                self.master.paths.HTTP_KEYTAB,
+            ]
+        )
         try:
             yield
         finally:
@@ -1237,10 +1257,11 @@ class TestIPACommands(CALessBase):
             self.master.run_command(['ipa', 'service-add', self.test_service,
                                      '--force',
                                      '--certificate', self.client_pem])
-            self.master.run_command(['ipa-getkeytab', '-s',
-                                     self.master.hostname,
-                                     '-p', self.test_service,
-                                     '-k', paths.HTTP_KEYTAB])
+            self.master.run_command(
+                ['ipa-getkeytab', '-s',
+                 self.master.hostname,
+                 '-p', self.test_service,
+                 '-k', self.master.paths.HTTP_KEYTAB])
             yield
 
     def test_service_mod_doesnt_revoke(self):
@@ -1521,25 +1542,24 @@ class TestCertInstall(CALessBase):
         self.prepare_cacert('ca2', filename=self.ca2_crt)
         self.copy_cert(self.master, self.ca2_crt)
 
-        result = self.master.run_command(['ipa-cacert-manage', 'install',
-                                          os.path.join(test_dir, self.ca2_crt)]
-                                         )
-        assert result.returncode == 0
-        result = self.master.run_command(['ipa-certupdate'])
-        assert result.returncode == 0
+        self.master.run_command(
+            [
+                'ipa-cacert-manage',
+                'install',
+                os.path.join(test_dir, self.ca2_crt),
+            ]
+        )
+        self.master.run_command(['ipa-certupdate'])
         result = self.certinstall('k', 'ca2/server-kdc',
                                   filename=self.ca2_kdc_crt)
         assert result.returncode == 0
-        result = self.master.run_command(['systemctl', 'restart', 'krb5kdc'])
-        assert result.returncode == 0
-        result = self.master.run_command(['kinit', '-n'])
-        assert result.returncode == 0
+        self.master.systemctl.restart("krb5kdc")
+        self.master.run_command(['kinit', '-n'])
 
 
 def verify_kdc_cert_perms(host):
     """Verify that the KDC cert pem file has 0644 perms"""
-    cmd = host.run_command(['stat', '-c',
-                           '"%a %G:%U"', paths.KDC_CERT])
+    cmd = host.run_command(['stat', '-c', '"%a %G:%U"', host.paths.KDC_CERT])
     assert "644 root:root" in cmd.stdout_text
 
 
