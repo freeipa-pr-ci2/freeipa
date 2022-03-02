@@ -616,7 +616,8 @@ class TestSubCAkeyReplication(IntegrationTest):
     def check_subca(self, host, name, cert_nick):
         result = host.run_command(['ipa', 'ca-show', name])
         # ipa ca-show returns 0 even if the cert cannot be found locally.
-        assert "ipa: ERROR:" not in result.stderr_text
+        if "ipa: ERROR:" in result.stderr_text:
+            return False
         tasks.run_certutil(
             host, ['-L', '-n', cert_nick], paths.PKI_TOMCAT_ALIAS_DIR
         )
@@ -625,6 +626,7 @@ class TestSubCAkeyReplication(IntegrationTest):
             '-f', paths.PKI_TOMCAT_ALIAS_PWDFILE_TXT,
             '-K', '-n', cert_nick
         ])
+        return True
 
     def get_certinfo(self, host):
         result = tasks.run_certutil(
@@ -707,11 +709,18 @@ class TestSubCAkeyReplication(IntegrationTest):
         master_nick = self.add_subca(
             master, self.SUBCA_MASTER, self.SUBCA_MASTER_CN
         )
-        # give replication some time
-        time.sleep(15)
+        # give replication some time, up to 60 seconds
+        for _i in range(0,6):
+            time.sleep(10)
+            m = self.check_subca(master, self.SUBCA_MASTER, master_nick)
+            r = self.check_subca(replica, self.SUBCA_MASTER, master_nick)
 
-        self.check_subca(master, self.SUBCA_MASTER, master_nick)
-        self.check_subca(replica, self.SUBCA_MASTER, master_nick)
+            if m and r:
+                break
+        else:
+            assert m, "master doesn't have the subCA"
+            assert r, "replica doesn't have the subCA"
+
         self.check_pki_error(replica)
         self.check_certdb(master, replica)
 
@@ -722,12 +731,19 @@ class TestSubCAkeyReplication(IntegrationTest):
         replica_nick = self.add_subca(
             replica, self.SUBCA_REPLICA, self.SUBCA_REPLICA_CN
         )
-        # give replication some time
-        time.sleep(15)
+        # give replication some time, up to 60 seconds
+        for _i in range(0,6):
+            time.sleep(10)
+            m = self.check_subca(master, self.SUBCA_MASTER, replica_nick)
+            r = self.check_subca(replica, self.SUBCA_MASTER, replica_nick)
+
+            if m and r:
+                break
+        else:
+            assert m, "master doesn't have the subCA"
+            assert r, "replica doesn't have the subCA"
 
         # replica.run_command(['ipa-certupdate'])
-        self.check_subca(replica, self.SUBCA_REPLICA, replica_nick)
-        self.check_subca(master, self.SUBCA_REPLICA, replica_nick)
         self.check_pki_error(master)
         self.check_certdb(master, replica)
 
