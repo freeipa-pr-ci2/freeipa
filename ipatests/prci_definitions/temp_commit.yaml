@@ -72,3 +72,31 @@ jobs:
         template: *ci-master-latest
         timeout: 7200
         topology: *master_1repl
+
+  pki-fedora/build:
+    requires: []
+    priority: 100
+    job:
+      class: Build
+      args:
+        git_repo: '{git_repo}'
+        git_refspec: '{git_refspec}'
+        template: &pki-master-latest
+          name: freeipa/pki-master-f35
+          version: 0.0.1
+        timeout: 1800
+        topology: *build
+
+  pki-fedora/test_replica_promotion_TestSubCAkeyReplication:
+    requires: [pki-fedora/build]
+    priority: 50
+    job:
+      class: RunPytest
+      args:
+        build_url: '{pki-fedora/build_url}'
+        update_packages: True
+        test_suite: test_integration/test_replica_promotion.py::TestSubCAkeyReplication
+        template: *pki-master-latest
+        timeout: 7200
+        topology: *master_1repl
+
