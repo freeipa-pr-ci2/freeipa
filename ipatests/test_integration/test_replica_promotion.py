@@ -638,7 +638,11 @@ class TestSubCAkeyReplication(IntegrationTest):
         for line in result.stdout_text.splitlines():
             mo = certdb.CERT_RE.match(line)
             if mo:
-                certs[mo.group('nick')] = mo.group('flags')
+                # Strip out any token
+                nick = mo.group('nick')
+                if ':' in nick:
+                    nick = nick.split(':', maxsplit=1)[1]
+                certs[nick] = mo.group('flags')
 
         result = tasks.run_certutil(
             host,
@@ -649,7 +653,11 @@ class TestSubCAkeyReplication(IntegrationTest):
         for line in result.stdout_text.splitlines():
             mo = certdb.KEY_RE.match(line)
             if mo:
-                keys[mo.group('nick')] = mo.group('keyid')
+                # Strip out any token
+                nick = mo.group('nick')
+                if ':' in nick:
+                    nick = nick.split(':', maxsplit=1)[1]
+                keys[nick] = mo.group('keyid')
         return certs, keys
 
     def check_certdb(self, master, replica):
@@ -665,14 +673,8 @@ class TestSubCAkeyReplication(IntegrationTest):
         if master.is_fips_mode:
             # Mixed FIPS/non-FIPS installations are not supported
             assert replica.is_fips_mode
-            key_nick = self.SERVER_KEY_NICK_FIPS
-        else:
-            key_nick = self.SERVER_KEY_NICK
 
-        # expected keys, server key has different name
         expected_keys = set(expected_certs)
-        expected_keys.remove(self.SERVER_CERT_NICK)
-        expected_keys.add(key_nick)
 
         # get certs and keys from Dogtag's NSSDB
         master_certs, master_keys = self.get_certinfo(master)
@@ -684,9 +686,9 @@ class TestSubCAkeyReplication(IntegrationTest):
         assert set(master_keys) == expected_keys
         assert set(replica_keys) == expected_keys
 
-        # server keys are different
-        master_server_key = master_keys.pop(key_nick)
-        replica_server_key = replica_keys.pop(key_nick)
+        # The Server-Cert keys are unique per-machine
+        master_server_key = master_keys.pop('Server-Cert cert-pki-ca')
+        replica_server_key = replica_keys.pop('Server-Cert cert-pki-ca')
         assert master_server_key != replica_server_key
         # but key ids of other keys are equal
         assert master_keys == replica_keys
