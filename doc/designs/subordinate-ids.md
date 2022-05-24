@@ -1,9 +1,5 @@
 # Central management of subordinate user and group ids
 
-## OUTDATED
-
-**The design document does not reflect new implementation yet!**
-
 Subordinate ids are a Linux Kernel feature to grant a user additional
 user and group id ranges. Amongst others the feature can be used
 by container runtime engies to implement rootless containers.
@@ -82,8 +78,8 @@ basic use cases. Some restrictions may be lifted in the future.
   ``/etc/subuid``, users are limited to one set of subordinate ids. The
   limitation is implemented with a unique index on owner reference and
   can be lifted in the future.
-* subids are auto-assigned. Auto-assignment is currently emulated
-  until 389-DS has been extended to support DNA with step interval.
+* subids are auto-assigned thanks to dnaInterval support from 389-DS
+  DNA plugin.
 * subids are allocated from hard-coded range
   ``[2147483648..4294901767]`` (``2^31`` to ``2^32-1-65536``), which
   is the upper 2.1 billion uids of ``uid_t`` (``uint32_t``). The range
@@ -241,6 +237,20 @@ objectClasses: (
   SUP top
   STRUCTURAL
   MUST ( ipaUniqueId ) MAY ( description ) X-ORIGIN 'IPA v4.9'
+)
+```
+
+Finally, setting ``ipaUserDefaultSubordinateId`` to TRUE will cause
+new user entries to gain subordinate id by default:
+
+```text
+attributeTypes: (
+  2.16.840.1.113730.3.8.23.14
+  NAME 'ipaUserDefaultSubordinateId'
+  DESC 'Enable adding user entries with subordinate id'
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE
+  X-ORIGIN 'IPA v4.9'
 )
 ```
 
@@ -587,7 +597,6 @@ ipaSubGidCount: 65536
 ### TODO
 
 * enable configuration for ``dnaStepAttr``
-* remove ``fake_dna_plugin`` hack from ``baseuser`` plug-in.
 * add custom range type for idranges and teach AD trust, sidgen, and
   range overlap check code to deal with new range type.
 
