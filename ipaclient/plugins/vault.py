@@ -711,7 +711,11 @@ class ModVaultData(Local):
         # wrap session key with transport certificate
         wrapped_session_key = public_key.encrypt(
             algo.key,
-            padding.PKCS1v15()
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
         )
         options['session_key'] = wrapped_session_key
 
