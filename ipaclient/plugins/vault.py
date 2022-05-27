@@ -119,8 +119,8 @@ def encrypt(data, symmetric_key=None, public_key=None):
         return public_key_obj.encrypt(
             data,
             padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA1()),
-                algorithm=hashes.SHA1(),
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
                 label=None
             )
         )
@@ -154,8 +154,8 @@ def decrypt(data, symmetric_key=None, private_key=None):
             return private_key_obj.decrypt(
                 data,
                 padding.OAEP(
-                    mgf=padding.MGF1(algorithm=hashes.SHA1()),
-                    algorithm=hashes.SHA1(),
+                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                    algorithm=hashes.SHA256(),
                     label=None
                 )
             )
@@ -711,7 +711,11 @@ class ModVaultData(Local):
         # wrap session key with transport certificate
         wrapped_session_key = public_key.encrypt(
             algo.key,
-            padding.PKCS1v15()
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
         )
         options['session_key'] = wrapped_session_key
 
