@@ -48,6 +48,7 @@ jobs:
       class: Build
       args:
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         git_repo: '{git_repo}'
         git_refspec: '{git_refspec}'
         template: &ci-master-latest
@@ -65,6 +66,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_simple_replication.py
         template: *ci-master-latest
         timeout: 3600
@@ -79,6 +81,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestExternalCA test_integration/test_external_ca.py::TestExternalCAConstraints
         template: *ci-master-latest
         timeout: 4800
@@ -93,6 +96,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestSelfExternalSelf test_integration/test_external_ca.py::TestExternalCAInstall
         template: *ci-master-latest
         timeout: 3600
@@ -107,6 +111,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestExternalCAProfileScenarios
         template: *ci-master-latest
         timeout: 3600
@@ -121,6 +126,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_topologies.py
         template: *ci-master-latest
         timeout: 3600
@@ -135,6 +141,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_sudo.py
         template: *ci-master-latest
         timeout: 4800
@@ -149,6 +156,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_commands.py
         template: *ci-master-latest
         timeout: 5400
@@ -163,6 +171,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_kerberos_flags.py
         template: *ci-master-latest
         timeout: 3600
@@ -177,6 +186,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_http_kdc_proxy.py
         template: *ci-master-latest
         timeout: 7200
@@ -191,6 +201,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_fips.py
         template: *ci-master-latest
         timeout: 7200
@@ -205,6 +216,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_forced_client_reenrollment.py
         template: *ci-master-latest
         timeout: 4800
@@ -219,6 +231,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_advise.py
         template: *ci-master-latest
         timeout: 3600
@@ -233,6 +246,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_testconfig.py
         template: *ci-master-latest
         timeout: 3600
@@ -247,6 +261,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_service_permissions.py
         template: *ci-master-latest
         timeout: 3600
@@ -261,6 +276,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_netgroup.py
         template: *ci-master-latest
         timeout: 3600
@@ -275,6 +291,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_vault.py
         template: *ci-master-latest
         timeout: 6300
@@ -289,6 +306,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_authselect.py
         template: *ci-master-latest
         timeout: 4800
@@ -303,6 +321,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_smb.py
         template: *ci-master-latest
         timeout: 7200
@@ -317,6 +336,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_server_del.py
         template: *ci-master-latest
         timeout: 10800
@@ -331,6 +351,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA1
         template: *ci-master-latest
         timeout: 10800
@@ -345,6 +366,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA2
         template: *ci-master-latest
         timeout: 10800
@@ -359,6 +381,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallCA
         template: *ci-master-latest
         timeout: 10800
@@ -373,6 +396,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA1
         template: *ci-master-latest
         timeout: 10800
@@ -387,6 +411,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA2
         template: *ci-master-latest
         timeout: 10800
@@ -401,6 +426,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS1
         template: *ci-master-latest
         timeout: 10800
@@ -415,6 +441,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS2
         template: *ci-master-latest
         timeout: 10800
@@ -429,6 +456,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS3
         template: *ci-master-latest
         timeout: 3600
@@ -443,6 +471,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS4
         template: *ci-master-latest
         timeout: 3600
@@ -456,6 +485,7 @@ jobs:
       args:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
+        copr: 'abbra/krb5-test'
         enable_testing_repo: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA_DNS1
         template: *ci-master-latest
@@ -471,6 +501,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA_DNS2
         template: *ci-master-latest
         timeout: 10800
@@ -485,6 +516,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMaster
         template: *ci-master-latest
         timeout: 10800
@@ -499,6 +531,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMasterKRA
         template: *ci-master-latest
         timeout: 10800
@@ -513,6 +546,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMasterDNS
         template: *ci-master-latest
         timeout: 10800
@@ -527,6 +561,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMasterDNSRepeatedly
         template: *ci-master-latest
         timeout: 10800
@@ -541,6 +576,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMasterReservedIPasForwarder
         template: *ci-master-latest
         timeout: 10800
@@ -555,6 +591,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallMasterReplica
         template: *ci-master-latest
         timeout: 10800
@@ -569,6 +606,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallReplicaAgainstSpecificServer
         template: *ci-master-latest
         timeout: 10800
@@ -583,6 +621,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestADTrustInstall
         template: *ci-master-latest
         timeout: 10800
@@ -597,6 +636,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestADTrustInstallWithDNS_KRA_ADTrust
         template: *ci-master-latest
         timeout: 10800
@@ -611,6 +651,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestKRAinstallAfterCertRenew
         template: *ci-master-latest
         timeout: 10800
@@ -625,6 +666,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithoutSudo
         template: *ci-master-latest
         timeout: 4800
@@ -639,6 +681,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallWithoutNamed
         template: *ci-master-latest
         timeout: 4800
@@ -653,6 +696,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestInstallwithSHA384withRSA
         template: *ci-master-latest
         timeout: 3600
@@ -667,6 +711,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_idviews.py
         template: *ci-master-latest
         timeout: 7200
@@ -681,6 +726,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestServerInstall
         template: *ci-master-latest
         timeout: 12000
@@ -695,6 +741,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestReplicaInstall
         template: *ci-master-latest
         timeout: 7200
@@ -709,6 +756,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestClientInstall
         template: *ci-master-latest
         timeout: 5400
@@ -724,6 +772,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestIPACommands
         template: *ci-master-latest
         timeout: 5400
@@ -738,6 +787,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestCertInstall
         template: *ci-master-latest
         timeout: 5400
@@ -752,6 +802,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestPKINIT
         template: *ci-master-latest
         timeout: 5400
@@ -766,6 +817,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestServerReplicaCALessToCAFull
         template: *ci-master-latest
         timeout: 5400
@@ -780,6 +832,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestReplicaCALessToCAFull
         template: *ci-master-latest
         timeout: 5400
@@ -794,6 +847,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_caless.py::TestServerCALessToExternalCA
         template: *ci-master-latest
         timeout: 5400
@@ -808,6 +862,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestUserRootFilesOwnershipPermission
         template: *ci-master-latest
         timeout: 7200
@@ -822,6 +877,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestore
         template: *ci-master-latest
         timeout: 7200
@@ -836,6 +892,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithDNSSEC
         template: *ci-master-latest
         timeout: 7200
@@ -850,6 +907,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithDNSSEC
         template: *ci-master-latest
         timeout: 7200
@@ -864,6 +922,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithDNS
         template: *ci-master-latest
         timeout: 7200
@@ -878,6 +937,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithDNS
         template: *ci-master-latest
         timeout: 7200
@@ -892,6 +952,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithKRA
         template: *ci-master-latest
         timeout: 7200
@@ -906,6 +967,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithKRA
         template: *ci-master-latest
         timeout: 7200
@@ -920,6 +982,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithReplica
         template: *ci-master-latest
         timeout: 7200
@@ -934,6 +997,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreDMPassword
         template: *ci-master-latest
         timeout: 7200
@@ -948,6 +1012,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestReplicaInstallAfterRestore
         template: *ci-master-latest
         timeout: 7200
@@ -962,6 +1027,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupRoles
         template: *ci-master-latest
         timeout: 7200
@@ -976,6 +1042,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_dnssec.py
         template: *ci-master-latest
         timeout: 10800
@@ -990,6 +1057,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestReplicaPromotionLevel1
         template: *ci-master-latest
         timeout: 7200
@@ -1004,6 +1072,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestUnprivilegedUserPermissions
         template: *ci-master-latest
         timeout: 7200
@@ -1018,6 +1087,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestProhibitReplicaUninstallation
         template: *ci-master-latest
         timeout: 7200
@@ -1032,6 +1102,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestWrongClientDomain
         template: *ci-master-latest
         timeout: 7200
@@ -1046,6 +1117,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestRenewalMaster
         template: *ci-master-latest
         timeout: 7200
@@ -1060,6 +1132,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInstallWithExistingEntry
         template: *ci-master-latest
         timeout: 7200
@@ -1074,6 +1147,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestSubCAkeyReplication
         template: *ci-master-latest
         timeout: 7200
@@ -1088,6 +1162,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInstallCustodia
         template: *ci-master-latest
         timeout: 7200
@@ -1102,6 +1177,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInForwardZone
         template: *ci-master-latest
         timeout: 7200
@@ -1116,6 +1192,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestHiddenReplicaPromotion
         template: *ci-master-latest
         timeout: 7200
@@ -1130,6 +1207,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replica_promotion.py::TestHiddenReplicaKRA
         template: *ci-master-latest
         timeout: 7200
@@ -1144,6 +1222,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_upgrade.py
         template: *ci-master-latest
         timeout: 7200
@@ -1158,6 +1237,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_topology.py::TestCASpecificRUVs
         template: *ci-master-latest
         timeout: 7200
@@ -1172,6 +1252,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_topology.py::TestTopologyOptions
         template: *ci-master-latest
         timeout: 7200
@@ -1186,6 +1267,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithoutCA
         template: *ci-master-latest
         timeout: 7200
@@ -1200,6 +1282,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithCA
         template: *ci-master-latest
         timeout: 10800
@@ -1214,6 +1297,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithCAKRA
         template: *ci-master-latest
         timeout: 10800
@@ -1228,6 +1312,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithoutCA
         template: *ci-master-latest
         timeout: 7200
@@ -1242,6 +1327,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithCA
         template: *ci-master-latest
         timeout: 7200
@@ -1256,6 +1342,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithCAKRA
         template: *ci-master-latest
         timeout: 10800
@@ -1270,6 +1357,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithoutCA
         template: *ci-master-latest
         timeout: 7200
@@ -1284,6 +1372,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCA
         template: *ci-master-latest
         timeout: 7200
@@ -1298,6 +1387,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
         template: *ci-master-latest
         timeout: 7200
@@ -1312,6 +1402,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_uninstallation.py
         template: *ci-master-latest
         timeout: 7200
@@ -1326,6 +1417,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation_client.py
         template: *ci-master-latest
         timeout: 3600
@@ -1340,6 +1432,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_user_permissions.py
         template: *ci-master-latest
         timeout: 3600
@@ -1354,6 +1447,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_webui/test_cert.py
         template: *ci-master-latest
         timeout: 2400
@@ -1368,6 +1462,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_loginscreen.py
           test_webui/test_misc_cases.py
@@ -1386,6 +1481,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_webui/test_host.py
         template: *ci-master-latest
         timeout: 3600
@@ -1400,6 +1496,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_hostgroup.py
           test_webui/test_netgroup.py
@@ -1416,6 +1513,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_automember.py
           test_webui/test_idviews.py
@@ -1432,6 +1530,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_automount.py
           test_webui/test_dns.py
@@ -1449,6 +1548,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_hbac.py
           test_webui/test_krbtpolicy.py
@@ -1468,6 +1568,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_delegation.py
           test_webui/test_rbac.py
@@ -1485,6 +1586,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_config.py
           test_webui/test_range.py
@@ -1504,6 +1606,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_webui/test_service.py
         template: *ci-master-latest
         timeout: 2400
@@ -1518,6 +1621,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: >-
           test_webui/test_group.py
           test_webui/test_user.py
@@ -1534,6 +1638,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_webui/test_subid.py
         template: *ci-master-latest
         timeout: 2400
@@ -1548,6 +1653,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_customized_ds_config_install.py
         template: *ci-master-latest
         timeout: 3600
@@ -1562,6 +1668,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_dns_locations.py
         template: *ci-master-latest
         timeout: 3600
@@ -1576,6 +1683,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestExternalCAdirsrvStop
         template: *ci-master-latest
         timeout: 3600
@@ -1590,6 +1698,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestExternalCAInvalidCert test_integration/test_external_ca.py::TestExternalCAInvalidIntermediate
         template: *ci-master-latest
         timeout: 3600
@@ -1604,6 +1713,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_external_ca.py::TestMultipleExternalCA
         template: *ci-master-latest
         timeout: 3600
@@ -1618,6 +1728,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheck
         template: *ci-master-latest
         topology: *master_1repl_1client
@@ -1632,6 +1743,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithoutDNS test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithExternalCA test_integration/test_ipahealthcheck.py::TestIpaHealthCheckFileCheck
         template: *ci-master-latest
         topology: *master_1repl
@@ -1646,6 +1758,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCLI test_integration/test_ipahealthcheck.py::TestIpaHealthCheckFilesystemSpace
         template: *ci-master-latest
         timeout: 3600
@@ -1660,6 +1773,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithADtrust
         template: *ci-master-latest
         timeout: 4800
@@ -1674,6 +1788,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ntp_options.py::TestNTPoptions
         template: *ci-master-latest
         timeout: 10800
@@ -1688,6 +1803,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_otp.py
         template: *ci-master-latest
         timeout: 3600
@@ -1702,6 +1818,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_pkinit_manage.py
         template: *ci-master-latest
         timeout: 3600
@@ -1716,6 +1833,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_pki_config_override.py
         template: *ci-master-latest
         timeout: 3600
@@ -1745,6 +1863,7 @@ jobs:
         update_packages: True
         enable_testing_repo: True
         test_suite: test_integration/test_nfs.py::TestIpaClientAutomountFileRestore
+        copr: 'abbra/krb5-test'
         template: *ci-master-latest
         timeout: 3600
         topology: *master_3client
@@ -1758,6 +1877,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestMaskInstall
         template: *ci-master-latest
         timeout: 3600
@@ -1772,6 +1892,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_installation.py::TestHostnameValidator
         template: *ci-master-latest
         timeout: 3600
@@ -1786,6 +1907,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_automember.py
         template: *ci-master-latest
         timeout: 3600
@@ -1800,6 +1922,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_crlgen_manage.py
         template: *ci-master-latest
         timeout: 3600
@@ -1814,6 +1937,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_cli_ipa_not_configured.py::TestIPANotConfigured
         template: *ci-master-latest
         timeout: 10800
@@ -1828,6 +1952,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_sssd.py
         template: *ci-master-latest
         timeout: 7200
@@ -1842,6 +1967,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ca_custom_sdn.py
         template: *ci-master-latest
         timeout: 7200
@@ -1856,6 +1982,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_membermanager.py
         template: *ci-master-latest
         timeout: 1800
@@ -1870,6 +1997,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_krbtpolicy.py
         template: *ci-master-latest
         timeout: 4800
@@ -1884,6 +2012,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_winsyncmigrate.py
         template: *ci-master-latest
         timeout: 4800
@@ -1898,6 +2027,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_trust.py
         template: *ci-master-latest
         timeout: 10000
@@ -1912,6 +2042,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreTrust
         template: *ci-master-latest
         timeout: 7200
@@ -1926,6 +2057,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_adtrust_install.py
         template: *ci-master-latest
         timeout: 3600
@@ -1940,6 +2072,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_cert.py
         template: *ci-master-latest
         timeout: 5400
@@ -1954,6 +2087,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_epn.py
         template: *ci-master-latest
         timeout: 7200
@@ -1968,6 +2102,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_acme.py
         template: *ci-master-latest
         timeout: 7200
@@ -1982,6 +2117,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_dns.py
         template: *ci-master-latest
         timeout: 3600
@@ -1996,6 +2132,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_pwpolicy.py
         template: *ci-master-latest
         timeout: 3600
@@ -2010,6 +2147,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_ipa_cert_fix.py
         template: *ci-master-latest
         timeout: 10800
@@ -2024,6 +2162,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_subids.py
         template: *ci-master-latest
         timeout: 3600
@@ -2038,6 +2177,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_custom_plugins.py
         template: *ci-master-latest
         timeout: 3600
@@ -2052,6 +2192,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_idp.py
         template: *ci-master-latest
         timeout: 5000
@@ -2080,6 +2221,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_random_serial_numbers.py::TestInstallWithCA_DNS1_RSN
         template: *ci-master-latest
         timeout: 10800
@@ -2094,6 +2236,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_random_serial_numbers.py::TestInstallWithCA_KRA1_RSN
         template: *ci-master-latest
         timeout: 10800
@@ -2108,6 +2251,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_random_serial_numbers.py::TestIPACommand_RSN::test_certificate_out_write_to_file
         template: *ci-master-latest
         timeout: 5400
@@ -2122,6 +2266,7 @@ jobs:
         build_url: '{testing-fedora/build_url}'
         update_packages: True
         enable_testing_repo: True
+        copr: 'abbra/krb5-test'
         test_suite: test_integration/test_random_serial_numbers.py::TestServerCALessToExternalCA_RSN
         template: *ci-master-latest
         timeout: 5400
