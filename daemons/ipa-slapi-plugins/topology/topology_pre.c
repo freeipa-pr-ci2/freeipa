@@ -238,7 +238,7 @@ ipa_topo_connection_fanout(TopoReplica *tconf, TopoReplicaSegment *tseg)
     slapi_log_error(SLAPI_LOG_PLUGIN, IPA_TOPO_PLUGIN_SUBSYSTEM,
                             "ipa_topo_connection_fanout for segment: %s\n",tseg->name);
     /* lock it */
-    TopoReplicaSegmentList *seglist = tconf->repl_segments;
+    TopoReplicaSegmentList *seglist = ipa_topo_util_get_repl_segments(tconf);
     while (seglist) {
         segm = seglist->segm;
         if (strcasecmp(segm->name, tseg->name) != 0) {
