@@ -432,6 +432,19 @@ def master_authoritative_for_client_domain(master, client):
     return result.returncode == 0
 
 
+def copy_nfast_data(src_host, dest_host):
+    src_host.run_command(
+        ['tar', '-cf', '/root/token_files.tar', '.'],
+        cwd='/opt/nfast/kmdata/local/'
+    )
+    tarball = src_host.get_file_contents('/root/token_files.tar')
+    dest_host.put_file_contents('/root/token_files.tar', tarball)
+    dest_host.run_command(
+        ['tar', '-xf', '/root/token_files.tar',
+         '-C', '/opt/nfast/kmdata/local']
+    )
+
+
 def install_replica(master, replica, setup_ca=True, setup_dns=False,
                     setup_kra=False, setup_adtrust=False, extra_args=(),
                     domain_level=None, unattended=True, stdin_text=None,
