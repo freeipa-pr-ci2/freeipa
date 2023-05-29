@@ -1132,6 +1132,9 @@ class login_password(Backend, KerberosSession):
             elif ('kinit: Error constructing AP-REQ armor: '
                   'Matching credential not found') in str(e):
                 raise KrbPrincipalWrongFAST(principal=principal)
+            elif ('kinit: Error constructing AP-REQ armor: '
+                  'Server krbtgt/') in str(e):
+                self.kinit(principal, password, ccache_name, use_armor=False)
             raise InvalidSessionPassword(principal=principal,
                                          message=unicode(e))
 
