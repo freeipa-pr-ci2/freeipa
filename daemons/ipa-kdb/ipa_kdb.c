@@ -49,6 +49,11 @@ static void ipadb_context_free(krb5_context kcontext,
     size_t c;
 
     if (*ctx != NULL) {
+        if ((*ctx)->magic != IPA_CONTEXT_MAGIC) {
+            krb5_klog_syslog(LOG_ERR, "IPA context is corrupted");
+            *ctx = NULL;
+            return;
+        }
         free((*ctx)->uri);
         free((*ctx)->base);
         free((*ctx)->realm_base);
@@ -200,6 +205,7 @@ static const struct {
     { "pkinit", IPADB_USER_AUTH_PKINIT },
     { "hardened", IPADB_USER_AUTH_HARDENED },
     { "idp", IPADB_USER_AUTH_IDP },
+    { "passkey", IPADB_USER_AUTH_PASSKEY },
     { }
 };
 
@@ -524,52 +530,6 @@ static krb5_principal ipadb_create_local_tgs(krb5_context kcontext,
     return tgtp;
 }
 
-static char *no_attrs[] = {
-    LDAP_NO_ATTRS,
-
-    NULL
-};
-
-static krb5_error_code
-should_support_pac_tkt_sign(krb5_context kcontext, bool *result)
-{
-    struct ipadb_context *ipactx;
-    krb5_error_code kerr;
-    LDAPMessage *res = NULL;
-    char *masters_dn = NULL;
-    int count;
-
-    char *kdc_filter = "(&(cn=KDC)(objectClass=ipaConfigObject)"
-                       "(!(ipaConfigString=pacTktSignSupported)))";
-
-    ipactx = ipadb_get_context(kcontext);
-    if (!ipactx) {
-        kerr = KRB5_KDB_DBNOTINITED;
-        goto done;
-    }
-
-    count = asprintf(&masters_dn, "cn=masters,cn=ipa,cn=etc,%s", ipactx->base);
-    if (count < 0) {
-        kerr = ENOMEM;
-        goto done;
-    }
-
-    kerr = ipadb_simple_search(ipactx, masters_dn, LDAP_SCOPE_SUBTREE,
-                               kdc_filter, no_attrs, &res);
-    if (kerr)
-        goto done;
-
-    count = ldap_count_entries(ipactx->lcontext, res);
-
-    if (result)
-        *result = (count == 0);
-
-done:
-    free(masters_dn);
-    ldap_msgfree(res);
-    return kerr;
-}
-
 /* INTERFACE */
 
 static krb5_error_code ipadb_init_library(void)
@@ -590,7 +550,6 @@ static krb5_error_code ipadb_init_module(krb5_context kcontext,
     krb5_error_code kerr;
     int ret;
     int i;
-    bool pac_tkt_sign_supported;
 
     /* make sure the context is freed to avoid leaking it */
     ipactx = ipadb_get_context(kcontext);
@@ -662,6 +621,8 @@ static krb5_error_code ipadb_init_module(krb5_context kcontext,
         goto fail;
     }
 
+    ipactx->optional_pac_tkt_chksum = IPADB_TRISTATE_UNDEFINED;
+
     ret = ipadb_get_connection(ipactx);
     if (ret != 0) {
         /* Not a fatal failure, as the LDAP server may be temporarily down. */
@@ -675,13 +636,6 @@ static krb5_error_code ipadb_init_module(krb5_context kcontext,
         goto fail;
     }
 
-    /* Enforce PAC ticket signature verification if supported by all KDCs */
-    kerr = should_support_pac_tkt_sign(kcontext, &pac_tkt_sign_supported);
-    if (kerr) {
-        ret = kerr;
-        goto fail;
-    }
-    ipactx->optional_pac_tkt_chksum = !pac_tkt_sign_supported;
 
     return 0;
 
