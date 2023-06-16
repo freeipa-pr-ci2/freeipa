@@ -30,7 +30,6 @@ import cryptography.x509
 from cryptography.hazmat.primitives import hashes, serialization
 from dns import resolver, reversename
 import six
-import sys
 
 from ipalib import Command, Str, Int, Flag, StrEnum, SerialNumber
 from ipalib import api
@@ -1618,19 +1617,7 @@ class cert_find(Search, CertMethod):
             )
 
     def _get_cert_key(self, cert):
-        # for cert-find with a certificate value
-        if isinstance(cert, x509.IPACertificate):
-            return (DN(cert.issuer), cert.serial_number)
-
-        issuer = []
-        for oid, value in cert.get_issuer().get_components():
-            issuer.append(
-                '{}={}'.format(oid.decode('utf-8'), value.decode('utf-8'))
-            )
-        issuer = ','.join(issuer)
-        # Use this to flip from OpenSSL reverse to X500 ordering
-        issuer = DN(issuer).x500_text()
-        return (DN(issuer), cert.get_serial_number())
+        return (DN(cert.issuer), cert.serial_number)
 
     def _cert_search(self, pkey_only, **options):
         result = collections.OrderedDict()
@@ -1750,11 +1737,6 @@ class cert_find(Search, CertMethod):
         return result, False, complete
 
     def _ldap_search(self, all, pkey_only, no_members, **options):
-        # defer import of the OpenSSL module to not affect the requests
-        # module which will use pyopenssl if this is available.
-        if sys.modules.get('OpenSSL.SSL', False) is None:
-            del sys.modules["OpenSSL.SSL"]
-        import OpenSSL.crypto
         ldap = self.api.Backend.ldap2
 
         filters = []
@@ -1814,20 +1796,18 @@ class cert_find(Search, CertMethod):
         for entry in entries:
             for attr in ('usercertificate', 'usercertificate;binary'):
                 for der in entry.raw.get(attr, []):
-                    cert = OpenSSL.crypto.load_certificate(
-                        OpenSSL.crypto.FILETYPE_ASN1, der)
+                    cert = cryptography.x509.load_der_x509_certificate(der)
                     cert_key = self._get_cert_key(cert)
                     try:
                         obj = result[cert_key]
                     except KeyError:
-                        obj = {'serial_number': cert.get_serial_number()}
+                        obj = {'serial_number': cert.serial_number}
                         if not pkey_only and (all or not ca_enabled):
                             # Retrieving certificate details is now deferred
                             # until after all certificates are collected.
                             # For the case of CA-less we need to keep
                             # the certificate because getting it again later
                             # would require unnecessary LDAP searches.
-                            cert = cert.to_cryptography()
                             obj['certificate'] = (
                                 base64.b64encode(
                                     cert.public_bytes(x509.Encoding.DER))
