@@ -1064,9 +1064,24 @@ class TestHiddenReplicaPromotion(IntegrationTest):
         tasks.user_add(self.replicas[0], 'testuser')
         tasks.user_del(self.replicas[0], 'testuser')
         for srv in (self.master, self.replicas[0]):
+            # https://pagure.io/freeipa/issue/9400
+            # exclude ipahealthcheck.ds.config
+            tmpcmd = srv.run_command(['mktemp'])
+            config_file = tmpcmd.stdout_text.strip()
+            srv.put_file_contents(
+                config_file,
+                '\n'.join([
+                    '[default]',
+		    'output_type=human',
+                    'output_file=%s' % HC_LOG,
+                    '[excludes]',
+                    'key=DSCLE0004'
+                ])
+            )
             returncode, _unused = run_healthcheck(
                 srv,
-                failures_only=True
+                failures_only=True,
+                config=config_file
             )
             pki_too_old = \
                 (os_version[0] == 'fedora'
