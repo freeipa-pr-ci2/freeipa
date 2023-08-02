@@ -1743,8 +1743,8 @@ jobs:
 #      args:
 #        build_url: '{fedora-latest/build_url}'
 #        update_packages: True
-        copr: 'spichugi/pyasn1-0.5.0-test-fixed'
-        test_suite: test_integration/test_nfs.py::TestNFS
+#        copr: 'spichugi/pyasn1-0.5.0-test-fixed' 
+#        test_suite: test_integration/test_nfs.py::TestNFS
 #        template: *ci-master-latest
 #        timeout: 9000
 #        topology: *master_3client
