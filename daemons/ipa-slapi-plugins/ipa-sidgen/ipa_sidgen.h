@@ -45,6 +45,8 @@
 #define UID_NUMBER "uidnumber"
 #define GID_NUMBER "gidnumber"
 #define IPA_SID "ipantsecurityidentifier"
+#define IPA_UNIQUEID "ipauniqueid"
+#define IPA_UNIQUEID_AUTOGENERATE "autogenerate"
 #define DOM_ATTRS_FILTER OBJECTCLASS"=ipantdomainattrs"
 #define DOMAIN_ID_RANGE_FILTER OBJECTCLASS"=ipadomainidrange"
 #define POSIX_ACCOUNT "posixaccount"
@@ -104,3 +106,6 @@ int find_sid_for_ldap_entry(struct slapi_entry *entry,
                             const char *base_dn,
                             const char *dom_sid,
                             struct range_info **ranges);
+
+int sidgen_task_init(Slapi_PBlock *pb);
+int ipa_sidgen_init(Slapi_PBlock *pb);
