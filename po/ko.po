@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the freeipa package.
 # 김인수 <simmon@nplob.com>, 2022, 2024.
 # Alexander Bokovoy <abokovoy@redhat.com>, 2022.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: freeipa 4.10.0.dev202206291425+git9a97f9b40\n"
 "Report-Msgid-Bugs-To: https://pagure.io/freeipa/new_issue\n"
 "POT-Creation-Date: 2023-11-20 14:44+0100\n"
-"PO-Revision-Date: 2024-02-08 12:36+0000\n"
-"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"PO-Revision-Date: 2024-02-27 09:36+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/freeipa/"
 "master/ko/>\n"
 "Language: ko\n"
@@ -17,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.3.1\n"
+"X-Generator: Weblate 5.4\n"
 
 #, c-format
 msgid "cannot open configuration file %s\n"
@@ -284,7 +286,7 @@ msgid "DN to bind as if not using kerberos"
 msgstr "만약 커버러스를 사용하지 않는 것같이 바인드하는 DN"
 
 msgid "LDAP password"
-msgstr ""
+msgstr "LDAP 비밀번호"
 
 msgid "password to use if not using kerberos"
 msgstr "만약 커버러스를 사용하지 않는 것을 사용하려는 비밀번호"
@@ -308,7 +310,7 @@ msgid "LDAP SASL bind mechanism if no bindd/bindpw"
 msgstr "만약 bindd/bindpw가 없는 경우 LDAP SASL 바인드 동작원리"
 
 msgid "GSSAPI|EXTERNAL"
-msgstr ""
+msgstr "GSSAPI|EXTERNAL"
 
 msgid "Retrieve current keys without changing them"
 msgstr "변경하지 않고 현재 키를 검색합니다"
@@ -350,23 +352,23 @@ msgstr "서버와 LDAP uri를 동시에 지정 할 수 없습니다.\n"
 
 #, c-format
 msgid "DNS discovery for domain %s\n"
-msgstr ""
+msgstr "도메인 %s를 위한 DNS 검색\n"
 
 #, c-format
 msgid "Discovered server %s\n"
-msgstr ""
+msgstr "검색된 서버 %s\n"
 
 #, c-format
 msgid "Using discovered server %s\n"
-msgstr ""
+msgstr "검색된 서버 %s를 사용하기\n"
 
 #, c-format
 msgid "DNS Discovery failed\n"
-msgstr ""
+msgstr "DNS 검색 실패함\n"
 
 #, c-format
 msgid "Using server from config %s\n"
-msgstr ""
+msgstr "config %s에서 서버 사용하기\n"
 
 #, c-format
 msgid "Server name not provided and unavailable\n"
@@ -374,7 +376,7 @@ msgstr "서버 이름은 제공되지 않으며 사용 할 수 없습니다\n"
 
 #, c-format
 msgid "Using provided server %s\n"
-msgstr ""
+msgstr "제공된 서버 %s 사용하기\n"
 
 #, c-format
 msgid "Incompatible options provided (-r and -P)\n"
@@ -500,63 +502,67 @@ msgstr "curl_easy_setopt()가 실패했습니다\n"
 
 #, c-format
 msgid "Expanding buffer in jsonrpc_handle_response failed"
-msgstr ""
+msgstr "jsonrpc_handle_response에서 버퍼 확장이 실패했습니다"
 
 #, c-format
 msgid "curl_global_init() failed\n"
-msgstr ""
+msgstr "curl_global_init() 가 실패함\n"
 
 #, c-format
 msgid "curl_easy_init() failed\n"
-msgstr ""
+msgstr "curl_easy_init()가 실패함\n"
 
 #, c-format
 msgid "json_dumps() failed\n"
-msgstr ""
+msgstr "json_dumps()가 실패함\n"
 
 #, c-format
 msgid ""
 "JSON-RPC request:\n"
 "%s\n"
 msgstr ""
+"JSON-RPC 요청:\n"
+"%s\n"
 
 #, c-format
 msgid "JSON-RPC call failed: %s\n"
-msgstr ""
+msgstr "JSON-RPC 호출이 실패함: %s\n"
 
 #, c-format
 msgid "JSON-RPC call was unauthorized. Check your credentials.\n"
-msgstr ""
+msgstr "JSON-RPC 호출은 허용되지 않습니다. 자신의 인증을 점검하세요.\n"
 
 #, c-format
 msgid "JSON-RPC call failed with status code: %li\n"
-msgstr ""
+msgstr "JSON-RPC 호출은 상태 코드에서 실패하였습니다: %li\n"
 
 #, c-format
 msgid ""
 "JSON-RPC response:\n"
 "%s\n"
 msgstr ""
+"JSON-RPC 응답:\n"
+"%s\n"
 
 #, c-format
 msgid "Extracting the error from the JSON-RPC response failed: %s\n"
-msgstr ""
+msgstr "JSON-RPC 응답에서 오류 추출이 실패함: %s\n"
 
 #, c-format
 msgid "Parsing JSON-RPC response failed: %s\n"
-msgstr ""
+msgstr "JSON-RPC 응답 구문분석이 실패함: %s\n"
 
 #, c-format
 msgid "Parsing JSON-RPC response failed: no 'result' value found.\n"
-msgstr ""
+msgstr "JSON-RPC 응답을 구문 분석하는데 실패함: '결과' 값을 찾을 수 없습니다.\n"
 
 #, c-format
 msgid "Extracting the data from the JSON-RPC response failed: %s\n"
-msgstr ""
+msgstr "JSON-RPC 응답에서 자료를 추출 하는데 실패함: %s\n"
 
 #, c-format
 msgid "json_pack_ex() failed: %s\n"
-msgstr ""
+msgstr "json_pack_ex() 실패함: %s\n"
 
 #, c-format
 msgid "Unenrollment successful.\n"
@@ -564,152 +570,155 @@ msgstr "등록 취소 성공.\n"
 
 #, c-format
 msgid "Unenrollment failed.\n"
-msgstr ""
+msgstr "등록 취소 실패함.\n"
 
 #, c-format
 msgid "result not found in XML-RPC response\n"
-msgstr ""
+msgstr "결과는 XML-RPC 응답에서 찾을 수 없습니다\n"
 
 #, c-format
 msgid "Unable to determine IPA server from %s\n"
-msgstr ""
+msgstr "%s에서 IPA 서버를 결정 할 수 없습니다\n"
 
 #, c-format
 msgid "Unable to join host: Kerberos context initialization failed\n"
-msgstr ""
+msgstr "호스트에 참여 할 수 없습니다: 커버러스 문맥 초기화가 실패하였습니다\n"
 
 #, c-format
 msgid "Unable to join host: Kerberos Credential Cache not found\n"
-msgstr ""
+msgstr "호스트에 참여 할 수 없음: 커버러스 인증 캐쉬를 찾을 수 없습니다\n"
 
 #, c-format
 msgid ""
 "Unable to join host: Kerberos User Principal not found and host password not "
 "provided.\n"
-msgstr ""
+msgstr "호스에 참여 할 수 없음: 커버러스 사용자 주체를 찾을 수 없고 호스트 "
+"비밀번호가 제공되지 않았습니다.\n"
 
 #, c-format
 msgid "fork() failed\n"
-msgstr ""
+msgstr "fork() 실패함\n"
 
 #, c-format
 msgid "ipa-getkeytab not found\n"
-msgstr ""
+msgstr "ipa-getkeytab 찾을 수 없음\n"
 
 #, c-format
 msgid "ipa-getkeytab has bad permissions?\n"
-msgstr ""
+msgstr "ipa-getkeytab은 잘못된 권한을 갖고 있나요?\n"
 
 #, c-format
 msgid "executing ipa-getkeytab failed, errno %d\n"
-msgstr ""
+msgstr "ipa-getkeytab 실행하는데 실패함, 오류번호 %d\n"
 
 #, c-format
 msgid "child exited with %d\n"
-msgstr ""
+msgstr "자식 프로세서가 %d와 힘께 종료되었습니다\n"
 
 #, c-format
 msgid "Error resolving keytab: %s.\n"
-msgstr ""
+msgstr "키탭 해석 오류: %s.\n"
 
 #, c-format
 msgid "Error getting default Kerberos realm: %s.\n"
-msgstr ""
+msgstr "기본 커버러스 realm을 가져오는 중 오류: %s.\n"
 
 #, c-format
 msgid "Error parsing \"%1$s\": %2$s.\n"
-msgstr ""
+msgstr "구문 분석 중 오류 \"%1$s\": %2$s.\n"
 
 #, c-format
 msgid "Error obtaining initial credentials: %s.\n"
-msgstr ""
+msgstr "초기 인증서를 획득 중 오류: %s.\n"
 
 #, c-format
 msgid "Unable to generate Kerberos Credential Cache\n"
-msgstr ""
+msgstr "커버러스 인증서 캐쉬를 생성 할 수 없음\n"
 
 #, c-format
 msgid "Error storing creds in credential cache: %s.\n"
-msgstr ""
+msgstr "인증서 캐쉬에서 인증서 저장 중 오류: %s.\n"
 
 msgid "Print the raw XML-RPC output in GSSAPI mode"
-msgstr ""
+msgstr "GSSAPI 방식에서 단순 XML-RPC 표준출력을 인쇄합니다"
 
 msgid "Quiet mode. Only errors are displayed."
-msgstr ""
+msgstr "정숙 방식. 단지 오류만 표시됩니다."
 
 msgid "Unenroll this host from IPA server"
-msgstr ""
+msgstr "IPA 서버에서 이 호스트를 등록 취소합니다"
 
 msgid "Hostname of this server"
-msgstr ""
+msgstr "이 서버의 호스트 이름"
 
 msgid "hostname"
-msgstr ""
+msgstr "호스트 이름"
 
 msgid "IPA Server to use"
-msgstr ""
+msgstr "사용하려는 IPA 서버"
 
 msgid "Specifies where to store keytab information."
-msgstr ""
+msgstr "키탭 정보를 저장하려는 장소를 지정합니다."
 
 msgid "filename"
-msgstr ""
+msgstr "파일이름"
 
 msgid "Force the host join. Rejoin even if already joined."
-msgstr ""
+msgstr "호스트 참여를 강제합니다. 만약 이미 참여 중이라 할지라도 다시 참여합니다."
 
 msgid "LDAP password (if not using Kerberos)"
-msgstr ""
+msgstr "LDAP 비밀번호 (만약 커버로스를 사용 중이 아니라면)"
 
 msgid "password"
-msgstr ""
+msgstr "비밀번호"
 
 msgid "LDAP basedn"
-msgstr ""
+msgstr "LDAP basedn"
 
 msgid "basedn"
-msgstr ""
+msgstr "basedn"
 
 #, c-format
 msgid "Cannot get host's FQDN!\n"
-msgstr ""
+msgstr "호스트의 FQDN을 가져 올 수 없습니다!\n"
 
 #, c-format
 msgid "The hostname must be fully-qualified: %s\n"
-msgstr ""
+msgstr "호스트 이름은 완전하게-검증되어야 합니다: %s\n"
 
 #, c-format
 msgid "The hostname must not be: %s\n"
-msgstr ""
+msgstr "호스트 이름이 아니어야 합니다: %s\n"
 
 msgid "Write certificate (chain if --chain used) to file"
-msgstr ""
+msgstr "파일에 인증서 쓰기 (만약 --chain이 사용된 경우 체인)"
 
 msgid "Input file"
-msgstr ""
+msgstr "입력 파일"
 
 msgid "File to load the certificate from"
-msgstr ""
+msgstr "해당 인증서에 적재 할 파일"
 
 msgid "cannot specify both raw certificate and file"
-msgstr ""
+msgstr "단순 인증서와 파일 모두 상세화 할 수 없습니다"
 
 #, python-format
 msgid "Profile configuration stored in file '%(file)s'"
-msgstr ""
+msgstr "파일 '%(file)s'에서 저장된 프로파일 구성"
 
 #, python-format
 msgid "Certificate(s) stored in file '%(file)s'"
-msgstr ""
+msgstr "파일 '%(file)s'에서 저장된 인증서"
 
 msgid "Servers details:"
-msgstr ""
+msgstr "서버 상세:"
 
 msgid ""
 "Migration mode is disabled.\n"
 "Use 'ipa config-mod --enable-migration=TRUE' to enable it."
 msgstr ""
+"이전 방식(migration mode)이 비활성화 되었습니다.\n"
+"이를 활성화 하도록 'ipa config-mod --enable-migration=TRUE'를 사용하세요."
 
 msgid ""
 "Passwords have been migrated in pre-hashed format.\n"
@@ -718,74 +727,79 @@ msgid ""
 "login at https://your.domain/ipa/migration/ before they\n"
 "can use their Kerberos accounts."
 msgstr ""
+"비밀번호는 사전-해시된 형식으로 이전되었습니다.\n"
+"IPA는 일반 텍스트 비밀번호로 제공되지 않는 한 커버러스 키를\n"
+"생성 할 수 없습니다. 모든 이전된 사용자는 이들 커버러스\n"
+"계정을 사용하기 전에 https://your.domain/ipa/migration/에\n"
+"로그인 해야 합니다."
 
 #, python-format
 msgid "Removing %(servers)s from replication topology, please wait..."
-msgstr ""
+msgstr "복제된 형상에서 %(servers)s를 제거하는 중임. 잠시 기다려 주세요..."
 
 #, python-format
 msgid "Replication topology of suffix \"%(suffix)s\" is in order."
-msgstr ""
+msgstr "접미사 \"%(suffix)s\"의 복제 형상 순서입니다."
 
 #, python-format
 msgid "Replication topology of suffix \"%(suffix)s\" contains errors."
-msgstr ""
+msgstr "접미사 \"%(suffix)s\"의 복제 형상은 오류를 포함합니다."
 
 msgid "Topology is disconnected"
-msgstr ""
+msgstr "형상이 끊어졌습니다"
 
 #, python-format
 msgid "Server %(srv)s can't contact servers: %(replicas)s"
-msgstr ""
+msgstr "서버 %(srv)s는 서버와 연락 할 수 없습니다: %(replicas)s"
 
 msgid "Recommended maximum number of agreements per replica exceeded"
-msgstr ""
+msgstr "복제본당 추천되는 최대 계약 수를 초과했습니다"
 
 msgid "Maximum number of agreements per replica"
-msgstr ""
+msgstr "복제본당 계약의 최대 수"
 
 #, python-format
 msgid "Server \"%(srv)s\" has %(n)d agreements with servers:"
-msgstr ""
+msgstr "서버 \"%(srv)s\"는 서버 %(n)d 계약을 갖고 있습니다:"
 
 msgid "Unrevoked"
-msgstr ""
+msgstr "취소되지 않음"
 
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 msgid "Input filename"
-msgstr ""
+msgstr "파일이름 입력"
 
 msgid "File to load the certificate from."
-msgstr ""
+msgstr "해당 인증서에 적재 할 파일."
 
 msgid "Split DNS record to parts"
 msgstr "DNS 레코드를 부분으로 분할"
 
 msgid "Please choose a type of DNS resource record to be added"
-msgstr ""
+msgstr "추가 되는 DNS 자원 레코드의 유형을 선택하세요"
 
 #, python-format
 msgid "The most common types for this type of zone are: %s\n"
-msgstr ""
+msgstr "이 유형의 zone을 위해 가장 일반적인 유형은 다음과 같습니다: %s\n"
 
 msgid "DNS resource record type"
-msgstr ""
+msgstr "DNS 리소스 레코드 유형"
 
 #, python-format
 msgid "Invalid or unsupported type. Allowed values are: %s"
-msgstr ""
+msgstr "잘못되거나 지원되지 않는 유형. 허용된 값은 다음과 같습니다: %s"
 
 msgid "No option to modify specific record provided."
-msgstr ""
+msgstr "제공된 특정 레코드를 수정하는 옵션이 없습니다."
 
 msgid "Current DNS record contents:\n"
-msgstr ""
+msgstr "현재 DNS 레코드 내용:\n"
 
 #, python-format
 msgid "Modify %(name)s '%(value)s'?"
-msgstr ""
+msgstr "%(name)s '%(value)s' 수정할까요?"
 
 #, python-format
 msgid ""
@@ -801,31 +815,33 @@ msgid ""
 "Neither --del-all nor options to delete a specific record provided.\n"
 "Command help may be consulted for all supported record types."
 msgstr ""
+"--del-all 또는 특정한 레코드를 삭제하는 선택이 제공되지 않았습니다.\n"
+"명령 도움말은 지원되는 모든 레코드 유형을 위해 참조 할 수 있습니다."
 
 msgid "No option to delete specific record provided."
-msgstr ""
+msgstr "제공된 특정 레코드를 삭제하는 옵션이 없습니다."
 
 msgid "Delete all?"
-msgstr ""
+msgstr "모두 삭제?"
 
 #, python-format
 msgid "Delete %(name)s '%(value)s'?"
-msgstr ""
+msgstr "%(name)s '%(value)s' 삭제할까요?"
 
 msgid "Server will check DNS forwarder(s)."
-msgstr ""
+msgstr "서버는 DNS 전달자(s)를 점검합니다."
 
 msgid "This may take some time, please wait ..."
-msgstr ""
+msgstr "시간이 걸립니다, 잠시만 기다려주세요..."
 
 msgid "DNS forwarder"
-msgstr ""
+msgstr "DNS 전달자"
 
 msgid "file to store DNS records in nsupdate format"
-msgstr ""
+msgstr "nsupdate 형식에서 DNS 레코드를 저장하는 파일"
 
 msgid "Failed to add"
-msgstr ""
+msgstr "추가하는데 실패함"
 
 msgid ""
 "IMPORTANT: In case of a high number of users, hosts or groups, the operation "
@@ -835,97 +851,99 @@ msgstr ""
 msgid ""
 "Unable to display QR code using the configured output encoding. Please use "
 "the token URI to configure your OTP device"
-msgstr ""
+msgstr "구성된 출력 인코딩을 사용하여 QR 코드를 표시 할 수 없습니다. 자신의 OTP "
+"장치를 구성하려면 토큰 URI를 사용하세요"
 
 msgid ""
 "QR code width is greater than that of the output tty. Please resize your "
 "terminal."
-msgstr ""
+msgstr "QR 코드 폭이 출력 tty의 너비보다 큽니다. 사용하고 있는 터미널 크기를 "
+"조정하세요."
 
 msgid "Synchronize an OTP token."
-msgstr ""
+msgstr "OTP 토큰을 동기화합니다."
 
 msgid "User ID"
-msgstr ""
+msgstr "사용자 ID"
 
 msgid "Password"
-msgstr ""
+msgstr "비밀번호"
 
 msgid "First Code"
-msgstr ""
+msgstr "첫 번째 코드"
 
 msgid "Second Code"
-msgstr ""
+msgstr "두 번째 코드"
 
 msgid "Token ID"
-msgstr ""
+msgstr "토큰 ID"
 
 #, python-format
 msgid "Unable to synchronize token: %s"
 msgstr ""
 
 msgid "maps not connected to /etc/auto.master:"
-msgstr ""
+msgstr "/etc/auto.master로 연결되지 않은 맵:"
 
 msgid "Import automount files for a specific location."
-msgstr ""
+msgstr "지정된 위치로 자동 적재 파일을 가져옵니다."
 
 msgid "Master file"
-msgstr ""
+msgstr "마스터 파일"
 
 msgid "Automount master file."
-msgstr ""
+msgstr "자동적재 마스터 파일."
 
 msgid ""
 "Continuous operation mode. Errors are reported but the process continues."
-msgstr ""
+msgstr "연속 동작 방식. 오류는 보고 되지만 처리는 계속됩니다."
 
 #, python-format
 msgid "File %(file)s not found"
-msgstr ""
+msgstr "파일 %(file)s을 찾을 수 없음"
 
 #, python-format
 msgid "key %(key)s already exists"
-msgstr ""
+msgstr "키 %(key)s가 이미 존재합니다"
 
 #, python-format
 msgid "map %(map)s already exists"
-msgstr ""
+msgstr "맵 %(map)s이 이미 존재합니다"
 
 msgid "Imported maps:"
-msgstr ""
+msgstr "가져온 맵:"
 
 #, python-format
 msgid "Added %(map)s"
-msgstr ""
+msgstr "추가된 %(map)s"
 
 msgid "Imported keys:"
-msgstr ""
+msgstr "가져온 키:"
 
 #, python-format
 msgid "Added %(src)s to %(dst)s"
-msgstr ""
+msgstr "%(src)s를 %(dst)s으로 추가함"
 
 msgid "Ignored keys:"
-msgstr ""
+msgstr "무시된 키:"
 
 #, python-format
 msgid "Ignored %(src)s to %(dst)s"
-msgstr ""
+msgstr "%(src)s에서 %(dst)s까지 무시함"
 
 msgid "Duplicate maps skipped:"
-msgstr ""
+msgstr "중복된 맵 건너띄기:"
 
 #, python-format
 msgid "Skipped %(map)s"
-msgstr ""
+msgstr "%(map)s 건너뛰기"
 
 msgid "Duplicate keys skipped:"
-msgstr ""
+msgstr "중복된 키 건너뛰기:"
 
 #, python-format
 msgid "Skipped %(key)s"
-msgstr ""
+msgstr "%(key)s 건너뛰기"
 
 msgid "Register the passkey"
 msgstr ""
@@ -950,194 +968,207 @@ msgid ""
 msgstr ""
 
 msgid "python-yubico is not installed."
-msgstr ""
+msgstr "python-yubico은 설치되지 않습니다."
 
 msgid ""
 "\n"
 "YubiKey Tokens\n"
 msgstr ""
+"\n"
+"YubiKey 토큰\n"
 
 msgid ""
 "\n"
 "Manage YubiKey tokens.\n"
 msgstr ""
+"\n"
+"YubiKey 토큰 관리.\n"
 
 msgid ""
 "\n"
 "This code is an extension to the otptoken plugin and provides support for\n"
 "reading/writing YubiKey tokens directly.\n"
 msgstr ""
+"\n"
+"이 코드는 otptoken 플러그인의 확장과 YubiKey 토큰을 직접\n"
+"읽고/쓸 수 있도록 지원합니다.\n"
 
 msgid ""
 "\n"
 "EXAMPLES:\n"
 msgstr ""
+"\n"
+"예제:\n"
 
 msgid ""
 "\n"
 " Add a new token:\n"
 "   ipa otptoken-add-yubikey --owner=jdoe --desc=\"My YubiKey\"\n"
 msgstr ""
+"\n"
+" 신규 토큰 추가:\n"
+"   ipa otptoken-add-yubikey --owner=jdoe --desc=\"My YubiKey\"\n"
 
 msgid "Add a new YubiKey OTP token."
 msgstr "신규 Yubikey OTP 토큰 추가."
 
 msgid "YubiKey slot"
-msgstr ""
+msgstr "YubiKey 슬롯"
 
 msgid "No free YubiKey slot!"
-msgstr ""
+msgstr "Yubikey 슬롯은 무료가 아닙니다!"
 
 msgid "Add one or more passkey mappings to the user entry."
 msgstr ""
 
 #, python-format
 msgid "Enabled Sudo Rule \"%s\""
-msgstr ""
+msgstr "활성화된 sudo 규칙 \"%s\""
 
 #, python-format
 msgid "Disabled Sudo Rule \"%s\""
-msgstr ""
+msgstr "비활성화된 suo 규칙 \"%s\""
 
 #, python-format
 msgid "Added option \"%(option)s\" to Sudo Rule \"%(rule)s\""
-msgstr ""
+msgstr "옵션 \"%(option)s\"이 추가됨 (sudo 규칙 \"%(rule)s\"에)"
 
 #, python-format
 msgid "Removed option \"%(option)s\" from Sudo Rule \"%(rule)s\""
-msgstr ""
+msgstr "제거된 option \"%(option)s\" (sudo 규칙 \"%(rule)s\"에서)"
 
 msgid "Delete a user, keeping the entry available for future use"
-msgstr ""
+msgstr "사용자를 삭제하고, 다음에 사용 할 수 있도록 항목을 유지하기"
 
 msgid "Delete a user"
-msgstr ""
+msgstr "사용자 삭제"
 
 msgid "preserve and no-preserve cannot be both set"
-msgstr ""
+msgstr "보존과 보존-없음을 둘 다 설정 할 수 없습니다"
 
 #, python-format
 msgid "Cannot read file '%(filename)s': %(exc)s"
-msgstr ""
+msgstr "파일을 읽을 수 없습니다 '%(filename)s': %(exc)s"
 
 #, python-format
 msgid "Cannot decode file '%(filename)s': %(exc)s"
-msgstr ""
+msgstr "파일을 디코드 할 수 없습니다 '%(filename)s': %(exc)s"
 
 msgid "Invalid credentials"
-msgstr ""
+msgstr "잘못된 인증 정보"
 
 msgid "Create a new vault."
-msgstr ""
+msgstr "새로운 저장소를 생성합니다."
 
 msgid "Vault password"
-msgstr ""
+msgstr "저장소 비밀번호"
 
 msgid "File containing the vault password"
-msgstr ""
+msgstr "저장소 비밀번호를 포함하는 파일"
 
 msgid "File containing the vault public key"
-msgstr ""
+msgstr "저장소 공용 키를 포함하는 파일"
 
 msgid "Password can be specified only for symmetric vault"
-msgstr ""
+msgstr "비밀번호는 대칭 저장소를 위해서만 지정 될 수 있습니다"
 
 msgid "Public key can be specified only for asymmetric vault"
-msgstr ""
+msgstr "공용 키는 비대칭 저장소에서만 지정 될 수 있습니다"
 
 msgid "Password specified multiple times"
-msgstr ""
+msgstr "비밀번호는 여러 번 지정됩니다"
 
 msgid "Public key specified multiple times"
-msgstr ""
+msgstr "공용 키는 여러 번 지정됩니다"
 
 msgid "Missing vault public key"
-msgstr ""
+msgstr "저장소 공용 키가 누락됨"
 
 #, python-format
 msgid "Invalid or unsupported vault public key: %s"
-msgstr ""
+msgstr "유효하지 않거나 지원되지 않는 저장소 공용 키: %s"
 
 msgid "Modify a vault."
-msgstr ""
+msgstr "저장소를 수정합니다."
 
 msgid "Change password"
-msgstr ""
+msgstr "비밀번호 변경"
 
 msgid "Old vault password"
-msgstr ""
+msgstr "오래된 저장소 비밀번호"
 
 msgid "File containing the old vault password"
-msgstr ""
+msgstr "오래된 저장소 비밀번호를 포함하는 파일"
 
 msgid "New vault password"
 msgstr "신규 저장소 비밀번호"
 
 msgid "File containing the new vault password"
-msgstr ""
+msgstr "신규 저장소 비밀번호를 포함하는 파일"
 
 msgid "Old vault private key"
-msgstr ""
+msgstr "오래된 저장소 개인 키"
 
 msgid "File containing the old vault private key"
-msgstr ""
+msgstr "오래된 저장소 개인 키를 포함하는 파일"
 
 msgid "File containing the new vault public key"
-msgstr ""
+msgstr "새로운 저장소 공용 키를 포함하는 파일"
 
 msgid "New public key specified multiple times"
-msgstr ""
+msgstr "여러 번 지정된 신규 공용 키"
 
 msgid "Missing new vault public key"
-msgstr ""
+msgstr "신규 저장소 공용 키가 누락됨"
 
 #, python-brace-format
 msgid "{algo} is not a supported vault wrapping algorithm"
-msgstr ""
+msgstr "{algo}는 지원되는 저장소 포장 알고리즘이 아닙니다"
 
 msgid "Archive data into a vault."
-msgstr ""
+msgstr "자료를 저장소에 보관합니다."
 
 msgid "Binary data to archive"
-msgstr ""
+msgstr "보관 해야 하는 바이너리 자료"
 
 msgid "File containing data to archive"
-msgstr ""
+msgstr "보관해야 하는 자료를 포함하는 파일"
 
 msgid "Override existing password"
-msgstr ""
+msgstr "기존 비밀번호를 무시합니다"
 
 msgid "Input data specified multiple times"
-msgstr ""
+msgstr "여러 번 지정된 입력 자료"
 
 #, python-format
 msgid ""
 "Size of data exceeds the limit. Current vault data size limit is %(limit)d B"
-msgstr ""
+msgstr "자료 크기가 제한을 초과했습니다. 현재 저장소 자료 크기 제한은 %(limit)d "
+"B입니다"
 
 msgid "Invalid vault type"
-msgstr ""
+msgstr "잘못된 저장소 유형"
 
 msgid "Retrieve a data from a vault."
-msgstr ""
+msgstr "저장소에서 자료를 검색합니다."
 
 msgid "File to store retrieved data"
-msgstr ""
+msgstr "검색된 자료를 저장하는 파일"
 
 msgid "Vault private key"
-msgstr ""
+msgstr "저장소 개인 키"
 
 msgid "File containing the vault private key"
-msgstr ""
+msgstr "저장소 개인 키를 포함하는 파일"
 
 msgid "Data"
 msgstr "자료"
 
 msgid "Private key specified multiple times"
-msgstr ""
+msgstr "여러 번 지정된 개인 키"
 
 msgid "Missing vault private key"
-msgstr ""
+msgstr "저장소 개인 키가 누락됨"
 
 msgid ""
 "\n"
@@ -1259,102 +1290,221 @@ msgid ""
 "must include all existing attributes as well. When doing an aci-mod the\n"
 "targetattr REPLACES the current attributes, it does not add to them.\n"
 msgstr ""
+"\n"
+"Directory Server Access Control Instructions (ACIs)\n"
+"\n"
+"ACIs are used to allow or deny access to information. This module is\n"
+"currently designed to allow, not deny, access.\n"
+"\n"
+"The aci commands are designed to grant permissions that allow updating\n"
+"existing entries or adding or deleting new ones. The goal of the ACIs\n"
+"that ship with IPA is to provide a set of low-level permissions that\n"
+"grant access to special groups called taskgroups. These low-level\n"
+"permissions can be combined into roles that grant broader access. These\n"
+"roles are another type of group, roles.\n"
+"\n"
+"For example, if you have taskgroups that allow adding and modifying users "
+"you\n"
+"could create a role, useradmin. You would assign users to the useradmin\n"
+"role to allow them to do the operations defined by the taskgroups.\n"
+"\n"
+"You can create ACIs that delegate permission so users in group A can write\n"
+"attributes on group B.\n"
+"\n"
+"The type option is a map that applies to all entries in the users, groups "
+"or\n"
+"host location. It is primarily designed to be used when granting add\n"
+"permissions (to write new entries).\n"
+"\n"
+"An ACI consists of three parts:\n"
+"1. target\n"
+"2. permissions\n"
+"3. bind rules\n"
+"\n"
+"The target is a set of rules that define which LDAP objects are being\n"
+"targeted. This can include a list of attributes, an area of that LDAP\n"
+"tree or an LDAP filter.\n"
+"\n"
+"The targets include:\n"
+"- attrs: list of attributes affected\n"
+"- type: an object type (user, group, host, service, etc)\n"
+"- memberof: members of a group\n"
+"- targetgroup: grant access to modify a specific group. This is primarily\n"
+"  designed to enable users to add or remove members of a specific group.\n"
+"- filter: A legal LDAP filter used to narrow the scope of the target.\n"
+"- subtree: Used to apply a rule across an entire set of objects. For example,"
+"\n"
+"  to allow adding users you need to grant \"add\" permission to the subtree\n"
+"  ldap://uid=*,cn=users,cn=accounts,dc=example,dc=com. The subtree option\n"
+"  is a fail-safe for objects that may not be covered by the type option.\n"
+"\n"
+"The permissions define what the ACI is allowed to do, and are one or\n"
+"more of:\n"
+"1. write - write one or more attributes\n"
+"2. read - read one or more attributes\n"
+"3. add - add a new entry to the tree\n"
+"4. delete - delete an existing entry\n"
+"5. all - all permissions are granted\n"
+"\n"
+"Note the distinction between attributes and entries. The permissions are\n"
+"independent, so being able to add a user does not mean that the user will\n"
+"be editable.\n"
+"\n"
+"The bind rule defines who this ACI grants permissions to. The LDAP server\n"
+"allows this to be any valid LDAP entry but we encourage the use of\n"
+"taskgroups so that the rights can be easily shared through roles.\n"
+"\n"
+"For a more thorough description of access controls see\n"
+"http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Managing_Access_Control."
+"html\n"
+"\n"
+"EXAMPLES:\n"
+"\n"
+"NOTE: ACIs are now added via the permission plugin. These examples are to\n"
+"demonstrate how the various options work but this is done via the "
+"permission\n"
+"command-line now (see last example).\n"
+"\n"
+" Add an ACI so that the group \"secretaries\" can update the address on any "
+"user:\n"
+"   ipa group-add --desc=\"Office secretaries\" secretaries\n"
+"   ipa aci-add --attrs=streetAddress --memberof=ipausers --group=secretaries "
+"--permissions=write --prefix=none \"Secretaries write addresses\"\n"
+"\n"
+" Show the new ACI:\n"
+"   ipa aci-show --prefix=none \"Secretaries write addresses\"\n"
+"\n"
+" Add an ACI that allows members of the \"addusers\" permission to add new "
+"users:\n"
+"   ipa aci-add --type=user --permission=addusers --permissions=add --"
+"prefix=none \"Add new users\"\n"
+"\n"
+" Add an ACI that allows members of the editors manage members of the admins "
+"group:\n"
+"   ipa aci-add --permissions=write --attrs=member --targetgroup=admins --"
+"group=editors --prefix=none \"Editors manage admins\"\n"
+"\n"
+" Add an ACI that allows members of the admins group to manage the street and "
+"zip code of those in the editors group:\n"
+"   ipa aci-add --permissions=write --memberof=editors --group=admins --"
+"attrs=street --attrs=postalcode --prefix=none \"admins edit the address of "
+"editors\"\n"
+"\n"
+" Add an ACI that allows the admins group manage the street and zipcode of "
+"those who work for the boss:\n"
+"   ipa aci-add --permissions=write --group=admins --attrs=street --"
+"attrs=postalcode --filter=\""
+"(manager=uid=boss,cn=users,cn=accounts,dc=example,dc=com)\" --prefix=none "
+"\"Edit the address of those who work for the boss\"\n"
+"\n"
+" Add an entirely new kind of record to IPA that isn't covered by any of the "
+"--type options, creating a permission:\n"
+"   ipa permission-add  --permissions=add --subtree=\"cn"
+"=*,cn=orange,cn=accounts,dc=example,dc=com\" --desc=\"Add Orange Entries\" "
+"add_orange\n"
+"\n"
+"\n"
+"The show command shows the raw 389-ds ACI.\n"
+"\n"
+"IMPORTANT: When modifying the target attributes of an existing ACI you\n"
+"must include all existing attributes as well. When doing an aci-mod the\n"
+"targetattr REPLACES the current attributes, it does not add to them.\n"
 
 msgid "ACI name"
-msgstr ""
+msgstr "ACI 이름"
 
 msgid "Permission"
-msgstr ""
+msgstr "권한"
 
 msgid "Permission ACI grants access to"
-msgstr ""
+msgstr "권한 ACI가 접근 권한을 부여합니다"
 
 msgid "User group"
-msgstr ""
+msgstr "사용자 그룹"
 
 msgid "User group ACI grants access to"
-msgstr ""
+msgstr "사용자 그룹 ACI가 접근 권한을 부여합니다"
 
 msgid "Permissions"
-msgstr ""
+msgstr "권한"
 
 msgid "Permissions to grant(read, write, add, delete, all)"
-msgstr ""
+msgstr "권한(일기, 쓰기, 추가, 삭제, 모두) 부여"
 
 msgid "Attributes to which the permission applies"
-msgstr ""
+msgstr "권한이 적용되는 속성"
 
 msgid "Attributes"
-msgstr ""
+msgstr "속성"
 
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 msgid "type of IPA object (user, group, host, hostgroup, service, netgroup)"
-msgstr ""
+msgstr "IPA 객체(사용자, 그룹, 호스트, 호스트그룹, 서비스, 넷그룹)의 유형"
 
 msgid "Member of"
-msgstr ""
+msgstr "구성원"
 
 msgid "Member of a group"
-msgstr ""
+msgstr "그룹의 구성원"
 
 msgid "Filter"
-msgstr ""
+msgstr "필터"
 
 msgid "Legal LDAP filter (e.g. ou=Engineering)"
-msgstr ""
+msgstr "적절한 LDAP 필터 (예: ou=Engineering)"
 
 msgid "Subtree"
-msgstr ""
+msgstr "하위구조"
 
 msgid "Subtree to apply ACI to"
-msgstr ""
+msgstr "ACI를 적용 할 하위구조"
 
 msgid "Target group"
-msgstr ""
+msgstr "대상 그룹"
 
 msgid "Group to apply ACI to"
-msgstr ""
+msgstr "ACI를 적용 할 그룹"
 
 msgid "Target your own entry (self)"
-msgstr ""
+msgstr "자신의 항목을 대상 (자신)"
 
 msgid "Apply ACI to your own entry (self)"
-msgstr ""
+msgstr "ACI를 자신의 항목(자신)으로 적용"
 
 msgid "Create new ACI."
-msgstr ""
+msgstr "신규 ACI 생성."
 
 msgid "ACI prefix"
-msgstr ""
+msgstr "ACI 접두사"
 
 msgid ""
 "Prefix used to distinguish ACI types (permission, delegation, selfservice, "
 "none)"
-msgstr ""
+msgstr "ACI 유형(권한, 위임, 셀프 서비스, 없음)을 구별하는 데 사용되는 접두사"
 
 msgid "Test the ACI syntax but don't write anything"
-msgstr ""
+msgstr "ACI 구문을 시험하지만 아무 것도 작성하지 마세요"
 
 msgid ""
 "Retrieve and print all attributes from the server. Affects command output."
-msgstr ""
+msgstr "서버에서 모든 속성을 검색하고 출력합니다. 명령 출력에 영향을 줍니다."
 
 msgid "Print entries as stored on the server. Only affects output format."
-msgstr ""
+msgstr "서버에서 저장된 것 같은 항목을 출력합니다. 단지 출력 형식에 영향을 줍니다."
 
 msgid "User-friendly description of action performed"
 msgstr "수행된 동작에 대한 사용자 친화적인 설명"
 
 msgid "The primary_key value of the entry, e.g. 'jdoe' for a user"
-msgstr ""
+msgstr "사용자를 위한 예제. 'jdoe'인 항목의 기본_키 값"
 
 msgid "Delete ACI."
-msgstr ""
+msgstr "ACI 삭제."
 
 msgid "True means the operation was successful"
-msgstr ""
+msgstr "참(True)은 작업이 성공했다는 것을 의미합니다"
 
 msgid ""
 "\n"
@@ -1377,36 +1527,55 @@ msgid ""
 "    members of that group indirectly.\n"
 "    "
 msgstr ""
+"\n"
+"ACIs 검색.\n"
+"\n"
+"    ACIs의 목록을 반환합니다\n"
+"\n"
+"    예제:\n"
+"\n"
+"     To find all ACIs that apply directly to members of the group ipausers:\n"
+"       ipa aci-find --memberof=ipausers\n"
+"\n"
+"     To find all ACIs that grant add access:\n"
+"       ipa aci-find --permissions=add\n"
+"\n"
+"    Note that the find command only looks for the given text in the set of\n"
+"    ACIs, it does not evaluate the ACIs to see if something would apply.\n"
+"    For example, searching on memberof=ipausers will find all ACIs that\n"
+"    have ipausers as a memberof. There may be other ACIs that apply to\n"
+"    members of that group indirectly.\n"
+"    "
 
 msgid "A string searched in all relevant object attributes"
-msgstr ""
+msgstr "모든 연관된 객체 속성에서 검색된 문자열"
 
 msgid "Primary key only"
-msgstr ""
+msgstr "기본 키만"
 
 msgid "Results should contain primary key attribute only (\"name\")"
-msgstr ""
+msgstr "결과는 기본 키 속성(\"이름\")만 포함되어야 합니다"
 
 msgid "Number of entries returned"
-msgstr ""
+msgstr "반환된 항목의 수"
 
 msgid "True if not all results were returned"
-msgstr ""
+msgstr "모든 결과가 반환되지 않은 경우라면 참(true)"
 
 msgid "Modify ACI."
-msgstr ""
+msgstr "ACI 수정."
 
 msgid "Rename an ACI."
-msgstr ""
+msgstr "ACI 이름 재지정."
 
 msgid "New ACI name"
-msgstr ""
+msgstr "새로운 ACI 이름"
 
 msgid "Display a single ACI given an ACI name."
-msgstr ""
+msgstr "ACI 이름으로 주어진 단인 ACI를 표시합니다."
 
 msgid "Location of the ACI"
-msgstr ""
+msgstr "ACI의 위치"
 
 msgid ""
 "\n"
@@ -1514,70 +1683,178 @@ msgid ""
 "  Remove the man key from the auto.share map:\n"
 "    ipa automountkey-del baltimore auto.share --key=man\n"
 msgstr ""
+"\n"
+"Automount\n"
+"\n"
+"IPA에서 autofs(8)을 위한 저장소 자동적재(8) 구성\n"
+"\n"
+"The base of an automount configuration is the configuration file auto.master."
+"\n"
+"This is also the base location in IPA. Multiple auto.master configurations\n"
+"can be stored in separate locations. A location is implementation-specific\n"
+"with the default being a location named 'default'. For example, you can "
+"have\n"
+"locations by geographic region, by floor, by type, etc.\n"
+"\n"
+"Automount has three basic object types: locations, maps and keys.\n"
+"\n"
+"A location defines a set of maps anchored in auto.master. This allows you\n"
+"to store multiple automount configurations. A location in itself isn't\n"
+"very interesting, it is just a point to start a new automount map.\n"
+"\n"
+"A map is roughly equivalent to a discrete automount file and provides\n"
+"storage for keys.\n"
+"\n"
+"A key is a mount point associated with a map.\n"
+"\n"
+"When a new location is created, two maps are automatically created for\n"
+"it: auto.master and auto.direct. auto.master is the root map for all\n"
+"automount maps for the location. auto.direct is the default map for\n"
+"direct mounts and is mounted on /-.\n"
+"\n"
+"An automount map may contain a submount key. This key defines a mount\n"
+"location within the map that references another map. This can be done\n"
+"either using automountmap-add-indirect --parentmap or manually\n"
+"with automountkey-add and setting info to \"-type=autofs :<mapname>\".\n"
+"\n"
+"예제:\n"
+"\n"
+"위치:\n"
+"\n"
+"  Create a named location, \"Baltimore\":\n"
+"    ipa automountlocation-add baltimore\n"
+"\n"
+"  Display the new location:\n"
+"    ipa automountlocation-show baltimore\n"
+"\n"
+"  Find available locations:\n"
+"    ipa automountlocation-find\n"
+"\n"
+"  Remove a named automount location:\n"
+"    ipa automountlocation-del baltimore\n"
+"\n"
+"  Show what the automount maps would look like if they were in the "
+"filesystem:\n"
+"    ipa automountlocation-tofiles baltimore\n"
+"\n"
+"  Import an existing configuration into a location:\n"
+"    ipa automountlocation-import baltimore /etc/auto.master\n"
+"\n"
+"    The import will fail if any duplicate entries are found. For\n"
+"    continuous operation where errors are ignored, use the --continue\n"
+"    option.\n"
+"\n"
+"Maps:\n"
+"\n"
+"  Create a new map, \"auto.share\":\n"
+"    ipa automountmap-add baltimore auto.share\n"
+"\n"
+"  Display the new map:\n"
+"    ipa automountmap-show baltimore auto.share\n"
+"\n"
+"  Find maps in the location baltimore:\n"
+"    ipa automountmap-find baltimore\n"
+"\n"
+"  Create an indirect map with auto.share as a submount:\n"
+"    ipa automountmap-add-indirect baltimore --parentmap=auto.share --"
+"mount=sub auto.man\n"
+"\n"
+"    This is equivalent to:\n"
+"\n"
+"    ipa automountmap-add-indirect baltimore --mount=/man auto.man\n"
+"    ipa automountkey-add baltimore auto.man --key=sub --info=\"-"
+"fstype=autofs ldap:auto.share\"\n"
+"\n"
+"  Remove the auto.share map:\n"
+"    ipa automountmap-del baltimore auto.share\n"
+"\n"
+"키:\n"
+"\n"
+"  Create a new key for the auto.share map in location baltimore. This ties\n"
+"  the map we previously created to auto.master:\n"
+"    ipa automountkey-add baltimore auto.master --key=/share --info=auto."
+"share\n"
+"\n"
+"  Create a new key for our auto.share map, an NFS mount for man pages:\n"
+"    ipa automountkey-add baltimore auto.share --key=man --info=\"-"
+"ro,soft,rsize=8192,wsize=8192 ipa.example.com:/shared/man\"\n"
+"\n"
+"  Find all keys for the auto.share map:\n"
+"    ipa automountkey-find baltimore auto.share\n"
+"\n"
+"  Find all direct automount keys:\n"
+"    ipa automountkey-find baltimore --key=/-\n"
+"\n"
+"  Remove the man key from the auto.share map:\n"
+"    ipa automountkey-del baltimore auto.share --key=man\n"
 
 msgid "Key"
 msgstr ""
 
 msgid "Automount key name."
-msgstr ""
+msgstr "자동적재 키 이름."
 
 msgid "Mount information"
-msgstr ""
+msgstr "적재 정보"
 
 msgid "description"
-msgstr ""
+msgstr "설명"
 
 msgid "Location"
-msgstr ""
+msgstr "위치"
 
 msgid "Automount location name."
-msgstr ""
+msgstr "자동적재 위치 이름."
 
 msgid "Map"
-msgstr ""
+msgstr "맵"
 
 msgid "Automount map name."
-msgstr ""
+msgstr "자동적재 맵 이름."
 
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
 msgid "Create a new automount key."
-msgstr ""
+msgstr "신규 자동적재 키를 생성합니다."
 
 msgid ""
 "Set an attribute to a name/value pair. Format is attr=value.\n"
 "For multi-valued attributes, the command replaces the values already present."
 msgstr ""
+"속성을 이름/값의 쌍으로 설정합니다. 형식은 attr=value입니다.\n"
+"다중-값 속성을 위해, 명령은 이미 존재하는 값으로 교체합니다."
 
 msgid ""
 "Add an attribute/value pair. Format is attr=value. The attribute\n"
 "must be part of the schema."
 msgstr ""
+"속성/값 쌍을 추가합니다. 형식은 속성=값입니다. 속성은\n"
+"스키마의 일부여야 합니다."
 
 msgid "Delete an automount key."
-msgstr ""
+msgstr "자동 적재 키를 삭제합니다."
 
 msgid "Continuous mode: Don't stop on errors."
-msgstr ""
+msgstr "연속된 방식: 오류에 멈추지 않습니다."
 
 msgid "List of deletions that failed"
-msgstr ""
+msgstr "실패한 삭제 목록"
 
 msgid "Search for an automount key."
-msgstr ""
+msgstr "자동 적재 키를 위한 검색."
 
 msgid "Time Limit"
-msgstr ""
+msgstr "시간 제한"
 
 msgid "Time limit of search in seconds"
-msgstr ""
+msgstr "검색 시간 제한 (초)"
 
 msgid "Size Limit"
-msgstr ""
+msgstr "크기 제한"
 
 msgid "Maximum number of entries returned"
-msgstr ""
+msgstr "반환된 항목의 최대 수"
 
 msgid "Modify an automount key."
 msgstr "자동 적재된 키를 수정합니다."
@@ -1586,65 +1863,68 @@ msgid ""
 "Delete an attribute/value pair. The option will be evaluated\n"
 "last, after all sets and adds."
 msgstr ""
+"속성/값 쌍을 삭제합니다. 옵션이 모든 설정과 추가 후에\n"
+"마지막으로 평가됩니다."
 
 msgid "Rights"
-msgstr ""
+msgstr "권한"
 
 msgid ""
 "Display the access rights of this entry (requires --all). See ipa man page "
 "for details."
-msgstr ""
+msgstr "이 항목(--all가 필요)의 접근 권한을 표시합니다. 자세한 내용은 ipa man 부분을 "
+"참조하세요."
 
 msgid "New mount information"
-msgstr ""
+msgstr "새로운 적재 정보"
 
 msgid "Rename"
-msgstr ""
+msgstr "이름변경"
 
 msgid "Rename the automount key object"
-msgstr ""
+msgstr "자동 적재 키 객체 이름 바꾸기"
 
 msgid "Display an automount key."
-msgstr ""
+msgstr "자동 적재 키 표시."
 
 msgid "Create a new automount location."
-msgstr ""
+msgstr "신규 자동 적재 위치를 생성합니다."
 
 msgid "Delete an automount location."
-msgstr ""
+msgstr "자동 적재 위치를 삭제합니다."
 
 msgid "Search for an automount location."
-msgstr ""
+msgstr "자동 적재 위치를 검색."
 
 msgid "Results should contain primary key attribute only (\"location\")"
-msgstr ""
+msgstr "결과는 기본 키 속성(\"위치\")만 포함되어야 합니다"
 
 msgid "Display an automount location."
-msgstr ""
+msgstr "자동 적재 위치를 표시합니다."
 
 msgid "Generate automount files for a specific location."
-msgstr ""
+msgstr "지정된 위치로 자동 적재 파일을 발생합니다."
 
 msgid "Create a new automount map."
-msgstr ""
+msgstr "신규 자동 적재 맵를 생성합니다."
 
 msgid "Create a new indirect mount point."
-msgstr ""
+msgstr "새로운 간접 적재 지점을 만듭니다."
 
 msgid "Mount point"
-msgstr ""
+msgstr "적재 지점"
 
 msgid "Parent map"
-msgstr ""
+msgstr "상위 맵"
 
 msgid "Name of parent automount map (default: auto.master)."
-msgstr ""
+msgstr "상위 자동 적재 맵의 이름(기본값: auto.master)."
 
 msgid "Delete an automount map."
-msgstr ""
+msgstr "자동적재 맵을 삭제합니다."
 
 msgid "Search for an automount map."
-msgstr ""
+msgstr "자동 적재 맵을 위한 검색."
 
 msgid "Results should contain primary key attribute only (\"map\")"
 msgstr ""
@@ -1907,7 +2187,7 @@ msgid "Modify a delegation."
 msgstr ""
 
 msgid "Display information about a delegation."
-msgstr ""
+msgstr "위임에 대한 정보를 표시합니다."
 
 msgid ""
 "\n"
@@ -2998,7 +3278,7 @@ msgid ""
 msgstr ""
 
 msgid "Rule name"
-msgstr ""
+msgstr "규칙 이름"
 
 msgid "Rule type"
 msgstr ""
@@ -3475,39 +3755,43 @@ msgid "force host name even if not in DNS"
 msgstr ""
 
 msgid "skip reverse DNS detection"
-msgstr ""
+msgstr "역 DNS 탐지를 건너뜁니다"
 
 msgid "Add the host to DNS with this IP address"
-msgstr ""
+msgstr "이 IP 주소인 DNS에 호스트를 추가합니다"
 
 msgid "Add hosts that can manage this host."
-msgstr ""
+msgstr "이 호스트를 관리 할 수 있는 호스트를 추가합니다."
 
 msgid ""
 "Allow users, groups, hosts or host groups to create a keytab of this host."
-msgstr ""
+msgstr "사용자, 그룹, 호스트 또는 호스트 그룹이 이 호스트의 키탭을 생성하도록 "
+"허용합니다."
 
 msgid ""
 "Allow users, groups, hosts or host groups to retrieve a keytab of this host."
-msgstr ""
+msgstr "사용자, 그룹, 호스트 또는 호스트 그룹이 이 호스트의 키탭을 검색하도록 "
+"허용합니다."
 
 msgid "Delete a host."
-msgstr ""
+msgstr "호스트 삭제."
 
 msgid "Remove entries from DNS"
 msgstr ""
 
 msgid "Disable the Kerberos key, SSL certificate and all services of a host."
-msgstr ""
+msgstr "커버러스 키, SSL 인증서 및 호스트의 모든 서비스를 비활성화."
 
 msgid ""
 "Disallow users, groups, hosts or host groups to create a keytab of this host."
-msgstr ""
+msgstr "사용자, 그룹, 호스트 또는 호스트 그룹을 이 호스트의 키탭을 생성하도록 "
+"허용하지 않습니다."
 
 msgid ""
 "Disallow users, groups, hosts or host groups to retrieve a keytab of this "
 "host."
-msgstr ""
+msgstr "사용자, 그룹, 또는 호스트 그룹을 이 호스트의 키탭을 검색하도록 허용하지 "
+"않습니다."
 
 msgid "Search for hosts."
 msgstr ""
@@ -3564,10 +3848,10 @@ msgid "user"
 msgstr ""
 
 msgid "Search for hosts with these enrolled by users."
-msgstr ""
+msgstr "사용자에 의해 등록된 호스트를 검색합니다."
 
 msgid "Search for hosts without these enrolled by users."
-msgstr ""
+msgstr "사용자에 의해 등록되지 않은 호스트를 위한 검색."
 
 msgid "host"
 msgstr ""
@@ -3579,7 +3863,7 @@ msgid "Search for hosts without these managed by hosts."
 msgstr ""
 
 msgid "Search for hosts with these managing hosts."
-msgstr ""
+msgstr "이들 관리 호스트가 있는 호스트를 검색."
 
 msgid "Search for hosts without these managing hosts."
 msgstr ""
@@ -3588,19 +3872,19 @@ msgid "Modify information about a host."
 msgstr ""
 
 msgid "Kerberos principal name for this host"
-msgstr ""
+msgstr "이 호스트를 위한 커버러스 주체 이름"
 
 msgid "Update DNS entries"
-msgstr ""
+msgstr "DNS 항목 최신화"
 
 msgid "Remove hosts that can manage this host."
-msgstr ""
+msgstr "이 호스트를 관리 할 수 있는 호스트를 제거합니다."
 
 msgid "Display information about a host."
 msgstr ""
 
 msgid "file to store certificate in"
-msgstr ""
+msgstr "인증서를 저장하려는 파일"
 
 msgid ""
 "\n"
@@ -3632,12 +3916,40 @@ msgid ""
 " Delete a hostgroup:\n"
 "   ipa hostgroup-del baltimore\n"
 msgstr ""
+"\n"
+"호스트 그룹.\n"
+"\n"
+"Manage groups of hosts. This is useful for applying access control to a\n"
+"number of hosts by using Host-based Access Control.\n"
+"\n"
+"예제:\n"
+"\n"
+" Add a new host group:\n"
+"   ipa hostgroup-add --desc=\"Baltimore hosts\" baltimore\n"
+"\n"
+" Add another new host group:\n"
+"   ipa hostgroup-add --desc=\"Maryland hosts\" maryland\n"
+"\n"
+" Add members to the hostgroup (using Bash brace expansion):\n"
+"   ipa hostgroup-add-member --hosts={box1,box2,box3} baltimore\n"
+"\n"
+" Add a hostgroup as a member of another hostgroup:\n"
+"   ipa hostgroup-add-member --hostgroups=baltimore maryland\n"
+"\n"
+" Remove a host from the hostgroup:\n"
+"   ipa hostgroup-remove-member --hosts=box2 baltimore\n"
+"\n"
+" Display a host group:\n"
+"   ipa hostgroup-show baltimore\n"
+"\n"
+" Delete a hostgroup:\n"
+"   ipa hostgroup-del baltimore\n"
 
 msgid "Host-group"
 msgstr ""
 
 msgid "Name of host-group"
-msgstr ""
+msgstr "호스트-그룹의 이름"
 
 msgid "A description of this host-group"
 msgstr ""
@@ -3779,7 +4091,7 @@ msgid "Rename the Group ID override object"
 msgstr ""
 
 msgid "Display information about an Group ID override."
-msgstr ""
+msgstr "그룹 ID 재정의에 대해 정보를 표시합니다."
 
 msgid "Add a new User ID override."
 msgstr ""
@@ -4165,13 +4477,13 @@ msgstr ""
 
 msgid ""
 "Continuous operation mode. Errors are reported but the process continues"
-msgstr ""
+msgstr "연속 동작 방식. 오류는 보고 되지만 처리는 계속됩니다"
 
 msgid "Base DN"
-msgstr ""
+msgstr "기본 DN"
 
 msgid "Base DN on remote LDAP server"
-msgstr ""
+msgstr "원격 LDAP 서버에서 기본 DN"
 
 msgid "Ignore compat plugin"
 msgstr ""
@@ -4319,10 +4631,10 @@ msgid "Search for netgroups without these member netgroups."
 msgstr ""
 
 msgid "Search for netgroups with these member users."
-msgstr ""
+msgstr "이들 구성원 사용자와 함께 넷그룹을 검색."
 
 msgid "Search for netgroups without these member users."
-msgstr ""
+msgstr "이들 구성원 사용자가 없는 넷그룹을 검색."
 
 msgid "group"
 msgstr ""
@@ -4334,7 +4646,7 @@ msgid "Search for netgroups without these member groups."
 msgstr "이들 구성원 그룹이 없이 넷그룹를 위한 검색."
 
 msgid "Search for netgroups with these member hosts."
-msgstr ""
+msgstr "이들 구성원 호스트와 함께 넷그룹을 검색."
 
 msgid "Search for netgroups without these member hosts."
 msgstr ""
@@ -4456,7 +4768,7 @@ msgid ""
 msgstr ""
 
 msgid "Set a user's password."
-msgstr ""
+msgstr "사용자 비밀번호를 설정합니다."
 
 msgid "New Password"
 msgstr ""
@@ -5095,7 +5407,7 @@ msgid ""
 msgstr ""
 
 msgid "Role name"
-msgstr ""
+msgstr "역할 이름"
 
 msgid "A description of this role-group"
 msgstr ""
@@ -6614,7 +6926,7 @@ msgid "Number of conditions removed"
 msgstr ""
 
 msgid "Display information about an automember rule."
-msgstr ""
+msgstr "자동 구성원 규칙에 대해 정보를 표시합니다."
 
 msgid ""
 "\n"
@@ -8080,7 +8392,7 @@ msgid ""
 msgstr ""
 
 msgid "ACL name"
-msgstr ""
+msgstr "ACL 이름"
 
 msgid "Profile category"
 msgstr ""
@@ -9785,6 +10097,124 @@ msgid ""
 "must include all existing attributes as well. When doing an aci-mod the\n"
 "targetattr REPLACES the current attributes, it does not add to them.\n"
 msgstr ""
+"\n"
+"디렉토리 서버 접근 제어 지시(ACIs)\n"
+"\n"
+"ACIs are used to allow or deny access to information. This module is\n"
+"currently designed to allow, not deny, access.\n"
+"\n"
+"The aci commands are designed to grant permissions that allow updating\n"
+"existing entries or adding or deleting new ones. The goal of the ACIs\n"
+"that ship with IPA is to provide a set of low-level permissions that\n"
+"grant access to special groups called taskgroups. These low-level\n"
+"permissions can be combined into roles that grant broader access. These\n"
+"roles are another type of group, roles.\n"
+"\n"
+"For example, if you have taskgroups that allow adding and modifying users "
+"you\n"
+"could create a role, useradmin. You would assign users to the useradmin\n"
+"role to allow them to do the operations defined by the taskgroups.\n"
+"\n"
+"You can create ACIs that delegate permission so users in group A can write\n"
+"attributes on group B.\n"
+"\n"
+"The type option is a map that applies to all entries in the users, groups "
+"or\n"
+"host location. It is primarily designed to be used when granting add\n"
+"permissions (to write new entries).\n"
+"\n"
+"An ACI consists of three parts:\n"
+"1. target\n"
+"2. permissions\n"
+"3. bind rules\n"
+"\n"
+"The target is a set of rules that define which LDAP objects are being\n"
+"targeted. This can include a list of attributes, an area of that LDAP\n"
+"tree or an LDAP filter.\n"
+"\n"
+"The targets include:\n"
+"- attrs: list of attributes affected\n"
+"- type: an object type (user, group, host, service, etc)\n"
+"- memberof: members of a group\n"
+"- targetgroup: grant access to modify a specific group. This is primarily\n"
+"  designed to enable users to add or remove members of a specific group.\n"
+"- filter: A legal LDAP filter used to narrow the scope of the target.\n"
+"- subtree: Used to apply a rule across an entire set of objects. For example,"
+"\n"
+"  to allow adding users you need to grant \"add\" permission to the subtree\n"
+"  ldap://uid=*,cn=users,cn=accounts,dc=example,dc=com. The subtree option\n"
+"  is a fail-safe for objects that may not be covered by the type option.\n"
+"\n"
+"The permissions define what the ACI is allowed to do, and are one or\n"
+"more of:\n"
+"1. write - write one or more attributes\n"
+"2. read - read one or more attributes\n"
+"3. add - add a new entry to the tree\n"
+"4. delete - delete an existing entry\n"
+"5. all - all permissions are granted\n"
+"\n"
+"Note the distinction between attributes and entries. The permissions are\n"
+"independent, so being able to add a user does not mean that the user will\n"
+"be editable.\n"
+"\n"
+"The bind rule defines who this ACI grants permissions to. The LDAP server\n"
+"allows this to be any valid LDAP entry but we encourage the use of\n"
+"taskgroups so that the rights can be easily shared through roles.\n"
+"\n"
+"For a more thorough description of access controls see\n"
+"http://www.redhat.com/docs/manuals/dir-server/ag/8.0/Managing_Access_Control."
+"html\n"
+"\n"
+"EXAMPLES:\n"
+"\n"
+"NOTE: ACIs are now added via the permission plugin. These examples are to\n"
+"demonstrate how the various options work but this is done via the "
+"permission\n"
+"command-line now (see last example).\n"
+"\n"
+" Add an ACI so that the group \"secretaries\" can update the address on any "
+"user:\n"
+"   ipa group-add --desc=\"Office secretaries\" secretaries\n"
+"   ipa aci-add --attrs=streetAddress --memberof=ipausers --group=secretaries "
+"--permissions=write --prefix=none \"Secretaries write addresses\"\n"
+"\n"
+" Show the new ACI:\n"
+"   ipa aci-show --prefix=none \"Secretaries write addresses\"\n"
+"\n"
+" Add an ACI that allows members of the \"addusers\" permission to add new "
+"users:\n"
+"   ipa aci-add --type=user --permission=addusers --permissions=add --"
+"prefix=none \"Add new users\"\n"
+"\n"
+" Add an ACI that allows members of the editors manage members of the admins "
+"group:\n"
+"   ipa aci-add --permissions=write --attrs=member --targetgroup=admins --"
+"group=editors --prefix=none \"Editors manage admins\"\n"
+"\n"
+" Add an ACI that allows members of the admins group to manage the street and "
+"zip code of those in the editors group:\n"
+"   ipa aci-add --permissions=write --memberof=editors --group=admins --"
+"attrs=street,postalcode --prefix=none \"admins edit the address of editors\""
+"\n"
+"\n"
+" Add an ACI that allows the admins group manage the street and zipcode of "
+"those who work for the boss:\n"
+"   ipa aci-add --permissions=write --group=admins --attrs=street,postalcode "
+"--filter=\"(manager=uid=boss,cn=users,cn=accounts,dc=example,dc=com)\" --"
+"prefix=none \"Edit the address of those who work for the boss\"\n"
+"\n"
+" Add an entirely new kind of record to IPA that isn't covered by any of the "
+"--type options, creating a permission:\n"
+"   ipa permission-add  --permissions=add --subtree=\"cn"
+"=*,cn=orange,cn=accounts,dc=example,dc=com\" --desc=\"Add Orange Entries\" "
+"add_orange\n"
+"\n"
+"\n"
+"The show command shows the raw 389-ds ACI.\n"
+"\n"
+"IMPORTANT: When modifying the target attributes of an existing ACI you\n"
+"must include all existing attributes as well. When doing an aci-mod the\n"
+"targetattr REPLACES the current attributes, it does not add to them.\n"
 
 msgid ""
 "comma-separated list of permissions to grant(read, write, add, delete, all)"
@@ -9974,6 +10404,32 @@ msgid ""
 " Delete a rule:\n"
 "   ipa delegation-del \"managers edit employees' street\"\n"
 msgstr ""
+"\n"
+"그룹간 위임\n"
+"\n"
+"A permission enables fine-grained delegation of permissions. Access Control\n"
+"Rules, or instructions (ACIs), grant permission to permissions to perform\n"
+"given tasks such as adding a user, modifying a group, etc.\n"
+"\n"
+"Group to Group Delegations grants the members of one group to update a set\n"
+"of attributes of members of another group.\n"
+"\n"
+"EXAMPLES:\n"
+"\n"
+" Add a delegation rule to allow managers to edit employee's addresses:\n"
+"   ipa delegation-add --attrs=street --group=managers --"
+"membergroup=employees \"managers edit employees' street\"\n"
+"\n"
+" When managing the list of attributes you need to include all attributes\n"
+" in the list, including existing ones. Add postalCode to the list:\n"
+"   ipa delegation-mod --attrs=street,postalCode --group=managers --"
+"membergroup=employees \"managers edit employees' street\"\n"
+"\n"
+" Display our updated rule:\n"
+"   ipa delegation-show \"managers edit employees' street\"\n"
+"\n"
+" Delete a rule:\n"
+"   ipa delegation-del \"managers edit employees' street\"\n"
 
 msgid ""
 "Comma-separated list of permissions to grant (read, write). Default is write."
@@ -12458,7 +12914,7 @@ msgid "DNS servers"
 msgstr ""
 
 msgid "DNS Servers"
-msgstr ""
+msgstr "DNS 서버"
 
 msgid "DNS Server"
 msgstr ""
@@ -12551,6 +13007,27 @@ msgid ""
 "   ipa hbacsvc-del tftp\n"
 "\n"
 msgstr ""
+"\n"
+"HBAC 서비스\n"
+"\n"
+"The PAM services that HBAC can control access to. The name used here\n"
+"must match the service name that PAM is evaluating.\n"
+"\n"
+"예제:\n"
+"\n"
+" Add a new HBAC service:\n"
+"   ipa hbacsvc-add tftp\n"
+"\n"
+" Modify an existing HBAC service:\n"
+"   ipa hbacsvc-mod --desc=\"TFTP service\" tftp\n"
+"\n"
+" Search for HBAC services. This example will return two results, the FTP\n"
+" service and the newly-added tftp service:\n"
+"   ipa hbacsvc-find ftp\n"
+"\n"
+" Delete an HBAC service:\n"
+"   ipa hbacsvc-del tftp\n"
+"\n"
 
 msgid "HBAC services"
 msgstr ""
@@ -13474,6 +13951,35 @@ msgid ""
 "And then a nested response for each IPA command method sent in the request\n"
 "\n"
 msgstr ""
+"\n"
+"Plugin to make multiple ipa calls via one remote procedure call\n"
+"\n"
+"To run this code in the lite-server\n"
+"\n"
+"curl   -H \"Content-Type:application/json\"          -H \"Accept:application/"
+"json\" -H \"Accept-Language:en\"        --negotiate -u :          --cacert /"
+"etc/ipa/ca.crt           -d  @batch_request.json -X POST       "
+"http://localhost:8888/ipa/json\n"
+"\n"
+"where the contents of the file batch_request.json follow the below example\n"
+"\n"
+"{\"method\":\"batch\",\"params\":[[\n"
+"        {\"method\":\"group_find\",\"params\":[[],{}]},\n"
+"        {\"method\":\"user_find\",\"params\":[[],{\"whoami\":\"true\",\"all\""
+":\"true\"}]},\n"
+"        {\"method\":\"user_show\",\"params\":[[\"admin\"],{\"all\":true}]}\n"
+"        ],{}],\"id\":1}\n"
+"\n"
+"The format of the response is nested the same way.  At the top you will see\n"
+"  \"error\": null,\n"
+"    \"id\": 1,\n"
+"    \"result\": {\n"
+"        \"count\": 3,\n"
+"            \"results\": [\n"
+"\n"
+"\n"
+"And then a nested response for each IPA command method sent in the request\n"
+"\n"
 
 msgid "Make multiple ipa calls via one remote procedure call"
 msgstr ""
@@ -14437,7 +14943,7 @@ msgid "IPA location name"
 msgstr ""
 
 msgid "IPA Location description"
-msgstr ""
+msgstr "IPA 위치 설명"
 
 msgid "Servers"
 msgstr ""
@@ -17234,7 +17740,7 @@ msgid "Realm administrator password should be specified"
 msgstr ""
 
 msgid "id range type"
-msgstr ""
+msgstr "id 범위 유형"
 
 msgid ""
 "Only the ipa-ad-trust and ipa-ad-trust-posix are allowed values for --range-"
@@ -17319,7 +17825,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "trust configuration"
-msgstr ""
+msgstr "신뢰 구성"
 
 msgid "Global Trust Configuration"
 msgstr ""
@@ -19206,10 +19712,8 @@ msgstr ""
 msgid "Serial Number (hex)"
 msgstr ""
 
-#, fuzzy
-#| msgid "Removing principal %s\n"
 msgid "Delegation principal"
-msgstr "주체 %s를 제거하기\n"
+msgstr "위임 주체"
 
 msgid "Authentication Indicators"
 msgstr ""
@@ -19823,7 +20327,7 @@ msgstr ""
 
 #, python-brace-format
 msgid "Are you sure you want to disable ${object}?"
-msgstr ""
+msgstr "${object}를 비활성화할까요?"
 
 #, python-brace-format
 msgid "Are you sure you want to enable ${object}?"
@@ -19995,13 +20499,13 @@ msgid "Delete"
 msgstr ""
 
 msgid "Remove hold"
-msgstr ""
+msgstr "보류 제거"
 
 msgid "Reset"
 msgstr ""
 
 msgid "Reset Password"
-msgstr ""
+msgstr "비밀번호 재설정"
 
 msgid "Reset Password and Log in"
 msgstr ""
@@ -20105,7 +20609,7 @@ msgstr ""
 
 #, python-brace-format
 msgid "${product}, version: ${version}"
-msgstr ""
+msgstr "${product}, 버전: ${version}"
 
 msgid "Prospective"
 msgstr ""
@@ -20151,7 +20655,7 @@ msgid "An error has occurred (${error})"
 msgstr ""
 
 msgid "HTTP Error"
-msgstr ""
+msgstr "HTTP 오류"
 
 msgid "Internal Error"
 msgstr ""
@@ -20619,7 +21123,7 @@ msgstr ""
 
 #, python-brace-format
 msgid "Add users into CA ACL '${primary_key}'"
-msgstr ""
+msgstr "CA ACL '${primary_key}'에 사용자를 추가합니다"
 
 msgid "All"
 msgstr ""
@@ -20932,10 +21436,10 @@ msgid "Version"
 msgstr ""
 
 msgid "Group Options"
-msgstr ""
+msgstr "그룹 옵션"
 
 msgid "Search Options"
-msgstr ""
+msgstr "검색 옵션"
 
 msgid "SELinux Options"
 msgstr ""
@@ -21294,7 +21798,7 @@ msgid "Include Disabled"
 msgstr ""
 
 msgid "Include Enabled"
-msgstr ""
+msgstr "활성화 포함"
 
 msgid "HBAC Test"
 msgstr ""
@@ -21349,7 +21853,7 @@ msgid "Add host '${primary_key}' into sudo rules"
 msgstr ""
 
 msgid "Host Certificate"
-msgstr ""
+msgstr "호스트 인증서"
 
 msgid "Host Name"
 msgstr ""
@@ -22106,7 +22610,7 @@ msgstr "sudo 규칙'${primary_key}'애 RunAS 사용자를 추가합니다"
 
 #, python-brace-format
 msgid "Add RunAs user groups into sudo rule '${primary_key}'"
-msgstr ""
+msgstr "sudo 규칙 '${primary_key}'에 RunAS 사용자 그룹을 추가합니다"
 
 #, python-brace-format
 msgid "Add RunAs groups into sudo rule '${primary_key}'"
@@ -23022,10 +23526,8 @@ msgid ""
 "   ipa passkeyconfig-mod --require-user-verification=TRUE\n"
 msgstr ""
 
-#, fuzzy
-#| msgid "cannot open configuration file %s\n"
 msgid "Passkey configuration options"
-msgstr "구성 파일 %s를 열 수 없습니다\n"
+msgstr "통과키 구성 옵션"
 
 #, fuzzy
 #| msgid "Confirmation"
