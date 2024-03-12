@@ -1431,6 +1431,7 @@ static int ipapwd_pre_bind(Slapi_PBlock *pb)
         "krbPasswordExpiration", "krblastpwchange",
         NULL
     };
+    struct ipapwd_krbcfg *krbcfg = NULL;
     struct berval *credentials = NULL;
     Slapi_Entry *entry = NULL;
     Slapi_DN *target_sdn = NULL;
@@ -1505,6 +1506,18 @@ static int ipapwd_pre_bind(Slapi_PBlock *pb)
     /* Try to do OTP first. */
     syncreq = otpctrl_present(pb, OTP_SYNC_REQUEST_OID);
     otpreq = otpctrl_present(pb, OTP_REQUIRED_OID);
+    if (!syncreq && !otpreq) {
+        ret = ipapwd_gen_checks(pb, &errMesg, &krbcfg, IPAPWD_CHECK_ONLY_CONFIG);
+        if (ret != 0) {
+            LOG_FATAL("ipapwd_gen_checks failed!?\n");
+            slapi_entry_free(entry);
+            slapi_sdn_free(&sdn);
+            return 0;
+        }
+        if (krbcfg->enforce_ldap_otp) {
+            otpreq = true;
+        }
+    }
     if (!syncreq && !ipapwd_pre_bind_otp(dn, entry, credentials, otpreq))
         goto invalid_creds;
 
@@ -1538,11 +1551,22 @@ static int ipapwd_pre_bind(Slapi_PBlock *pb)
     /* Attempt to write out kerberos keys for the user. */
     ipapwd_write_krb_keys(pb, discard_const(dn), entry, credentials);
 
+#ifdef USE_OP_NOTE_MFA_AUTH
+    /* If it was a successful authentication with OTP required, mark it
+     * for access log to notice multi-factor authentication has happened
+     * https://www.port389.org/docs/389ds/design/mfa-operation-note-design.html
+     */
+    if (!syncreq && otpreq) {
+        slapi_pblock_set_flag_operation_notes(pb, SLAPI_OP_NOTE_MFA_AUTH);
+    }
+#endif
+
     slapi_entry_free(entry);
     slapi_sdn_free(&sdn);
     return 0;
 
 invalid_creds:
+    free_ipapwd_krbcfg(&krbcfg);
     slapi_entry_free(entry);
     slapi_sdn_free(&sdn);
     slapi_send_ldap_result(pb, rc, NULL, errMesg, 0, NULL);
