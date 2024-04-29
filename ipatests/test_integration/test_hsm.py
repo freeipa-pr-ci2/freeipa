@@ -178,7 +178,10 @@ class TestHSMInstall(IntegrationTest):
             )
         )
         # copy the token files to replicas
-        if 'nfast' in cls.master.config.token_library:
+        if (
+            cls.master.config.token_library
+            and 'nfast' in cls.master.config.token_library
+        ):
             for replica in cls.replicas:
                 tasks.copy_nfast_data(cls.master, replica)
         copy_token_files(cls.master, cls.replicas, token_name)
@@ -206,7 +209,10 @@ class TestHSMInstall(IntegrationTest):
                           token_password=self.token_password)
 
         # Copy the new KRA key material to the other servers.
-        if 'nfast' in self.master.config.token_library:
+        if (
+            self.master.config.token_library
+            and 'nfast' in self.master.config.token_library
+        ):
             for dest_host in self.replicas[1], self.replicas[2]:
                 tasks.copy_nfast_data(self.replicas[0], dest_host)
 
@@ -301,7 +307,10 @@ class TestHSMInstallADTrustBase(IntegrationTest):
             )
         )
         # copy token files to replicas
-        if 'nfast' in cls.master.config.token_library:
+        if (
+            cls.master.config.token_library
+            and 'nfast' in cls.master.config.token_library
+        ):
             for replica in cls.replicas:
                 tasks.copy_nfast_data(cls.master, replica)
         copy_token_files(cls.master, cls.replicas, token_name)
@@ -345,7 +354,10 @@ class TestADTrustInstallWithDNS_KRA_ADTrust(IntegrationTest):
             )
         )
 
-        if 'nfast' in cls.master.config.token_library:
+        if (
+            cls.master.config.token_library
+            and 'nfast' in cls.master.config.token_library
+        ):
             for replica in cls.replicas:
                 tasks.copy_nfast_data(cls.master, replica)
         copy_token_files(cls.master, cls.replicas, token_name)
@@ -473,7 +485,10 @@ class TestHSMCALessToExternalToSelfSignedCA(CALessBase):
         assert master.returncode == 0
 
         # copy the token files to replicas
-        if 'nfast' in self.master.config.token_library:
+        if (
+            self.master.config.token_library
+            and 'nfast' in self.master.config.token_library
+        ):
             for replica in self.replicas:
                 tasks.copy_nfast_data(self.master, replica)
         copy_token_files(self.master, self.replicas, self.token_name)
@@ -587,7 +602,10 @@ class TestHSMExternalToSelfSignedCA(IntegrationTest):
         assert result.returncode == 0
 
         # copy token files to replicas
-        if 'nfast' in self.master.config.token_library:
+        if (
+            self.master.config.token_library
+            and 'nfast' in self.master.config.token_library
+        ):
             for replica in self.replicas:
                 tasks.copy_nfast_data(self.master, replica)
         copy_token_files(self.master, self.replicas, self.token_name)
@@ -598,7 +616,10 @@ class TestHSMExternalToSelfSignedCA(IntegrationTest):
                           token_password=self.token_password)
 
         # Copy the new KRA key material to the other server(s).
-        if 'nfast' in self.master.config.token_library:
+        if (
+            self.master.config.token_library
+            and 'nfast' in self.master.config.token_library
+        ):
             for replica in self.replicas:
                 tasks.copy_nfast_data(self.master, replica)
         copy_token_files(self.master, self.replicas, self.token_name)
@@ -760,7 +781,10 @@ class TestHSMcertFixReplica(IntegrationTest):
             )
         )
         # copy the token files to replicas
-        if 'nfast' in cls.master.config.token_library:
+        if (
+            cls.master.config.token_library
+            and 'nfast' in cls.master.config.token_library
+        ):
             for replica in cls.replicas:
                 tasks.copy_nfast_data(cls.master, replica)
         copy_token_files(cls.master, cls.replicas, token_name)
