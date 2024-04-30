@@ -197,16 +197,22 @@ class TestHSMInstall(IntegrationTest):
         tasks.install_replica(
             self.master, self.replicas[0], setup_ca=False,
             setup_dns=True,
-            token_password=self.token_password)
+            extra_args=('--token-password', self.token_password,)
+        )
 
     def test_hsm_install_replica0_ipa_ca_install(self):
         check_version(self.master)
-        tasks.install_ca(self.replicas[0], token_password=self.token_password)
+        tasks.install_ca(
+            self.replicas[0],
+            extra_args=('--token-password', self.token_password,),
+        )
 
     def test_hsm_install_replica0_ipa_kra_install(self):
         check_version(self.master)
-        tasks.install_kra(self.replicas[0], first_instance=True,
-                          token_password=self.token_password)
+        tasks.install_kra(
+            self.replicas[0], first_instance=True,
+            extra_args=('--token-password', self.token_password,)
+        )
 
         # Copy the new KRA key material to the other servers.
         if (
@@ -229,13 +235,14 @@ class TestHSMInstall(IntegrationTest):
         check_version(self.master)
         tasks.install_replica(
             self.master, self.replicas[1], setup_ca=True,
-            token_password=self.token_password)
+            extra_args=('--token-password', self.token_password,)
+        )
 
     def test_hsm_install_replica1_ipa_kra_install(self):
         check_version(self.master)
         tasks.install_kra(
             self.replicas[1],
-            token_password=self.token_password
+            extra_args=('--token-password', self.token_password,)
         )
 
     def test_hsm_install_replica1_ipa_dns_install(self):
@@ -246,7 +253,9 @@ class TestHSMInstall(IntegrationTest):
         check_version(self.master)
         tasks.install_replica(
             self.master, self.replicas[2], setup_ca=True, setup_kra=True,
-            setup_dns=True, token_password=self.token_password)
+            setup_dns=True,
+            extra_args=('--token-password', self.token_password,)
+        )
 
     def test_hsm_install_client(self):
         check_version(self.master)
@@ -327,7 +336,8 @@ class TestHSMInstallADTrustBase(IntegrationTest):
             self.master, self.replicas[0], setup_ca=True,
             setup_adtrust=True, setup_kra=True, setup_dns=True,
             nameservers='master' if self.master_with_dns else None,
-            token_password=self.token_password)
+            extra_args=('--token-password', self.token_password,)
+        )
 
 
 class TestADTrustInstallWithDNS_KRA_ADTrust(IntegrationTest):
@@ -372,7 +382,7 @@ class TestADTrustInstallWithDNS_KRA_ADTrust(IntegrationTest):
         check_version(self.master)
         tasks.install_replica(
             self.master, self.replicas[0], setup_ca=True, setup_kra=True,
-            token_password=self.token_password
+            extra_args=('--token-password', self.token_password,)
         )
 
 
@@ -495,7 +505,10 @@ class TestHSMCALessToExternalToSelfSignedCA(CALessBase):
 
     def test_hsm_caless_to_ca_full(self):
         check_version(self.master)
-        tasks.install_ca(self.master, token_password=self.token_password)
+        tasks.install_ca(
+            self.master,
+            extra_args=('--token-password', self.token_password,),
+        )
 
         ca_show = self.master.run_command(['ipa', 'ca-show', 'ipa'])
         assert 'Subject DN: CN=Certificate Authority,O={}'.format(
@@ -542,7 +555,8 @@ class TestHSMCALessToExternalToSelfSignedCA(CALessBase):
         check_version(self.master)
         tasks.install_replica(
             self.master, self.replicas[0], setup_ca=True,
-            token_password=self.token_password)
+            extra_args=('--token-password', self.token_password,)
+        )
 
 
 IPA_CA = "ipa_ca.crt"
@@ -612,8 +626,10 @@ class TestHSMExternalToSelfSignedCA(IntegrationTest):
 
     def test_hsm_external_kra_install(self):
         check_version(self.master)
-        tasks.install_kra(self.master, first_instance=True,
-                          token_password=self.token_password)
+        tasks.install_kra(
+            self.master, first_instance=True,
+            extra_args=('--token-password', self.token_password,)
+        )
 
         # Copy the new KRA key material to the other server(s).
         if (
@@ -634,7 +650,8 @@ class TestHSMExternalToSelfSignedCA(IntegrationTest):
         check_version(self.master)
         tasks.install_replica(
             self.master, self.replicas[0], setup_kra=True,
-            token_password=self.token_password)
+            extra_args=('--token-password', self.token_password,)
+        )
 
 
 @pytest.fixture
@@ -792,7 +809,7 @@ class TestHSMcertFixReplica(IntegrationTest):
         tasks.install_replica(
             cls.master, cls.replicas[0], setup_ca=True,
             nameservers='master' if cls.master_with_dns else None,
-            token_password=token_passwd
+            extra_args=('--token-password', token_passwd,)
         )
 
     @classmethod

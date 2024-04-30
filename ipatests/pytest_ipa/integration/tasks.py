@@ -448,8 +448,7 @@ def copy_nfast_data(src_host, dest_host):
 def install_replica(master, replica, setup_ca=True, setup_dns=False,
                     setup_kra=False, setup_adtrust=False, extra_args=(),
                     domain_level=None, unattended=True, stdin_text=None,
-                    raiseonerr=True, promote=True, nameservers='master',
-                    token_password=None):
+                    raiseonerr=True, promote=True, nameservers='master'):
     """
     This task installs client and then promote it to the replica
 
@@ -522,8 +521,6 @@ def install_replica(master, replica, setup_ca=True, setup_dns=False,
             enable_crypto_subpolicy(replica, "AD-SUPPORT")
     if master_authoritative_for_client_domain(master, replica):
         args.extend(['--ip-address', replica.ip])
-    if token_password:
-        args.extend(['--token-password', token_password])
 
     args.extend(replica_args)  # append extra arguments to installation
 
@@ -1440,7 +1437,7 @@ def double_circle_topo(master, replicas, site_size=6):
 def install_topo(topo, master, replicas, clients, domain_level=None,
                  skip_master=False, setup_replica_cas=True,
                  setup_replica_kras=False, clients_extra_args=(),
-                 random_serial=False, token_password=None):
+                 random_serial=False, extra_args=()):
     """Install IPA servers and clients in the given topology"""
     if setup_replica_kras and not setup_replica_cas:
         raise ValueError("Option 'setup_replica_kras' requires "
@@ -1468,7 +1465,7 @@ def install_topo(topo, master, replicas, clients, domain_level=None,
                 setup_ca=setup_replica_cas,
                 setup_kra=setup_replica_kras,
                 nameservers=master.ip,
-                token_password=token_password
+                extra_args=extra_args,
             )
         installed.add(child)
     install_clients([master] + replicas, clients, clients_extra_args)
@@ -1701,14 +1698,15 @@ def ipa_restore(master, backup_path, backend=None):
 
 
 def install_kra(host, domain_level=None,
-                first_instance=False, token_password=None,
-                raiseonerr=True):
+                first_instance=False, raiseonerr=True,
+                extra_args=(),):
     if domain_level is None:
         domain_level = domainlevel(host)
     check_domain_level(domain_level)
     command = ["ipa-kra-install", "-U", "-p", host.config.dirman_password]
-    if token_password:
-        command.extend(['--token-password', token_password])
+    if not isinstance(extra_args, (tuple, list)):
+        raise TypeError("extra_args must be tuple or list")
+    command.extend(extra_args)
     result = host.run_command(command, raiseonerr=raiseonerr)
     return result
 
@@ -1716,7 +1714,7 @@ def install_kra(host, domain_level=None,
 def install_ca(
         host, domain_level=None, first_instance=False, external_ca=False,
         cert_files=None, raiseonerr=True, extra_args=(),
-        random_serial=False, token_password=None,
+        random_serial=False,
 ):
     if domain_level is None:
         domain_level = domainlevel(host)
@@ -1725,8 +1723,6 @@ def install_ca(
                "-P", 'admin', "-w", host.config.admin_password]
     if random_serial:
         command.append('--random-serial-numbers')
-    if token_password:
-        command.extend(['--token-password', token_password])
     if not isinstance(extra_args, (tuple, list)):
         raise TypeError("extra_args must be tuple or list")
     command.extend(extra_args)
