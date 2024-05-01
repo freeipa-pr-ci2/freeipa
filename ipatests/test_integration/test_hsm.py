@@ -150,7 +150,7 @@ def copy_token_files(src_host, dest_host, token_name):
 
 
 def check_version(host):
-    if tasks.get_pki_version(host) < tasks.parse_version('11.5.0'):
+    if tasks.get_pki_version(host) < tasks.parse_version('11.4.0'):
         raise pytest.skip("PKI HSM support is not available")
 
 

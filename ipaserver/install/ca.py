@@ -177,7 +177,7 @@ def hsm_version():
        The caller is responsible for raising the exception.
     """
     pki_version = pki.util.Version(pki.specification_version())
-    return pki_version >= pki.util.Version("11.5.0"), pki_version
+    return pki_version >= pki.util.Version("11.4.0"), pki_version
 
 
 def hsm_validator(token_name, token_library, token_password):
