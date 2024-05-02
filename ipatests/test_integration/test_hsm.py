@@ -19,7 +19,6 @@ from ipatests.test_integration.test_acme import (
     get_selinux_status,
     skip_certbot_tests,
     skip_mod_md_tests,
-
 )
 from ipatests.test_integration.test_caless import CALessBase
 from ipatests.test_integration.test_cert import get_certmonger_fs_id
@@ -34,7 +33,10 @@ from ipatests.test_integration.test_ipa_cert_fix import (
     needs_resubmit,
     get_cert_expiry
 )
-from ipatests.test_integration.test_ipahealthcheck import run_healthcheck
+from ipatests.test_integration.test_ipahealthcheck import (
+    run_healthcheck,
+    set_excludes
+)
 from ipatests.pytest_ipa.integration import tasks
 from ipatests.pytest_ipa.integration.env_config import get_global_config
 from ipalib import x509 as ipa_x509
@@ -257,6 +259,13 @@ class TestHSMInstall(IntegrationTest):
             extra_args=('--token-password', self.token_password,)
         )
 
+    def test_hsm_install_master_ipa_kra_install(self):
+        check_version(self.master)
+        tasks.install_kra(
+            self.master,
+            extra_args=('--token-password', self.token_password,)
+        )
+
     def test_hsm_install_client(self):
         check_version(self.master)
         tasks.install_client(self.master, self.clients[0])
@@ -281,6 +290,7 @@ class TestHSMInstall(IntegrationTest):
 
     def test_hsm_install_healthcheck(self):
         check_version(self.master)
+        set_excludes(self.master, "key", "DSCLE0004")
         tasks.install_packages(self.master, ['*ipa-healthcheck'])
         returncode, output = run_healthcheck(
             self.master, output_type="human", failures_only=True
@@ -991,7 +1001,7 @@ class TestHSMNegative(IntegrationTest):
 
     def test_hsm_negative_special_char_token_name(self):
         check_version(self.master)
-        token_name = 'hsm token'
+        token_name = 'hsm:token'
         token_passwd = 'Secret123'
         self.master.run_command(
             ['softhsm2-util', '--delete-token', '--token', token_name],
