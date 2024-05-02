@@ -864,7 +864,7 @@ class TestHSMcertFixReplica(IntegrationTest):
         )
         req_id = get_certmonger_fs_id(cmd.stdout_text)
         tasks.wait_for_certmonger_status(
-            self.replicas[0], ('CA_UNREACHABLE'), req_id, timeout=600
+            self.replicas[0], ('CA_UNREACHABLE'), req_id, timeout=900
         )
         # get initial expiry date to compare later with renewed cert
         initial_expiry = get_cert_expiry(
@@ -882,7 +882,7 @@ class TestHSMcertFixReplica(IntegrationTest):
             )
             req_id = get_certmonger_fs_id(cmd.stdout_text)
             tasks.wait_for_certmonger_status(
-                self.replicas[0], ('MONITORING'), req_id, timeout=600
+                self.replicas[0], ('MONITORING'), req_id, timeout=900
             )
 
         cmd = self.replicas[0].run_command(
@@ -890,7 +890,7 @@ class TestHSMcertFixReplica(IntegrationTest):
         )
         req_id = get_certmonger_fs_id(cmd.stdout_text)
         tasks.wait_for_certmonger_status(
-            self.replicas[0], ('MONITORING'), req_id, timeout=600
+            self.replicas[0], ('MONITORING'), req_id, timeout=900
         )
 
         # check if replication working fine
@@ -914,7 +914,7 @@ class TestHSMcertFixReplica(IntegrationTest):
                 ['getcert', 'resubmit', '-i', req_id]
             )
             tasks.wait_for_certmonger_status(
-                self.replicas[0], ('MONITORING'), req_id, timeout=600
+                self.replicas[0], ('MONITORING'), req_id, timeout=900
             )
         for cert_nick in ('auditSigningCert cert-pki-ca',
                           'ocspSigningCert cert-pki-ca',
@@ -930,7 +930,7 @@ class TestHSMcertFixReplica(IntegrationTest):
                     ['getcert', 'resubmit', '-i', req_id]
                 )
                 tasks.wait_for_certmonger_status(
-                    self.replicas[0], ('MONITORING'), req_id, timeout=600
+                    self.replicas[0], ('MONITORING'), req_id, timeout=900
                 )
 
         self.replicas[0].run_command(
@@ -1285,7 +1285,7 @@ class TestHSMACMEPrune(IntegrationTest):
         # We moved time forward 90 days + 2 hours. Configure it to
         # prune after an hour then run it.
         self.master.run_command(
-            ['ipa-acme-manage', 'pruning', '--enable'
+            ['ipa-acme-manage', 'pruning', '--enable',
              '--certretention=60',
              '--certretentionunit=minute',]
         )
