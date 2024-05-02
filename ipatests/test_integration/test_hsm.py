@@ -1280,8 +1280,13 @@ class TestHSMACMEPrune(IntegrationTest):
         )
         assert f'CN={self.clients[0].hostname}' in result.stdout_text
 
-        # run prune command manually
-        self.master.run_command(['ipa-acme-manage', 'pruning', '--enable'])
+        # We moved time forward 90 days + 2 hours. Configure it to
+        # prune after an hour then run it.
+        self.master.run_command(
+            ['ipa-acme-manage', 'pruning', '--enable'
+             '--certretention=60',
+             '--certretentionunit=minute',]
+        )
         self.master.run_command(['ipactl', 'restart'])
         self.master.run_command(['ipa-acme-manage', 'pruning', '--run'])
         # wait for cert to get prune
