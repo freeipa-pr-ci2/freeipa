@@ -780,6 +780,7 @@ class TestHSMcertFixKRA(IntegrationTest):
         check_status(self.master, 11, "CA_UNREACHABLE")
 
         self.master.run_command(['ipa-cert-fix', '-v'], stdin_text='yes\n')
+        self.master.run_command(['systemctl', 'restart', 'certmonger'])
 
         check_status(self.master, 12, "MONITORING")
 
@@ -850,6 +851,7 @@ class TestHSMcertFixReplica(IntegrationTest):
         check_status(self.master, 8, "CA_UNREACHABLE")
 
         self.master.run_command(['ipa-cert-fix', '-v'], stdin_text='yes\n')
+        self.master.run_command(['systemctl', 'restart', 'certmonger'])
 
         check_status(self.master, 9, "MONITORING")
 
