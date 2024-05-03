@@ -68,6 +68,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMInstall
         template: *ci-master-latest
         timeout: 10800
@@ -80,6 +82,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMInstallADTrustBase
         template: *ci-master-latest
         timeout: 4800
@@ -92,6 +96,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestADTrustInstallWithDNS_KRA_ADTrust
         template: *ci-master-latest
         timeout: 10800
@@ -104,8 +110,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
-        copr: 'rcritten/freeipa'
         update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMcertRenewal
         template: *ci-master-latest
         timeout: 12000
@@ -118,6 +124,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMCALessToExternalToSelfSignedCA
         template: *ci-master-latest
         timeout: 12000
@@ -130,6 +138,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMExternalToSelfSignedCA
         template: *ci-master-latest
         timeout: 12000
@@ -142,8 +152,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
-        copr: 'rcritten/freeipa'
         update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMcertFix
         template: *ci-master-latest
         timeout: 10800
@@ -156,8 +166,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
-        copr: 'rcritten/freeipa'
         update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMcertFixKRA
         template: *ci-master-latest
         timeout: 10800
@@ -170,6 +180,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMcertFixReplica
         template: *ci-master-latest
         timeout: 10800
@@ -182,6 +194,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMNegative
         template: *ci-master-latest
         timeout: 3600
@@ -194,6 +208,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMACME
         template: *ci-master-latest
         timeout: 3600
@@ -206,6 +222,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMBackupRestore
         template: *ci-master-latest
         timeout: 3600
@@ -218,6 +236,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMACMEPrune
         template: *ci-master-latest
         timeout: 3600
@@ -230,6 +250,8 @@ jobs:
       class: RunPytest
       args:
         build_url: '{fedora-latest/build_url}'
+        update_packages: True
+        copr: frenaud/pki_11_5
         test_suite: test_integration/test_hsm.py::TestHSMVault
         template: *ci-master-latest
         timeout: 12000
