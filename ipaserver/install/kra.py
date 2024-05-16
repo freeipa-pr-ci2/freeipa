@@ -58,6 +58,14 @@ def install_check(api, replica_config, options):
             "KRA can not be installed when 'ca_host' is overriden in "
             "IPA configuration file.")
 
+    if options.token_password_file:
+        with open(options.token_password_file, "r") as fd:
+            options.token_password = fd.readline().strip()
+
+    if replica_config is not None:
+        (token_name, token_library) = ca.lookup_hsm_configuration(api)
+        ca.hsm_validator(token_name, token_library, options.token_password)
+
 
 def install(api, replica_config, options, custodia):
     if replica_config is None:
@@ -74,16 +82,20 @@ def install(api, replica_config, options, custodia):
     else:
         if not replica_config.setup_kra:
             return
-        krafile = os.path.join(replica_config.dir, 'kracert.p12')
-        with ipautil.private_ccache():
-            ccache = os.environ['KRB5CCNAME']
-            kinit_keytab(
-                'host/{env.host}@{env.realm}'.format(env=api.env),
-                paths.KRB5_KEYTAB,
-                ccache)
-            custodia.get_kra_keys(
-                krafile,
-                replica_config.dirman_password)
+        cai = cainstance.CAInstance()
+        if not cai.hsm_enabled:
+            krafile = os.path.join(replica_config.dir, 'kracert.p12')
+            with ipautil.private_ccache():
+                ccache = os.environ['KRB5CCNAME']
+                kinit_keytab(
+                    'host/{env.host}@{env.realm}'.format(env=api.env),
+                    paths.KRB5_KEYTAB,
+                    ccache)
+                custodia.get_kra_keys(
+                    krafile,
+                    replica_config.dirman_password)
+        else:
+            krafile = None
 
         realm_name = replica_config.realm_name
         dm_password = replica_config.dirman_password
@@ -105,6 +117,7 @@ def install(api, replica_config, options, custodia):
         master_host=master_host,
         promote=promote,
         pki_config_override=options.pki_config_override,
+        token_password=options.token_password
     )
 
     _service.print_msg("Restarting the directory server")

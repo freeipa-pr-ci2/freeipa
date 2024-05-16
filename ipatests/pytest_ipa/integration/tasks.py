@@ -432,6 +432,19 @@ def master_authoritative_for_client_domain(master, client):
     return result.returncode == 0
 
 
+def copy_nfast_data(src_host, dest_host):
+    src_host.run_command(
+        ['tar', '-cf', '/root/token_files.tar', '.'],
+        cwd='/opt/nfast/kmdata/local/'
+    )
+    tarball = src_host.get_file_contents('/root/token_files.tar')
+    dest_host.put_file_contents('/root/token_files.tar', tarball)
+    dest_host.run_command(
+        ['tar', '-xf', '/root/token_files.tar',
+         '-C', '/opt/nfast/kmdata/local']
+    )
+
+
 def install_replica(master, replica, setup_ca=True, setup_dns=False,
                     setup_kra=False, setup_adtrust=False, extra_args=(),
                     domain_level=None, unattended=True, stdin_text=None,
@@ -1424,7 +1437,7 @@ def double_circle_topo(master, replicas, site_size=6):
 def install_topo(topo, master, replicas, clients, domain_level=None,
                  skip_master=False, setup_replica_cas=True,
                  setup_replica_kras=False, clients_extra_args=(),
-                 random_serial=False):
+                 random_serial=False, extra_args=()):
     """Install IPA servers and clients in the given topology"""
     if setup_replica_kras and not setup_replica_cas:
         raise ValueError("Option 'setup_replica_kras' requires "
@@ -1452,6 +1465,7 @@ def install_topo(topo, master, replicas, clients, domain_level=None,
                 setup_ca=setup_replica_cas,
                 setup_kra=setup_replica_kras,
                 nameservers=master.ip,
+                extra_args=extra_args,
             )
         installed.add(child)
     install_clients([master] + replicas, clients, clients_extra_args)
@@ -1684,11 +1698,15 @@ def ipa_restore(master, backup_path, backend=None):
 
 
 def install_kra(host, domain_level=None,
-                first_instance=False, raiseonerr=True):
+                first_instance=False, raiseonerr=True,
+                extra_args=(),):
     if domain_level is None:
         domain_level = domainlevel(host)
     check_domain_level(domain_level)
     command = ["ipa-kra-install", "-U", "-p", host.config.dirman_password]
+    if not isinstance(extra_args, (tuple, list)):
+        raise TypeError("extra_args must be tuple or list")
+    command.extend(extra_args)
     result = host.run_command(command, raiseonerr=raiseonerr)
     return result
 
@@ -2920,3 +2938,15 @@ def move_date(host, chrony_cmd, date_str):
     """
     host.run_command(['systemctl', chrony_cmd, 'chronyd'])
     host.run_command(['date', '-s', date_str])
+
+
+def copy_files(source_host, dest_host, filelist):
+    """Helper to copy a file from one host to another
+    :param source_host: source host of the file to copy
+    :param dest_host: destination host
+    :param filelist: list of full path of files to copy
+    """
+    for file in filelist:
+        dest_host.transport.mkdir_recursive(os.path.dirname(file))
+        data = source_host.get_file_contents(file)
+        dest_host.transport.put_file_contents(file, data)
