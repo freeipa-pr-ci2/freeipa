@@ -241,6 +241,7 @@ def verify_samba_component_presence(ldap, api):
         )
 
     # We're ok in this case, bail out
+    # pylint: disable-next=used-before-assignment
     if adtrust_present and _bindings_installed:
         return
 
@@ -1872,7 +1873,8 @@ class trust_enable_agent(Command):
 
         # the user must have the Replication Administrators privilege
         privilege = u'Replication Administrators'
-        if not principal_has_privilege(self.api, context.principal, privilege):
+        op_account = getattr(context, 'principal', None)
+        if not principal_has_privilege(self.api, op_account, privilege):
             raise errors.ACIError(
                 info=_("not allowed to remotely add agent"))
 
