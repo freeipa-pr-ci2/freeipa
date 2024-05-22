@@ -63,22 +63,50 @@ from ipapython.cookie import Cookie
 from ipapython.dnsutil import DNSName, query_srv
 from ipalib.text import _
 from ipalib.util import create_https_connection
-from ipalib.krb_utils import KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN, KRB5KRB_AP_ERR_TKT_EXPIRED, \
-                             KRB5_FCC_PERM, KRB5_FCC_NOFILE, KRB5_CC_FORMAT, \
-                             KRB5_REALM_CANT_RESOLVE, KRB5_CC_NOTFOUND, get_principal
+from ipalib.krb_utils import (
+    KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN,
+    KRB5KRB_AP_ERR_TKT_EXPIRED,
+    KRB5_FCC_PERM,
+    KRB5_FCC_NOFILE,
+    KRB5_CC_FORMAT,
+    KRB5_REALM_CANT_RESOLVE,
+    KRB5_CC_NOTFOUND,
+    get_principal,
+)
 from ipapython.dn import DN
 from ipapython.kerberos import Principal
 from ipalib.capabilities import VERSION_WITHOUT_CAPABILITIES
 from ipalib import api
+from ipalib.ipajson import json_encode_binary, json_decode_binary
 
 # The XMLRPC client is in  "six.moves.xmlrpc_client", but pylint
 # cannot handle that
 try:
-    from xmlrpclib import (Binary, Fault, DateTime, dumps, loads, ServerProxy,
-            Transport, ProtocolError, MININT, MAXINT)
+    from xmlrpclib import (
+        Binary,
+        Fault,
+        DateTime,
+        dumps,
+        loads,
+        ServerProxy,
+        Transport,
+        ProtocolError,
+        MININT,
+        MAXINT,
+    )
 except ImportError:
-    from xmlrpc.client import (Binary, Fault, DateTime, dumps, loads, ServerProxy,
-            Transport, ProtocolError, MININT, MAXINT)
+    from xmlrpc.client import (
+        Binary,
+        Fault,
+        DateTime,
+        dumps,
+        loads,
+        ServerProxy,
+        Transport,
+        ProtocolError,
+        MININT,
+        MAXINT,
+    )
 
 # pylint: disable=import-error
 if six.PY3:
@@ -110,6 +138,7 @@ def update_persistent_client_session_data(principal, data):
     except Exception as e:
         raise ValueError(str(e))
 
+
 def read_persistent_client_session_data(principal):
     '''
     Given a principal return the stored session data for that
@@ -122,6 +151,7 @@ def read_persistent_client_session_data(principal):
         return session_storage.get_data(principal, CCACHE_COOKIE_KEY)
     except Exception as e:
         raise ValueError(str(e))
+
 
 def delete_persistent_client_session_data(principal):
     '''
@@ -136,12 +166,13 @@ def delete_persistent_client_session_data(principal):
     except Exception as e:
         raise ValueError(str(e))
 
+
 def xml_wrap(value, version):
     """
     Wrap all ``str`` in ``xmlrpc.client.Binary``.
 
-    Because ``xmlrpc.client.dumps()`` will itself convert all ``unicode`` instances
-    into UTF-8 encoded ``str`` instances, we don't do it here.
+    Because ``xmlrpc.client.dumps()`` will itself convert all ``unicode``
+    instances into UTF-8 encoded ``str`` instances, we don't do it here.
 
     So in total, when encoding data for an XML-RPC packet, the following
     transformations occur:
@@ -250,8 +281,8 @@ def xml_dumps(params, version, methodname=None, methodresponse=False,
     Encode an XML-RPC data packet, transparently wraping ``params``.
 
     This function will wrap ``params`` using `xml_wrap()` and will
-    then encode the XML-RPC data packet using ``xmlrpc.client.dumps()`` (from the
-    Python standard library).
+    then encode the XML-RPC data packet using ``xmlrpc.client.dumps()``
+    (from the Python standard library).
 
     For documentation on the ``xmlrpc.client.dumps()`` function, see:
 
@@ -268,185 +299,13 @@ def xml_dumps(params, version, methodname=None, methodresponse=False,
         params = xml_wrap(params, version)
     else:
         assert isinstance(params, Fault)
-    return dumps(params,
+    return dumps(
+        params,
         methodname=methodname,
         methodresponse=methodresponse,
         encoding=encoding,
         allow_none=True,
     )
-
-
-class _JSONPrimer(dict):
-    """Fast JSON primer and pre-converter
-
-    Prepare a data structure for JSON serialization. In an ideal world, priming
-    could be handled by the default hook of json.dumps(). Unfortunately the
-    hook treats Python 2 str as text while IPA considers str as bytes.
-
-    The primer uses a couple of tricks to archive maximum performance:
-
-    * O(1) type look instead of O(n) chain of costly isinstance() calls
-    * __missing__ and __mro__ with caching to handle subclasses
-    * inline code with minor code duplication (func lookup in enc_list/dict)
-    * avoid surplus function calls (e.g. func is _identity, obj.__class__
-      instead if type(obj))
-    * function default arguments to turn global into local lookups
-    * avoid re-creation of bound method objects (e.g. result.append)
-    * on-demand lookup of client capabilities with cached values
-
-    Depending on the client version number, the primer converts:
-
-    * bytes -> {'__base64__': b64encode}
-    * datetime -> {'__datetime__': LDAP_GENERALIZED_TIME}
-    * DNSName -> {'__dns_name__': unicode}
-
-    The _ipa_obj_hook() functions unserializes the marked JSON objects to
-    bytes, datetime and DNSName.
-
-    :see: _ipa_obj_hook
-    """
-    __slots__ = ('version', '_cap_datetime', '_cap_dnsname')
-
-    _identity = object()
-
-    def __init__(self, version, _identity=_identity):
-        super(_JSONPrimer, self).__init__()
-        self.version = version
-        self._cap_datetime = None
-        self._cap_dnsname = None
-        self.update({
-            unicode: _identity,
-            bool: _identity,
-            int: _identity,
-            type(None): _identity,
-            float: _identity,
-            Decimal: unicode,
-            DN: str,
-            Principal: unicode,
-            DNSName: self._enc_dnsname,
-            datetime.datetime: self._enc_datetime,
-            bytes: self._enc_bytes,
-            list: self._enc_list,
-            tuple: self._enc_list,
-            dict: self._enc_dict,
-            crypto_x509.Certificate: self._enc_certificate,
-            crypto_x509.CertificateSigningRequest: self._enc_certificate,
-        })
-
-    def __missing__(self, typ):
-        # walk MRO to find best match
-        for c in typ.__mro__:
-            if c in self:
-                self[typ] = self[c]
-                return self[c]
-        # use issubclass to check for registered ABCs
-        for c in self:
-            if issubclass(typ, c):
-                self[typ] = self[c]
-                return self[c]
-        raise TypeError(typ)
-
-    def convert(self, obj, _identity=_identity):
-        # obj.__class__ is twice as fast as type(obj)
-        func = self[obj.__class__]
-        return obj if func is _identity else func(obj)
-
-    def _enc_datetime(self, val):
-        cap = self._cap_datetime
-        if cap is None:
-            cap = capabilities.client_has_capability(self.version,
-                                                     'datetime_values')
-            self._cap_datetime = cap
-        if cap:
-            return {'__datetime__': val.strftime(LDAP_GENERALIZED_TIME_FORMAT)}
-        else:
-            return val.strftime(LDAP_GENERALIZED_TIME_FORMAT)
-
-    def _enc_dnsname(self, val):
-        cap = self._cap_dnsname
-        if cap is None:
-            cap = capabilities.client_has_capability(self.version,
-                                                     'dns_name_values')
-            self._cap_dnsname = cap
-        if cap:
-            return {'__dns_name__': unicode(val)}
-        else:
-            return unicode(val)
-
-    def _enc_bytes(self, val):
-        encoded = base64.b64encode(val)
-        if not six.PY2:
-            encoded = encoded.decode('ascii')
-        return {'__base64__': encoded}
-
-    def _enc_list(self, val, _identity=_identity):
-        result = []
-        append = result.append
-        for v in val:
-            func = self[v.__class__]
-            append(v if func is _identity else func(v))
-        return result
-
-    def _enc_dict(self, val, _identity=_identity, _iteritems=six.iteritems):
-        result = {}
-        for k, v in _iteritems(val):
-            func = self[v.__class__]
-            result[k] = v if func is _identity else func(v)
-        return result
-
-    def _enc_certificate(self, val):
-        return self._enc_bytes(val.public_bytes(x509_Encoding.DER))
-
-
-def json_encode_binary(val, version, pretty_print=False):
-    """Serialize a Python object structure to JSON
-
-    :param object val: Python object structure
-    :param str version: client version
-    :param bool pretty_print: indent and sort JSON (warning: slow!)
-    :return: text
-    :note: pretty printing triggers a slow path in Python's JSON module. Only
-           use pretty_print in debug mode.
-    """
-    result = _JSONPrimer(version).convert(val)
-    if pretty_print:
-        return json.dumps(result, indent=4, sort_keys=True)
-    else:
-        return json.dumps(result)
-
-
-def _ipa_obj_hook(dct, _iteritems=six.iteritems, _list=list):
-    """JSON object hook
-
-    :see: _JSONPrimer
-    """
-    if '__base64__' in dct:
-        return base64.b64decode(dct['__base64__'])
-    elif '__datetime__' in dct:
-        return datetime.datetime.strptime(dct['__datetime__'],
-                                          LDAP_GENERALIZED_TIME_FORMAT)
-    elif '__dns_name__' in dct:
-        return DNSName(dct['__dns_name__'])
-    else:
-        # XXX tests assume tuples. Is this really necessary?
-        for k, v in _iteritems(dct):
-            if v.__class__ is _list:
-                dct[k] = tuple(v)
-        return dct
-
-
-def json_decode_binary(val):
-    """Convert serialized JSON string back to Python data structure
-
-    :param val: JSON string
-    :type val: str, bytes
-    :return: Python data structure
-    :see: _ipa_obj_hook, _JSONPrimer
-    """
-    if isinstance(val, bytes):
-        val = val.decode('utf-8')
-
-    return json.loads(val, object_hook=_ipa_obj_hook)
 
 
 def decode_fault(e, encoding='UTF-8'):
@@ -499,6 +358,7 @@ class DummyParser:
 
 class MultiProtocolTransport(Transport):
     """Transport that handles both XML-RPC and JSON"""
+
     def __init__(self, *args, **kwargs):
         Transport.__init__(self)
         self.protocol = kwargs.get('protocol', None)
@@ -525,6 +385,7 @@ class MultiProtocolTransport(Transport):
 
 class LanguageAwareTransport(MultiProtocolTransport):
     """Transport sending Accept-Language header"""
+
     def get_host_info(self, host):
         host, extra_headers, x509 = MultiProtocolTransport.get_host_info(
             self, host)
@@ -552,6 +413,7 @@ class LanguageAwareTransport(MultiProtocolTransport):
 
 class SSLTransport(LanguageAwareTransport):
     """Handles an HTTPS transaction to an XML-RPC server."""
+
     def make_connection(self, host):
         host, self._extra_headers, _x509 = self.get_host_info(host)
 
@@ -653,7 +515,10 @@ class KerbTransport(SSLTransport):
 
         if token:
             self._extra_headers.append(
-                ('Authorization', 'negotiate %s' % base64.b64encode(token).decode('ascii'))
+                (
+                    "Authorization",
+                    "negotiate %s" % base64.b64encode(token).decode("ascii"),
+                )
             )
 
     def _auth_complete(self, response):
@@ -706,7 +571,8 @@ class KerbTransport(SSLTransport):
                     self.send_content(h, request_body)
                     response = h.getresponse(buffering=True)
                 else:
-                    self.__send_request(h, host, handler, request_body, verbose)
+                    self.__send_request(h, host, handler,
+                                        request_body, verbose)
                     response = h.getresponse()
 
                 if response.status != 200:
@@ -750,13 +616,15 @@ class KerbTransport(SSLTransport):
     # pylint: enable=inconsistent-return-statements
 
     if six.PY3:
-        def __send_request(self, connection, host, handler, request_body, debug):
+        def __send_request(self, connection, host, handler,
+                           request_body, debug):
             # Based on xmlrpc.client.Transport.send_request
             headers = self._extra_headers[:]
             if debug:
                 connection.set_debuglevel(1)
             if self.accept_gzip_encoding and gzip:
-                connection.putrequest("POST", handler, skip_accept_encoding=True)
+                connection.putrequest("POST", handler,
+                                      skip_accept_encoding=True)
                 connection.putheader("Accept-Encoding", "gzip")
                 headers.append(("Accept-Encoding", "gzip"))
             else:
@@ -878,8 +746,8 @@ class RPCClient(Connectible):
         Create a list of urls consisting of the available IPA servers.
         """
         # the configured URL defines what we use for the discovered servers
-        (_scheme, _netloc, path, _params, _query, _fragment
-            ) = urllib.parse.urlparse(rpc_uri)
+        (_scheme, _netloc, path, _params,
+         _query, _fragment) = urllib.parse.urlparse(rpc_uri)
         servers = []
         name = '_ldap._tcp.%s.' % self.env.domain
 
@@ -890,7 +758,8 @@ class RPCClient(Connectible):
 
         for answer in answers:
             server = str(answer.target).rstrip(".")
-            servers.append('https://%s%s' % (ipautil.format_netloc(server), path))
+            servers.append('https://%s%s' % (
+                ipautil.format_netloc(server), path))
 
         # make sure the configured master server is there just once and
         # it is the first one.
@@ -958,7 +827,8 @@ class RPCClient(Connectible):
         original_url = url
         principal = getattr(context, 'principal', None)
 
-        session_cookie = self.get_session_cookie_from_persistent_storage(principal)
+        session_cookie = self.get_session_cookie_from_persistent_storage(
+            principal)
         if session_cookie is None:
             logger.debug("failed to find session_cookie in persistent storage "
                          "for principal '%s'",
@@ -987,16 +857,19 @@ class RPCClient(Connectible):
             logger.error("not sending session cookie, unknown error: %s", e)
             return original_url
 
-        # O.K. session_cookie is valid to be returned, stash it away where it will will
-        # get included in a HTTP Cookie headed sent to the server.
+        # O.K. session_cookie is valid to be returned, stash it away where it
+        # will get included in a HTTP Cookie headed sent to the server.
         logger.debug("setting session_cookie into context '%s'",
                      session_cookie.http_cookie())
         setattr(context, 'session_cookie', session_cookie.http_cookie())
 
-        # Form the session URL by substituting the session path into the original URL
-        scheme, netloc, path, params, query, fragment = urllib.parse.urlparse(original_url)
+        # Form the session URL by substituting the session path
+        # into the original URL
+        scheme, netloc, path, params, query, fragment = urllib.parse.urlparse(
+            original_url)
         path = self.session_path
-        session_url = urllib.parse.urlunparse((scheme, netloc, path, params, query, fragment))
+        session_url = urllib.parse.urlunparse((scheme, netloc, path,
+                                               params, query, fragment))
 
         return session_url
 
@@ -1220,8 +1093,8 @@ class JSONServerProxy:
         self.__verbose = verbose
 
         # FIXME: Some of our code requires ServerProxy internals.
-        # But, xmlrpc.client.ServerProxy's _ServerProxy__transport can be accessed
-        # by calling serverproxy('transport')
+        # But, xmlrpc.client.ServerProxy's _ServerProxy__transport can be
+        # accessed by calling serverproxy('transport')
         self._ServerProxy__transport = transport
 
     def __request(self, name, args):
