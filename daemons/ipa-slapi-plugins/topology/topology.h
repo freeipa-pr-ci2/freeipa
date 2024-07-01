@@ -95,6 +95,7 @@ typedef struct topo_replica {
     char *total_attrs;
     char *repl_attrs;
     TopoReplicaSegmentList *repl_segments;
+    PRBool repl_segments_fetched;
     TopoReplicaHost *hosts;
 } TopoReplica;
 
@@ -311,6 +312,7 @@ Slapi_Entry *ipa_topo_util_get_entry(char *dn);
 int ipa_topo_util_modify(Slapi_DN *entrySDN, Slapi_Mods *smods);
 char *ipa_topo_util_get_pluginhost(void);
 TopoReplica *ipa_topo_util_get_replica_conf(char *repl_root);
+TopoReplicaSegmentList *ipa_topo_util_get_repl_segments(TopoReplica *replica);
 TopoReplicaSegmentList *ipa_topo_util_get_replica_segments(TopoReplica *replica);
 void ipa_topo_util_set_domain_level(void);
 void ipa_topo_util_reset_init(char *repl_root);

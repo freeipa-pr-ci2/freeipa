@@ -1,4 +1,6 @@
 
+#include <nspr4/prtypes.h>
+
 #include "topology.h"
 
 /* two static data structures to hold the
@@ -562,7 +564,7 @@ ipa_topo_cfg_replica_segment_find(TopoReplica *replica, char *leftHost, char *ri
     else reverse_dir = SEGMENT_BIDIRECTIONAL;
 
     if (lock) slapi_lock_mutex(replica->repl_lock);
-    segments = replica->repl_segments;
+    segments = ipa_topo_util_get_repl_segments(replica);
     while (segments) {
 
         tsegm = segments->segm;
@@ -716,7 +718,7 @@ ipa_topo_cfg_segment_set_visited(TopoReplica *replica, TopoReplicaSegment *vsegm
     char *rightHost = vsegm->to;
 
     slapi_lock_mutex(replica->repl_lock);
-    segments = replica->repl_segments;
+    segments = ipa_topo_util_get_repl_segments(replica);
     while (segments) {
         tsegm = segments->segm;
         if ( ((strcasecmp(leftHost,tsegm->from) == 0) && (strcasecmp(rightHost,tsegm->to) == 0) &&
@@ -754,10 +756,10 @@ ipa_topo_cfg_segment_add(TopoReplica *replica, TopoReplicaSegment *tsegm)
               slapi_ch_calloc(1,sizeof(TopoReplicaSegmentList));
     seglist->visited = 0;
     seglist->segm = tsegm;
-    if (replica->repl_segments == NULL) {
+    if (ipa_topo_util_get_repl_segments(replica) == NULL) {
         replica->repl_segments = seglist;
     } else {
-        seglist->next = replica->repl_segments;
+        seglist->next = ipa_topo_util_get_repl_segments(replica);
         replica->repl_segments = seglist;
     }
     slapi_log_error(SLAPI_LOG_PLUGIN, IPA_TOPO_PLUGIN_SUBSYSTEM,
@@ -775,7 +777,7 @@ ipa_topo_cfg_segment_del(TopoReplica *tconf, TopoReplicaSegment *tsegm)
     slapi_log_error(SLAPI_LOG_PLUGIN, IPA_TOPO_PLUGIN_SUBSYSTEM,
                             "ipa_topo_cfg_segment_del: %s\n", tsegm->name);
     slapi_lock_mutex(tconf->repl_lock);
-    segment = tconf->repl_segments;
+    segment = ipa_topo_util_get_repl_segments(tconf);
     while (segment) {
         if (segment->segm == tsegm) {
             if (prev == NULL) {
@@ -802,6 +804,7 @@ ipa_topo_cfg_replica_new(void)
     if (topoRepl) {
         topoRepl->next = NULL;
         topoRepl->repl_segments = NULL;
+        topoRepl->repl_segments_fetched = PR_FALSE;
         topoRepl->repl_root = NULL;
         topoRepl->strip_attrs = NULL;
         topoRepl->total_attrs = NULL;
@@ -848,7 +851,7 @@ ipa_topo_cfg_replica_free(TopoReplica *tconf)
         slapi_destroy_mutex(tconf->repl_lock);
         slapi_ch_free_string(&tconf->shared_config_base);
         slapi_ch_free_string(&tconf->repl_root);
-        seg = tconf->repl_segments;
+        seg = ipa_topo_util_get_repl_segments(tconf);
         while (seg) {
             seg_next = seg->next;
             ipa_topo_cfg_segment_free(seg->segm);
