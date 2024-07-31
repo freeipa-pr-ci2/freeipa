@@ -42,11 +42,8 @@ from cryptography.hazmat.backends import default_backend
 from ipaplatform.paths import paths
 from ipapython import admintool
 from ipalib import api, errors
+from ipalib.constants import VAULT_WRAPPING_SUPPORTED_ALGOS, VAULT_WRAPPING_3DES
 from ipaserver.plugins.ldap2 import AUTOBIND_DISABLED
-
-if six.PY3:
-    unicode = str
-    long = int
 
 logger = logging.getLogger(__name__)
 
@@ -144,15 +141,13 @@ def convertHMACType(value):
 def convertAlgorithm(value):
     "Converts encryption URI to (mech, ivlen)."
 
-    return {
+    supported_algs = {
         "http://www.w3.org/2001/04/xmlenc#aes128-cbc": (
             algorithms.AES, modes.CBC, 128),
         "http://www.w3.org/2001/04/xmlenc#aes192-cbc": (
             algorithms.AES, modes.CBC, 192),
         "http://www.w3.org/2001/04/xmlenc#aes256-cbc": (
             algorithms.AES, modes.CBC, 256),
-        "http://www.w3.org/2001/04/xmlenc#tripledes-cbc": (
-            algorithms.TripleDES, modes.CBC, 64),
         "http://www.w3.org/2001/04/xmldsig-more#camellia128": (
             algorithms.Camellia, modes.CBC, 128),
         "http://www.w3.org/2001/04/xmldsig-more#camellia192": (
@@ -168,7 +163,15 @@ def convertAlgorithm(value):
         # "http://www.w3.org/2001/04/xmldsig-more#kw-camellia128": "kw-camellia128",
         # "http://www.w3.org/2001/04/xmldsig-more#kw-camellia192": "kw-camellia192",
         # "http://www.w3.org/2001/04/xmldsig-more#kw-camellia256": "kw-camellia256",
-    }.get(value.lower(), (None, None, None))
+    }
+
+    # We don't deal with VAULT here but if VAULT_WRAPPING_3DES is not present
+    # in the list of the vault wrapping algorithms, we cannot use 3DES anywhere
+    if VAULT_WRAPPING_3DES in VAULT_WRAPPING_SUPPORTED_ALGOS:
+        supported_algs["http://www.w3.org/2001/04/xmlenc#tripledes-cbc"] = (
+            algorithms.TripleDES, modes.CBC, 64)
+
+    return supported_algs.get(value.lower(), (None, None, None))
 
 
 def convertEncrypted(value, decryptor=None, pconv=base64.b64decode, econv=lambda x: x):
@@ -287,43 +290,47 @@ class XMLDecryptor:
 class PSKCKeyPackage:
     _XML = {
         'pskc:DeviceInfo': {
-            'pskc:IssueNo/text()':      ('issueno',      unicode),
-            'pskc:ExpiryDate/text()':   ('notafter.hw',  convertDate),
-            'pskc:Manufacturer/text()': ('vendor',       unicode),
-            'pskc:Model/text()':        ('model',        unicode),
-            'pskc:SerialNo/text()':     ('serial',       unicode),
-            'pskc:StartDate/text()':    ('notbefore.hw', convertDate),
-            'pskc:UserId/text()':       ('owner',        unicode),
+            'pskc:IssueNo/text()': ('issueno', str),
+            'pskc:ExpiryDate/text()': ('notafter.hw', convertDate),
+            'pskc:Manufacturer/text()': ('vendor', str),
+            'pskc:Model/text()': ('model', str),
+            'pskc:SerialNo/text()': ('serial', str),
+            'pskc:StartDate/text()': ('notbefore.hw', convertDate),
+            'pskc:UserId/text()': ('owner', str),
         },
 
         'pskc:Key': {
-            '@Algorithm':               ('type',        convertTokenType),
-            '@Id':                      ('id',          unicode),
-            'pskc:FriendlyName/text()': ('description', unicode),
-            'pskc:Issuer/text()':       ('issuer',      unicode),
-            'pskc:KeyReference/text()': ('keyref',      unicode),
+            '@Algorithm': ('type', convertTokenType),
+            '@Id': ('id', str),
+            'pskc:FriendlyName/text()': ('description', str),
+            'pskc:Issuer/text()': ('issuer', str),
+            'pskc:KeyReference/text()': ('keyref', str),
 
             'pskc:AlgorithmParameters': {
-                'pskc:Suite/text()':               ('algorithm',  convertHashName),
-                'pskc:ResponseFormat/@CheckDigit': ('checkdigit', unicode),
-                'pskc:ResponseFormat/@Encoding':   ('encoding',   unicode),
-                'pskc:ResponseFormat/@Length':     ('digits',     int),
+                'pskc:Suite/text()': ('algorithm', convertHashName),
+                'pskc:ResponseFormat/@CheckDigit': ('checkdigit', str),
+                'pskc:ResponseFormat/@Encoding': ('encoding', str),
+                'pskc:ResponseFormat/@Length': ('digits', int),
             },
 
             'pskc:Data': {
-                'pskc:Counter':      ('counter',  lambda v, d: convertEncrypted(v, d, long, long)),
-                'pskc:Secret':       ('key',      convertEncrypted),
-                'pskc:Time':         ('time',     lambda v, d: convertEncrypted(v, d, int, int)),
-                'pskc:TimeDrift':    ('offset',   lambda v, d: convertEncrypted(v, d, int, int)),
-                'pskc:TimeInterval': ('interval', lambda v, d: convertEncrypted(v, d, int, int)),
+                'pskc:Counter':
+                    ('counter', lambda v, d: convertEncrypted(v, d, int, int)),
+                'pskc:Secret': ('key', convertEncrypted),
+                'pskc:Time':
+                    ('time', lambda v, d: convertEncrypted(v, d, int, int)),
+                'pskc:TimeDrift':
+                    ('offset', lambda v, d: convertEncrypted(v, d, int, int)),
+                'pskc:TimeInterval':
+                    ('interval', lambda v, d: convertEncrypted(v, d, int, int))
             },
 
             'pskc:Policy': {
-                'pskc:ExpiryDate/text()':    ('notafter.sw',  convertDate),
-                'pskc:KeyUsage/text()':      ('keyusage',     unicode),
-                'pskc:NumberOfTransactions': ('maxtransact',  lambda v: v),
-                'pskc:PINPolicy':            ('pinpolicy',    lambda v: v),
-                'pskc:StartDate/text()':     ('notbefore.sw', convertDate),
+                'pskc:ExpiryDate/text()': ('notafter.sw', convertDate),
+                'pskc:KeyUsage/text()': ('keyusage', str),
+                'pskc:NumberOfTransactions': ('maxtransact', lambda v: v),
+                'pskc:PINPolicy': ('pinpolicy', lambda v: v),
+                'pskc:StartDate/text()': ('notbefore.sw', convertDate),
             },
         },
     }
@@ -447,7 +454,8 @@ class PSKCKeyPackage:
         dates = (data.get(key + '.sw', None), data.get(key + '.hw', None))
         dates = [x for x in dates if x is not None]
         if dates:
-            out['ipatoken' + key] = unicode(reducer(dates).strftime("%Y%m%d%H%M%SZ"))
+            out['ipatoken' + key] = str(
+                reducer(dates).strftime("%Y%m%d%H%M%SZ"))
 
 
 class PSKCDocument:
