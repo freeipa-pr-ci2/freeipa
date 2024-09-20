@@ -4,7 +4,7 @@ import textwrap
 from ipatests.pytest_ipa.integration import tasks
 
 
-def setup_scim_server(host, version="main"):
+def setup_scim_server(host, version="0.1"):
     dir = "/opt/ipa-tuura"
     password = host.config.admin_password
     tasks.install_packages(host, ["unzip", "java-11-openjdk-headless",
@@ -13,23 +13,11 @@ def setup_scim_server(host, version="main"):
                                   "python3-pip"])
 
     # Download ipa-tuura project
-    url = "https://github.com/freeipa/ipa-tuura"
-    host.run_command(["git", "clone", "-b", f"{version}", f"{url}", f"{dir}"])
-
-    # Prepare SSSD config
-    host.run_command(["python", "./prepare_sssd.py"],
-                     cwd=f"{dir}/src/install")
-
-    # Get keytab for scim bridge service
-    master = host.domain.hosts_by_role("master")[0].hostname
-    princ = f"admin@{host.domain.realm}"
-    ktfile = "/root/scim.keytab"
-    sendpass = f"{password}\n{password}"
-    tasks.kdestroy_all(host)
-    tasks.kinit_admin(host)
-    host.run_command(["ipa-getkeytab", "-s", master, "-p", princ,
-                      "-P", "-k", ktfile], stdin_text=sendpass)
-    host.run_command(["kinit", "-k", "-t", ktfile, princ])
+    url = "https://github.com/freeipa/ipa-tuura/archive/refs/tags/{0}.zip".format(version) # noqa: E501
+    host.run_command(["wget", url, "-O", "{0}-{1}.zip".format(dir, version)])
+    host.run_command(
+        ["unzip", "{0}-{1}.zip".format(dir, version), "-d", "/opt/"]
+    )
 
     # Install django requirements
     django_reqs = f"{dir}/src/install/requirements.txt"
