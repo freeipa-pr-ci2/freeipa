@@ -178,3 +178,29 @@ class TestDNSOverTLS(IntegrationTest):
         self.test_install_dnsovertls_client()
         self.test_install_dnsovertls_replica()
         self.test_queries_encrypted()
+
+    
+    def test_install_dnsovertls_with_IANA_ipaddress_master(self):
+        """
+        This test installs an IPA server using the --dns-over-tls option with an IANA reserved IP address.
+        """
+        args = [
+            "--dns-over-tls",
+            "--dot-forwarder", "0.0.0.0#example-dns.test",
+        ]
+        res = tasks.install_master(self.master, extra_args=args,
+                                   raiseonerr=False)
+        assert "invalid IP address 0.0.0.0: cannot use IANA reserved IP address" in res.stderr_text
+
+    
+    def test_install_dnsovertls_with_invalid_ipaddress_master(self):
+        """
+        This test installs an IPA server using the --dns-over-tls option with an invalid IP address.
+        """
+        args = [
+            "--dns-over-tls",
+            "--dot-forwarder", "198.168.0.0.1#example-dns.test",
+        ]
+        res = tasks.install_master(self.master, extra_args=args,
+                                   raiseonerr=False)
+        assert "invalid IP address 10.0.0.0.1: failed to detect a valid IP address" in res.stderr_text
