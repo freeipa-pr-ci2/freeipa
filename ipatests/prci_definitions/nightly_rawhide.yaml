@@ -51,6 +51,7 @@ jobs:
     job:
       class: Build
       args:
+        copr: 'thrnciar/pytest'
         git_repo: '{git_repo}'
         git_refspec: '{git_refspec}'
         template: &ci-master-frawhide
@@ -61,10 +62,12 @@ jobs:
 
   fedora-rawhide/simple_replication:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_simple_replication.py
@@ -74,10 +77,12 @@ jobs:
 
   fedora-rawhide/test_external_ca_TestExternalCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestExternalCA test_integration/test_external_ca.py::TestExternalCAConstraints
@@ -87,10 +92,12 @@ jobs:
 
   fedora-rawhide/test_external_ca_TestSelfExternalSelf:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestSelfExternalSelf test_integration/test_external_ca.py::TestExternalCAInstall
@@ -100,10 +107,12 @@ jobs:
 
   fedora-rawhide/external_ca_templates:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestExternalCAProfileScenarios
@@ -113,10 +122,12 @@ jobs:
 
   fedora-rawhide/test_topologies:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_topologies.py
@@ -126,10 +137,12 @@ jobs:
 
   fedora-rawhide/test_sudo:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_sudo.py
@@ -139,10 +152,12 @@ jobs:
 
   fedora-rawhide/test_commands:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_commands.py
@@ -152,10 +167,12 @@ jobs:
 
   fedora-rawhide/test_kerberos_flags:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_kerberos_flags.py
@@ -165,10 +182,12 @@ jobs:
 
   fedora-rawhide/test_http_kdc_proxy:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_http_kdc_proxy.py
@@ -178,10 +197,12 @@ jobs:
 
   fedora-rawhide/test_fips:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_fips.py
@@ -191,10 +212,12 @@ jobs:
 
   fedora-rawhide/test_forced_client_enrolment:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_forced_client_reenrollment.py
@@ -204,10 +227,12 @@ jobs:
 
   fedora-rawhide/test_advise:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_advise.py
@@ -217,10 +242,12 @@ jobs:
 
   fedora-rawhide/test_testconfig:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_testconfig.py
@@ -230,10 +257,12 @@ jobs:
 
   fedora-rawhide/test_service_permissions:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_service_permissions.py
@@ -243,10 +272,12 @@ jobs:
 
   fedora-rawhide/test_netgroup:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_netgroup.py
@@ -256,10 +287,12 @@ jobs:
 
   fedora-rawhide/test_vault:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_vault.py
@@ -269,10 +302,12 @@ jobs:
 
   fedora-rawhide/test_authconfig:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_authselect.py
@@ -282,10 +317,12 @@ jobs:
 
   fedora-rawhide/test_smb:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_smb.py
@@ -295,10 +332,12 @@ jobs:
 
   fedora-rawhide/test_server_del:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_server_del.py
@@ -308,10 +347,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA1:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA1
@@ -321,10 +362,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA2:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA2
@@ -334,10 +377,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallCA
@@ -347,10 +392,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_KRA1:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA1
@@ -360,10 +407,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_KRA2:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA2
@@ -373,10 +422,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_DNS1:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS1
@@ -386,10 +437,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_DNS2:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS2
@@ -399,10 +452,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_DNS3:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS3
@@ -412,10 +467,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_DNS4:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_DNS4
@@ -425,10 +482,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_KRA_DNS1:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA_DNS1
@@ -438,10 +497,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithCA_KRA_DNS2:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithCA_KRA_DNS2
@@ -451,10 +512,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMaster:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMaster
@@ -464,10 +527,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMasterKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMasterKRA
@@ -477,10 +542,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMasterDNS:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMasterDNS
@@ -490,10 +557,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMasterDNSRepeatedly:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMasterDNSRepeatedly
@@ -503,10 +572,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMasterReservedIPasForwarder:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMasterReservedIPasForwarder
@@ -516,10 +587,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallMasterReplica:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallMasterReplica
@@ -529,10 +602,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallReplicaAgainstSpecificServer:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallReplicaAgainstSpecificServer
@@ -542,10 +617,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestADTrustInstall:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestADTrustInstall
@@ -555,10 +632,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestADTrustInstallWithDNS_KRA_ADTrust:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestADTrustInstallWithDNS_KRA_ADTrust
@@ -568,10 +647,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestKRAinstallAfterCertRenew:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestKRAinstallAfterCertRenew
@@ -581,10 +662,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithoutSudo:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithoutSudo
@@ -594,10 +677,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallWithoutNamed:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallWithoutNamed
@@ -607,10 +692,12 @@ jobs:
 
   fedora-rawhide/test_installation_TestInstallwithSHA384withRSA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestInstallwithSHA384withRSA
@@ -620,10 +707,12 @@ jobs:
 
   fedora-rawhide/test_idviews:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_idviews.py
@@ -633,10 +722,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestServerInstall:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestServerInstall
@@ -646,10 +737,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestReplicaInstall:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestReplicaInstall
@@ -659,10 +752,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestClientInstall:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestClientInstall
@@ -673,10 +768,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestIPACommands:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestIPACommands
@@ -686,10 +783,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestCertInstall:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestCertInstall
@@ -699,10 +798,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestPKINIT:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestPKINIT
@@ -712,10 +813,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestServerReplicaCALessToCAFull:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestServerReplicaCALessToCAFull
@@ -725,10 +828,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestReplicaCALessToCAFull:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestReplicaCALessToCAFull
@@ -738,10 +843,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestServerCALessToExternalCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_caless.py::TestServerCALessToExternalCA
@@ -751,10 +858,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestUserRootFilesOwnershipPermission:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestUserRootFilesOwnershipPermission
@@ -764,10 +873,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestore:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestore
@@ -777,10 +888,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreWithDNSSEC:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithDNSSEC
@@ -790,10 +903,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupReinstallRestoreWithDNSSEC:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithDNSSEC
@@ -803,10 +918,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreWithDNS:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithDNS
@@ -816,10 +933,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupReinstallRestoreWithDNS:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithDNS
@@ -829,10 +948,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreWithKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithKRA
@@ -842,10 +963,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupReinstallRestoreWithKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupReinstallRestoreWithKRA
@@ -855,10 +978,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreWithReplica:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreWithReplica
@@ -868,10 +993,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreDMPassword:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreDMPassword
@@ -881,10 +1008,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestReplicaInstallAfterRestore:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestReplicaInstallAfterRestore
@@ -894,10 +1023,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupRoles:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupRoles
@@ -907,10 +1038,12 @@ jobs:
 
   fedora-rawhide/test_dnssec:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_dnssec.py
@@ -920,10 +1053,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestReplicaPromotionLevel1:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestReplicaPromotionLevel1
@@ -933,10 +1068,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestUnprivilegedUserPermissions:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestUnprivilegedUserPermissions
@@ -946,10 +1083,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestProhibitReplicaUninstallation:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestProhibitReplicaUninstallation
@@ -959,10 +1098,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestWrongClientDomain:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestWrongClientDomain
@@ -972,10 +1113,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestRenewalMaster:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestRenewalMaster
@@ -985,10 +1128,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestReplicaInstallWithExistingEntry:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInstallWithExistingEntry
@@ -998,10 +1143,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestSubCAkeyReplication:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestSubCAkeyReplication
@@ -1011,10 +1158,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestReplicaInstallCustodia:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInstallCustodia
@@ -1024,10 +1173,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestReplicaInForwardZone:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestReplicaInForwardZone
@@ -1037,10 +1188,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestHiddenReplicaPromotion:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestHiddenReplicaPromotion
@@ -1050,10 +1203,12 @@ jobs:
 
   fedora-rawhide/test_replica_promotion_TestHiddenReplicaKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replica_promotion.py::TestHiddenReplicaKRA
@@ -1076,10 +1231,12 @@ jobs:
 
   fedora-rawhide/test_upgrade:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_upgrade.py
@@ -1089,10 +1246,12 @@ jobs:
 
   fedora-rawhide/test_topology_TestCASpecificRUVs:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_topology.py::TestCASpecificRUVs
@@ -1102,10 +1261,12 @@ jobs:
 
   fedora-rawhide/test_topology_TestTopologyOptions:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_topology.py::TestTopologyOptions
@@ -1115,10 +1276,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestLineTopologyWithoutCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithoutCA
@@ -1128,10 +1291,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestLineTopologyWithCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithCA
@@ -1141,10 +1306,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestLineTopologyWithCAKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestLineTopologyWithCAKRA
@@ -1154,10 +1321,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts.py_TestStarTopologyWithoutCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithoutCA
@@ -1167,10 +1336,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestStarTopologyWithCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithCA
@@ -1180,10 +1351,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestStarTopologyWithCAKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestStarTopologyWithCAKRA
@@ -1193,10 +1366,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestCompleteTopologyWithoutCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithoutCA
@@ -1206,10 +1381,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestCompleteTopologyWithCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCA
@@ -1219,10 +1396,12 @@ jobs:
 
   fedora-rawhide/test_replication_layouts_TestCompleteTopologyWithCAKRA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_replication_layouts.py::TestCompleteTopologyWithCAKRA
@@ -1232,10 +1411,12 @@ jobs:
 
   fedora-rawhide/test_client_uninstallation:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_uninstallation.py
@@ -1245,10 +1426,12 @@ jobs:
 
   fedora-rawhide/test_installation_client:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation_client.py
@@ -1258,10 +1441,12 @@ jobs:
 
   fedora-rawhide/test_user_permissions:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_user_permissions.py
@@ -1271,10 +1456,12 @@ jobs:
 
   fedora-rawhide/test_webui_cert:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_webui/test_cert.py
@@ -1284,10 +1471,12 @@ jobs:
 
   fedora-rawhide/test_webui_general:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1301,10 +1490,12 @@ jobs:
 
   fedora-rawhide/test_webui_host:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_webui/test_host.py
@@ -1314,10 +1505,12 @@ jobs:
 
   fedora-rawhide/test_webui_host_net_groups:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1329,10 +1522,12 @@ jobs:
 
   fedora-rawhide/test_webui_identity:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1344,10 +1539,12 @@ jobs:
 
   fedora-rawhide/test_webui_network:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1360,10 +1557,12 @@ jobs:
 
   fedora-rawhide/test_webui_policy:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1378,10 +1577,12 @@ jobs:
 
   fedora-rawhide/test_webui_rbac:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1394,10 +1595,12 @@ jobs:
 
   fedora-rawhide/test_webui_server:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1412,10 +1615,12 @@ jobs:
 
   fedora-rawhide/test_webui_service:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_webui/test_service.py
@@ -1425,10 +1630,12 @@ jobs:
 
   fedora-rawhide/test_webui_users:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1440,10 +1647,12 @@ jobs:
 
   fedora-rawhide/test_webui_subid:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunWebuiTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_webui/test_subid.py
@@ -1453,10 +1662,12 @@ jobs:
 
   fedora-rawhide/customized_ds_config_install:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_customized_ds_config_install.py
@@ -1466,10 +1677,12 @@ jobs:
 
   fedora-rawhide/dns_locations:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_dns_locations.py
@@ -1479,10 +1692,12 @@ jobs:
 
   fedora-rawhide/external_ca_TestExternalCAdirsrvStop:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestExternalCAdirsrvStop
@@ -1492,10 +1707,12 @@ jobs:
 
   fedora-rawhide/external_ca_TestExternalCAInvalidCert:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestExternalCAInvalidCert test_integration/test_external_ca.py::TestExternalCAInvalidIntermediate
@@ -1505,10 +1722,12 @@ jobs:
 
   fedora-rawhide/external_ca_TestMultipleExternalCA:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_external_ca.py::TestMultipleExternalCA
@@ -1518,10 +1737,12 @@ jobs:
 
   fedora-rawhide/test_ipahealthcheck:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheck
@@ -1531,10 +1752,12 @@ jobs:
 
   fedora-rawhide/test_ipahealthcheck_nodns_extca_file:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithoutDNS test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithExternalCA test_integration/test_ipahealthcheck.py::TestIpaHealthCheckFileCheck
@@ -1544,7 +1767,7 @@ jobs:
 
   fedora-rawhide/test_ipahealthcheck_cli_fsspace:
    requires: [fedora-rawhide/build]
-   priority: 50
+   priority: 40
    job:
      class: RunPytest
      args:
@@ -1557,10 +1780,12 @@ jobs:
 
   fedora-rawhide/test_ipahealthcheck_adtrust:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ipahealthcheck.py::TestIpaHealthCheckWithADtrust
@@ -1570,10 +1795,12 @@ jobs:
 
   fedora-rawhide/test_ntp_options:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ntp_options.py::TestNTPoptions
@@ -1583,10 +1810,12 @@ jobs:
 
   fedora-rawhide/test_otp:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_otp.py
@@ -1596,10 +1825,12 @@ jobs:
 
   fedora-rawhide/test_pkinit_install:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_pkinit_install.py
@@ -1609,10 +1840,12 @@ jobs:
 
   fedora-rawhide/test_pkinit_manage:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_pkinit_manage.py
@@ -1622,10 +1855,12 @@ jobs:
 
   fedora-rawhide/test_pki_config_override:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_pki_config_override.py
@@ -1635,10 +1870,12 @@ jobs:
 
   fedora-rawhide/mask:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestMaskInstall
@@ -1648,10 +1885,12 @@ jobs:
 
   fedora-rawhide/hostname_validator:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_installation.py::TestHostnameValidator
@@ -1661,7 +1900,7 @@ jobs:
 
 #  fedora-rawhide/nfs:
 #    requires: [fedora-rawhide/build]
-#    priority: 50
+#    priority: 40
 #    job:
 #      class: RunPytest
 #      args:
@@ -1674,10 +1913,12 @@ jobs:
 
   fedora-rawhide/nfs_nsswitch_restore:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_nfs.py::TestIpaClientAutomountFileRestore
@@ -1687,10 +1928,12 @@ jobs:
 
   fedora-rawhide/automember:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_automember.py
@@ -1700,10 +1943,12 @@ jobs:
 
   fedora-rawhide/test_crlgen_manage:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_crlgen_manage.py
@@ -1713,10 +1958,12 @@ jobs:
 
   fedora-rawhide/test_integration_TestIPANotConfigured:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_cli_ipa_not_configured.py::TestIPANotConfigured
@@ -1726,10 +1973,12 @@ jobs:
 
   fedora-rawhide/test_sssd:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_sssd.py
@@ -1739,10 +1988,12 @@ jobs:
 
   fedora-rawhide/test_ca_custom_sdn:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ca_custom_sdn.py
@@ -1752,10 +2003,12 @@ jobs:
 
   fedora-rawhide/test_membermanager:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_membermanager.py
@@ -1765,10 +2018,12 @@ jobs:
 
   fedora-rawhide/krbtpolicy:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_krbtpolicy.py
@@ -1778,10 +2033,12 @@ jobs:
 
   fedora-rawhide/test_winsyncmigrate:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_winsyncmigrate.py
@@ -1791,10 +2048,12 @@ jobs:
 
   fedora-rawhide/test_trust:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_trust.py::TestTrust
@@ -1804,10 +2063,12 @@ jobs:
 
   fedora-rawhide/test_trust_autoprivate:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunADTests
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_trust.py::TestNonPosixAutoPrivateGroup test_integration/test_trust.py::TestPosixAutoPrivateGroup
@@ -1817,10 +2078,12 @@ jobs:
 
   fedora-rawhide/test_backup_and_restore_TestBackupAndRestoreTrust:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_backup_and_restore.py::TestBackupAndRestoreTrust
@@ -1830,10 +2093,12 @@ jobs:
 
   fedora-rawhide/test_adtrust_install:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_adtrust_install.py
@@ -1843,10 +2108,12 @@ jobs:
 
   fedora-rawhide/test_cert:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_cert.py
@@ -1856,10 +2123,12 @@ jobs:
 
   fedora-rawhide/test_epn:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_epn.py
@@ -1869,10 +2138,12 @@ jobs:
 
   fedora-rawhide/test_acme:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -1886,10 +2157,12 @@ jobs:
 
   fedora-rawhide/test_acme_prune:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_acme.py::TestACMEPrune
@@ -1899,10 +2172,12 @@ jobs:
 
   fedora-rawhide/test_dns:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_dns.py
@@ -1912,10 +2187,12 @@ jobs:
 
   fedora-rawhide/test_pwpolicy:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_pwpolicy.py
@@ -1925,10 +2202,12 @@ jobs:
 
   fedora-rawhide/test_cert_fix:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_ipa_cert_fix.py
@@ -1951,10 +2230,12 @@ jobs:
 
   fedora-rawhide/test_subids:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_subids.py
@@ -1964,10 +2245,12 @@ jobs:
 
   fedora-rawhide/test_custom_plugins:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_custom_plugins.py
@@ -1977,10 +2260,12 @@ jobs:
 
   fedora-rawhide/test_external_idp:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_idp.py
@@ -1990,7 +2275,7 @@ jobs:
 
 #  fedora-rawhide/test_sso:
 #    requires: [fedora-rawhide/build]
-#    priority: 50
+#    priority: 40
 #    job:
 #      class: RunPytest
 #      args:
@@ -2003,10 +2288,12 @@ jobs:
 
   fedora-rawhide/test_random_serial_numbers_TestInstallWithCA_DNS1_RSN:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_random_serial_numbers.py::TestInstallWithCA_DNS1_RSN
@@ -2016,10 +2303,12 @@ jobs:
 
   fedora-rawhide/test_random_serial_numbers_TestInstallWithCA_KRA1_RSN:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_random_serial_numbers.py::TestInstallWithCA_KRA1_RSN
@@ -2029,10 +2318,12 @@ jobs:
 
   fedora-rawhide/test_random_serial_numbers_test_commands_RSN:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_random_serial_numbers.py::TestIPACommand_RSN::test_certificate_out_write_to_file
@@ -2042,10 +2333,12 @@ jobs:
 
   fedora-rawhide/test_caless_TestServerCALessToExternalCA_RSN:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: >-
@@ -2057,10 +2350,12 @@ jobs:
 
   fedora-rawhide/test_random_serial_numbers_TestRSNPKIConfig:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_random_serial_numbers.py::TestRSNPKIConfig
@@ -2070,10 +2365,12 @@ jobs:
 
   fedora-rawhide/test_random_serial_numbers_TestRSNVault:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_integration/test_random_serial_numbers.py::TestRSNVault
@@ -2083,10 +2380,12 @@ jobs:
 
   fedora-rawhide/test_ipalib_install:
     requires: [fedora-rawhide/build]
-    priority: 50
+    priority: 40
     job:
       class: RunPytest
       args:
+        copr: 'thrnciar/pytest'
+        update_packages: True
         build_url: '{fedora-rawhide/build_url}'
         update_packages: True
         test_suite: test_ipalib_install/test_kinit.py
