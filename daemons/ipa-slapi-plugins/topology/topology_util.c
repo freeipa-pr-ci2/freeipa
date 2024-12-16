@@ -1,3 +1,5 @@
+#include <dirsrv/slapi-plugin.h>
+#include <nspr4/prtypes.h>
 #include "topology.h"
 
 
@@ -204,6 +206,30 @@ ipa_topo_util_get_replica_conf(char *repl_root)
     return topoRepl;
 }
 
+/* This routine just return the segments associated to
+ * a given replica.
+ * In addition it logs a warning that this segments (in memory) may
+ * be out of sync (shared config entries) because ipa_topo_util_start
+ * was called with a delay (DS startup or total init).
+ */
+TopoReplicaSegmentList *
+ipa_topo_util_get_repl_segments(TopoReplica *replica)
+{
+    if (!replica->repl_segments_fetched) {
+        int nb_segments = 0;
+        TopoReplicaSegmentList *segm = replica->repl_segments;
+        for(; segm; nb_segments++) segm = segm->next;
+
+        slapi_log_error(SLAPI_LOG_WARNING, IPA_TOPO_PLUGIN_SUBSYSTEM,
+                        "ipa_topo_util_get_repl_segments: "
+                        "in memory replica %d segments for %s "
+                        "can differ from the shared tree. You may try to reduce %s\n",
+                nb_segments, replica->repl_root, CONFIG_ATTR_STARTUP_DELAY);
+    }
+    return replica->repl_segments;
+}
+
+
 TopoReplicaSegmentList *
 ipa_topo_util_get_replica_segments(TopoReplica *replica)
 {
@@ -241,7 +267,8 @@ ipa_topo_util_get_replica_segments(TopoReplica *replica)
     }
     slapi_free_search_results_internal(pb);
     slapi_pblock_destroy(pb);
-    return replica->repl_segments;
+    replica->repl_segments_fetched = PR_TRUE;
+    return ipa_topo_util_get_repl_segments(replica);
 }
 
 int
@@ -512,7 +539,7 @@ ipa_topo_util_segm_modify (TopoReplica *tconf,
 void
 ipa_topo_util_remove_init_attr(TopoReplica *repl_conf, TopoReplicaAgmt *topo_agmt)
 {
-    TopoReplicaSegmentList *seglist = repl_conf->repl_segments;
+    TopoReplicaSegmentList *seglist = ipa_topo_util_get_repl_segments(repl_conf);
     TopoReplicaSegment *segment = NULL;
     char *dirattr = NULL;
 
@@ -644,7 +671,7 @@ ipa_topo_util_update_agmt_list(TopoReplica *conf, TopoReplicaSegmentList *repl_s
                              "cannot read targethost: error %d\n", rc);
             continue;
         }
-        topo_agmt = ipa_topo_util_find_segment_agmt(conf->repl_segments,
+        topo_agmt = ipa_topo_util_find_segment_agmt(ipa_topo_util_get_repl_segments(conf),
                                                     ipa_topo_get_plugin_hostname(),
                                                     targetHost);
         if (topo_agmt) {
@@ -720,7 +747,7 @@ update_only:
     /* check if segments not covered by agreement exist
      * add agreeement
      */
-    ipa_topo_util_missing_agmts_add_list(conf, conf->repl_segments,
+    ipa_topo_util_missing_agmts_add_list(conf, ipa_topo_util_get_repl_segments(conf),
                                     ipa_topo_get_plugin_hostname());
 
 error_return:
@@ -1190,6 +1217,11 @@ ipa_topo_util_segment_merge(TopoReplica *tconf,
         /* merging is only done on one of the endpoints of the segm */
         return;
     }
+    if (!tconf->repl_segments_fetched) {
+        /* Let's fetch the in memory segment from the shared config area */
+        ipa_topo_util_get_replica_segments(tconf);
+    }
+
 
     if (tsegm->direct == SEGMENT_LEFT_RIGHT) {
         ex_segm = ipa_topo_cfg_replica_segment_find(tconf, tsegm->from, tsegm->to,
@@ -1374,7 +1406,7 @@ ipa_topo_util_update_segments_for_host(TopoReplica *conf, char *hostname)
         }
         /* segment has been recreated and added during postp of segment_write
          * but the correct agreement rdn was lost, set it now */
-        topo_agmt = ipa_topo_util_find_segment_agmt(conf->repl_segments,
+        topo_agmt = ipa_topo_util_find_segment_agmt(ipa_topo_util_get_repl_segments(conf),
                                                     ipa_topo_get_plugin_hostname(),
                                                     hostname);
         if (topo_agmt) {
